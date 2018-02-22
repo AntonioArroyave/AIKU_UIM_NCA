@@ -1,0 +1,235 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+/* Copyright (c) 2009, 2016, Oracle and/or its affiliates. 
+All rights reserved.*/
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+       avsubram  02/29/16 - Open Clone page in new tab
+    raattulu    4/08/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core" 
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:pf="/platform/functions" xmlns:cui="/CommsUI">
+		  
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>  
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+        <af:panelStretchLayout id="pgl1" topHeight="5" binding="#{backingBeanScope.Place_Results_panelGroupLayout}">
+        <f:facet name="top">
+        <cui:WarningDialog id="wd" binding="#{backingBeanScope.navigationWarningDialog}"/>
+        </f:facet>
+        <f:facet name="center">
+            <af:panelHeader text="#{pageFlowScope.InventoryResultsBean.displayInfo}" helpTopicId="OHW_search" id="ph1" >
+             <af:panelGroupLayout layout="scroll" id="pgl2">
+            <jsp:include page= "/oracle/communications/inventory/ui/framework/page/InventoryQuery.jsff" />
+            <af:spacer width="10" height="10" id="s1"/>
+            <af:showDetailHeader id="rc1" disclosed="true" text="#{inventoryUIBundle.SEARCH_RESULTS}">
+            <f:facet name="info"/>
+            <f:facet name="legend"/>
+            <f:facet name="menuBar"/>
+            <f:facet name="toolbar"/>
+            <f:facet name="context"/>
+             <af:panelCollection id="pc1" styleClass="invSearchPanelCollection">
+              <f:facet name="menus"/>
+                <f:facet name="toolbar">
+                <af:toolbar id="t1" rendered="#{!pageFlowScope.InventoryResultsBean.previewLayout}">
+                   <af:commandToolbarButton text="#{inventoryUIBundle.CREATE}" id="cb1Crt" actionListener="#{pageFlowScope.InventoryResultsBean.registerRecentItemForCreate}" icon="#{InventoryHelperBean.createIcon}" action="create">
+                        <af:setActionListener from="true" to="#{addMode}"/>
+                   </af:commandToolbarButton>
+                   <af:spacer width="10" height="10" id="s11"/>
+                   <af:commandToolbarButton text="#{inventoryUIBundle.CLONE}" id="cb1Create1" icon="#{InventoryHelperBean.cloneIcon}" disabledIcon="#{InventoryHelperBean.disCloneIcon}"
+                                           rendered="#{!(pageFlowScope.InventoryResultsBean.popupMode)}"
+                                           actionListener="#{pageFlowScope.InventoryResultsBean.onLaunchForClone}"
+                                           disabled="#{pageFlowScope.InventoryResultsBean.resultsTable.selectedRowKeys.size ne 1 or pageFlowScope.InventoryResultsBean.resultsTable.selectedRowKeys.size eq null}" partialTriggers="place1" 
+                                           binding="#{backingBeanScope.cloneButton}">
+                    </af:commandToolbarButton>
+                   <af:commandToolbarButton text="#{inventoryUIBundle.EDIT}" 
+                                       rendered="#{!(pageFlowScope.InventoryResultsBean.popupMode)}" disabledIcon="#{InventoryHelperBean.disEditIcon}"
+                                       id="cb2Edit" icon="#{InventoryHelperBean.editIcon}" action="edit" actionListener="#{bindings.openSubTaskForEdit.execute}"
+                                       disabled="#{pageFlowScope.InventoryResultsBean.resultsTable.selectedRowKeys.size != 1}" 
+                                       partialTriggers="place1" binding="#{backingBeanScope.editButton}"
+                                            accessKey="#{inventoryUIBundle.EDIT_ACCESS_KEY}">
+                        <af:setActionListener from= "#{bindings.searchResultsIterator.currentRow.dataProvider.oid}" to="#{objectId}"/>
+                        <af:setActionListener from="false" to="#{addMode}"/>
+                    </af:commandToolbarButton>
+                    <af:spacer width="10" height="10" id="s12"/>
+                    <af:commandToolbarButton text="#{inventoryUIBundle.DELETE}" id="cb3Del" disabledIcon="#{InventoryHelperBean.disDeleteIcon}"
+                                       rendered="#{!(pageFlowScope.InventoryResultsBean.popupMode) &amp;&amp; securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Place.DELETE;action=view']}" partialTriggers="place1"
+                                       icon="#{InventoryHelperBean.deleteIcon}" actionListener="#{InventoryHelperBean.deleteAction}"
+                                       disabled="#{pageFlowScope.InventoryResultsBean.resultsTable.selectedRowKeys.size lt 1 or pageFlowScope.InventoryResultsBean.resultsTable.selectedRowKeys.size eq null}" 
+                                       binding="#{backingBeanScope.deleteButton}"/>
+                    <af:spacer width="10" height="10" id="s8"/>
+                    <af:commandToolbarButton text="#{inventoryUIBundle.EXPORT}" immediate="true" shortDesc="#{inventoryUIBundle.EXPORT_ALL_ROWS}" icon="/images/exporttoexcel_ena.png" disabledIcon="/images/exporttoexcel_dis.png" partialTriggers="place1"
+                                             id="ctb3" rendered="#{!(pageFlowScope.InventoryResultsBean.popupMode)}" disabled="#{pageFlowScope.InventoryResultsBean.disableExportButton}">
+                        <af:exportCollectionActionListener type="excelHTML" exportedId="place1"
+                                    filename="#{pageFlowScope.InventoryResultsBean.displayInfo}.xls" title="Export" exportedRows="all"/>
+                    </af:commandToolbarButton> 
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="statusbar">
+                <af:toolbar id="t2" rendered="#{!pageFlowScope.InventoryResultsBean.previewLayout}">
+                    <af:outputText value="#{pageFlowScope.InventoryResultsBean.displayTotalResults}"
+                                       id="ol1" styleClass="invSearchOutputLabel" partialTriggers="place1" binding="#{backingBeanScope.totalResultsLabel}"/>
+                </af:toolbar>
+              </f:facet>
+              <af:table id="place1"
+                        value="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel}"
+                        var="row"
+                        emptyText="#{bindings.searchResults.viewable ? inventoryUIBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET : inventoryUIBundle.TABLE_EMPTY_TEXT_ACCESS_DENIED}"
+                        fetchSize="#{pageFlowScope.InventoryResultsBean.fetchSize}"
+                        filterModel="#{pageFlowScope.InventoryQueryBean.filterModel}"
+                        queryListener="#{InventoryHelperBean.processQuery}"
+                        filterVisible="false" varStatus="vs"
+                        selectedRowKeys="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.selectedRow}"
+                        selectionListener="#{pageFlowScope.InventoryResultsBean.selectAction}"
+                        sortListener="#{bindings.searchResultsIterator.dataControl.dataProvider.processSort}"
+                        rowSelection="#{pageFlowScope.InventoryResultsBean.rowSelection}"
+                        styleClass="invSearchTable" binding="#{pageFlowScope.InventoryResultsBean.resultsTable}"
+                        summary="#{inventoryUIBundle.PLACE_SEARCH_TABLE}">
+				<f:facet name="contextMenu">
+                    <af:popup id="p1" contentDelivery="lazyUncached">
+                        <af:menu text="menu 1" id="m2" rendered="#{!pageFlowScope.InventoryResultsBean.popupMode}">
+                            <af:commandMenuItem text="#{inventoryUIBundle.OPEN_IN_NEW_TAB}" id="cmi1" actionListener="#{pageFlowScope.InventoryResultsBean.onLaunchForEdit}"/>
+                        </af:menu>
+                    </af:popup>
+                </f:facet>
+                <af:column sortProperty="id" sortable="true" filterable="true"
+                           headerText="#{inventoryUIBundle.ID}" id="place1-id"
+                           rowHeader="unstyled">
+                    <af:switcher id="idSwt" defaultFacet="false" facetName="#{pageFlowScope.InventoryResultsBean.popupMode}">
+                        <f:facet name="false">           
+                            <af:commandImageLink action="summary" actionListener="#{bindings.openSubTaskForSummary.execute}" id="cl1"
+                                                 text="#{row.id}"
+                                                 shortDesc="#{inventoryUIBundle.PLACE_SUMMARY_LINK}">
+                            <af:setActionListener from="#{row.oid}" to="#{objectId}"/>
+
+                      
+                            </af:commandImageLink>
+                        </f:facet> 
+                        <f:facet name="true">           
+                            <af:outputText value="#{row.id}" id="ot2"/>
+                        </f:facet> 
+                    </af:switcher> 
+                </af:column>
+                <af:column sortProperty="name" sortable="true" filterable="true"
+                           headerText="#{inventoryUIBundle.NAME}" 
+                           id="place1-name" width="#{pageFlowScope.InventoryResultsBean.nameWidth}">
+                  <af:outputText value="#{row.name}" id="ot10"/>
+                </af:column>
+                <af:column sortProperty="description" sortable="true" filterable="true"
+                           headerText="#{inventoryUIBundle.DESCRIPTION}" 
+                           id="place1-description"
+                           rendered="#{not pageFlowScope.InventoryResultsBean.popupMode || pageFlowScope.associateMode eq 'CONFIGASSOCIATEMODE' || pageFlowScope.associateMode eq 'ADDCHILD'}"
+                           width="#{pageFlowScope.InventoryResultsBean.descriptionWidth}">
+                  <af:outputText value="#{row.description}" id="ot4"/>
+                </af:column>
+                <af:column sortProperty="specification.name" sortable="true" filterable="true"
+                           headerText="#{inventoryUIBundle.SPECIFICATION}" 
+                           id="place1-specification"
+                           rendered="#{not pageFlowScope.InventoryResultsBean.popupMode || pageFlowScope.associateMode eq 'CONFIGASSOCIATEMODE' || pageFlowScope.associateMode eq 'ADDCHILD'}"
+                           width="#{pageFlowScope.InventoryResultsBean.specWidth}">
+                   <af:switcher id="specswt1" defaultFacet="false" facetName="#{pageFlowScope.InventoryResultsBean.popupMode}">
+                    <f:facet name="false"> 
+                        <af:commandImageLink action="specificationSummary" actionListener="#{bindings.openSubTaskForSpec.execute}" id="cl21"
+                                        text="#{row.specification.name}"
+                                             shortDesc="#{inventoryUIBundle.LINK_FOR_SPECIFICATION_SUMMARY}">        
+                         
+                            <af:setActionListener from="#{row.specification.oid}" to="#{specObjectId}"/>
+                        </af:commandImageLink>
+                    </f:facet>
+                    <f:facet name="true">           
+                            <af:outputText value="#{row.specification.name}"/>
+                    </f:facet> 
+                  </af:switcher>  
+                </af:column>
+                <af:column headerText="#{inventoryUIBundle.PLACE_TYPE}" id="place1-placeType"
+                           rendered="#{not pageFlowScope.InventoryResultsBean.popupMode || pageFlowScope.associateMode eq 'CONFIGASSOCIATEMODE' || pageFlowScope.associateMode eq 'ADDCHILD'}">
+                  <af:outputText value="#{pageFlowScope.InventoryResultsBean.placeType}" id="ot8"/>
+                </af:column>
+                <af:column headerText="#{inventoryUIBundle.IDENTIFIER}" id="place1-formattedIdentifier"
+                           rendered="#{not pageFlowScope.InventoryResultsBean.popupMode || pageFlowScope.associateMode eq 'CONFIGASSOCIATEMODE' || pageFlowScope.associateMode eq 'ADDCHILD'}">
+                  <af:outputText value="#{row.formattedIdentifier}" id="ot7"/>
+                </af:column>
+                <af:column headerText="#{inventoryUIBundle.LATITUDE}" id="place1-latitiude"
+                           rendered="#{not pageFlowScope.InventoryResultsBean.popupMode || pageFlowScope.associateMode eq 'CONFIGASSOCIATEMODE' || pageFlowScope.associateMode eq 'ADDCHILD'}">
+                  <af:outputText value="#{row.latitude}" id="ot5"/>
+                </af:column>
+                <af:column headerText="#{inventoryUIBundle.LONGITUDE}" id="place1-longitude"
+                            rendered="#{not pageFlowScope.InventoryResultsBean.popupMode || pageFlowScope.associateMode eq 'CONFIGASSOCIATEMODE' || pageFlowScope.associateMode eq 'ADDCHILD'}">
+                  <af:outputText value="#{row.longitude}" id="ot3"/>
+                </af:column>
+                <af:column id="place1-roles" headerText="#{inventoryUIBundle.PLACE_ROLE}"  rendered="#{pageFlowScope.InventoryResultsBean.popupMode and !(pageFlowScope.associateMode eq 'CONFIGASSOCIATEMODE' || pageFlowScope.associateMode eq 'ADDCHILD')}">
+                <af:selectOneChoice id="c13" value="#{pageFlowScope.InventoryResultsBean.roles}"
+                                    autoSubmit="true" valueChangeListener="#{pageFlowScope.InventoryResultsBean.onChangeFromEntityRole}"
+                                    shortDesc="#{inventoryUIBundle.PLACE_ROLE}">
+                    <f:selectItems value="#{pageFlowScope.InventoryResultsBean.placeRole}" id="sc13"/>
+                </af:selectOneChoice>
+                </af:column>
+                <af:column id="place1-entityRole" headerText="#{inventoryUIBundle.ENTITY_ROLE}"
+                           rendered="#{pageFlowScope.InventoryResultsBean.popupMode and pageFlowScope.InventoryResultsBean.roleEnabled}">
+                <af:selectOneChoice id="c14" value="#{pageFlowScope.InventoryResultsBean.entityRoles}"
+                                    autoSubmit="true" valueChangeListener="#{pageFlowScope.InventoryResultsBean.onChangeToEntityRole}"
+                                    shortDesc="#{inventoryUIBundle.ENTITY_ROLE}">
+                    <f:selectItems value="#{pageFlowScope.InventoryResultsBean.entityRole}" id="sc14"/>
+                </af:selectOneChoice>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+            <af:panelBox id="pbx1" binding="#{pageFlowScope.InventoryResultsBean.roleCreatePanel}"
+                         visible="#{pageFlowScope.InventoryResultsBean.showRolePanel}"
+                         inlineStyle="height:auto;"
+                         text="#{inventoryUIBundle.INVENTORY_ROLE_EDIT}">
+                <af:panelStretchLayout id="psl1" styleClass="AFStretchWidth">
+                  <f:facet name="bottom"/>
+                  <f:facet name="center">
+                  
+                  
+                    <af:region value="#{bindings.InventoryRoleEditFlow1.regionModel}"
+                         id="r1"/>
+
+            </f:facet>
+                  <f:facet name="start"/>
+                  <f:facet name="end"/>
+                  <f:facet name="top"/>
+            
+                </af:panelStretchLayout>
+            </af:panelBox>  
+           </af:showDetailHeader>
+           <af:panelGroupLayout id="pgl4" halign="right" layout="scroll">
+              <af:panelGroupLayout id="pgl3" layout="horizontal">
+                <af:toolbar id="t4">
+                    <af:commandToolbarButton text="#{inventoryUIBundle.INVOLVE}"
+                                            id="ctb4"
+                                           action="CustomInvolvementEdit"
+                                           actionListener="#{pageFlowScope.InventoryResultsBean.involve}"
+                                           disabled="#{pageFlowScope.InventoryResultsBean.resultsTable.selectedRowKeys.size lt 1}"
+                                           partialTriggers="pc1:place1"
+                                           rendered="#{pageFlowScope.InventoryResultsBean.involvementMode}"/>
+                    <af:commandToolbarButton text="#{inventoryUIBundle.DONE}" id="ctb1" actionListener="#{pageFlowScope.InventoryResultsBean.associate}" 
+                                             disabled="#{pageFlowScope.InventoryResultsBean.resultsTable.selectedRowKeys.size lt 1}"
+                                             partialTriggers="pc1:place1"
+                                             rendered="#{pageFlowScope.InventoryResultsBean.popupMode and !pageFlowScope.InventoryResultsBean.involvementMode}"
+                                             accessKey="#{inventoryUIBundle.DONE_ACCESS_KEY}"/>
+                    <af:spacer width="10" height="10" id="s2"/>
+                    <af:commandToolbarButton text="#{inventoryUIBundle.CANCEL}" id="ctb2" actionListener="#{pageFlowScope.InventoryResultsBean.cancel}" 
+                                             rendered="#{pageFlowScope.InventoryResultsBean.popupMode}"
+                                             accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+                </af:toolbar>
+              </af:panelGroupLayout>
+          </af:panelGroupLayout>
+          </af:panelGroupLayout>
+          </af:panelHeader>
+      </f:facet>
+      </af:panelStretchLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

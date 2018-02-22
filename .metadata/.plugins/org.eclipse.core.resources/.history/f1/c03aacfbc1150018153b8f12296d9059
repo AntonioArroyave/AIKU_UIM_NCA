@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:data="http://www.oracle.com/communications/studio/core/model/common/data" xmlns:inv="http://www.mslv.com/studio/inventory/model/specification" xmlns="http://www.mslv.com/studio/inventory/model/specification" xmlns:layout="http://xmlns.oracle.com/communications/sce/poms/model/layout" xmlns:poms="http://xmlns.oracle.com/communications/sce/poms/model/poms" xsi:type="inv:BusinessInteractionSpecificationType" name="Aprovisionamiento_BA_HFC">
+  <com:baseEntityRef>
+    <com:entity>BusinessInteraction</com:entity>
+    <com:entityType>inventoryEntity</com:entityType>
+    <com:relationship>unknown</com:relationship>
+  </com:baseEntityRef>
+  <com:id>YTMV+NPISaWP2q5u6aViwA</com:id>
+  <data:dataElementNode virtual="true">
+    <com:id>YTMV+NPISaWP2q5u6aViwA</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+    <data:name>Aprovisionamiento_BA_HFC</data:name>
+    <data:displayName lang="[default]">Aprovisionamiento_BA_HFC</data:displayName>
+    <data:dataElement virtual="false">
+      <com:id>BVMg5Hz6S3S1rJwPTwXvoQ</com:id>
+      <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+      <data:name>BA_CFS</data:name>
+      <data:displayName lang="[default]">BA_CFS</data:displayName>
+      <data:baseElement>
+        <com:entity>BA_CFS</com:entity>
+        <com:entityType>service</com:entityType>
+        <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+        <com:element>hDxnwlvtTUmMQD2uDSHenQ</com:element>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+        <com:elementName>BA_CFS</com:elementName>
+      </data:baseElement>
+      <data:dataElement virtual="false">
+        <com:id>Rp7R1ntpSheTVeSVp+1Bxg</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+        <data:name>description</data:name>
+        <data:displayName lang="[default]">description</data:displayName>
+        <data:baseElement>
+          <com:entity>BA_CFS</com:entity>
+          <com:entityType>service</com:entityType>
+          <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+          <com:element>hDxnwlvtTUmMQD2uDSHenQ~description</com:element>
+          <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+          <com:elementName>description</com:elementName>
+        </data:baseElement>
+        <data:primitiveType>string</data:primitiveType>
+      </data:dataElement>
+      <data:dataElement virtual="false">
+        <com:id>uLgnF34bSJOIhtfKtYmV7Q</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+        <data:name>id</data:name>
+        <data:displayName lang="[default]">id</data:displayName>
+        <data:baseElement>
+          <com:entity>BA_CFS</com:entity>
+          <com:entityType>service</com:entityType>
+          <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+          <com:element>hDxnwlvtTUmMQD2uDSHenQ~id</com:element>
+          <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+          <com:elementName>id</com:elementName>
+        </data:baseElement>
+        <data:primitiveType>string</data:primitiveType>
+      </data:dataElement>
+      <data:dataElement virtual="false">
+        <com:id>ExhPOz1bSnajbG1eozw9AQ</com:id>
+        <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+        <data:name>name</data:name>
+        <data:displayName lang="[default]">name</data:displayName>
+        <data:baseElement>
+          <com:entity>BA_CFS</com:entity>
+          <com:entityType>service</com:entityType>
+          <com:relationship>oracle.communications.studio.model.data.baseType</com:relationship>
+          <com:element>hDxnwlvtTUmMQD2uDSHenQ~name</com:element>
+          <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+          <com:elementName>name</com:elementName>
+        </data:baseElement>
+        <data:primitiveType>string</data:primitiveType>
+      </data:dataElement>
+      <data:primitiveType>none</data:primitiveType>
+    </data:dataElement>
+    <data:primitiveType>none</data:primitiveType>
+  </data:dataElementNode>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>yHWxRqF5QaOcBpMHIMizdQ</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>YTMV+NPISaWP2q5u6aViwA</data:dataElementId>
+    <data:defaultValue></data:defaultValue>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:sensitive>false</data:sensitive>
+    <data:minLength>0</data:minLength>
+    <data:maxLength>40</data:maxLength>
+    <data:minMultiplicity>0</data:minMultiplicity>
+    <data:maxMultiplicity>-1</data:maxMultiplicity>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:uiConfigurationType">
+    <com:id>DmEITx1jRtysKPdioEyjZg</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.LayoutDetailType</com:elementType>
+    <data:dataElementId>YTMV+NPISaWP2q5u6aViwA</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>LsWKkbPCQzy1slQOUToUMA</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>BVMg5Hz6S3S1rJwPTwXvoQ</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:uiConfigurationType">
+    <com:id>KJLbiYUpRcyuS2SZ6zuSrw</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.LayoutDetailType</com:elementType>
+    <data:dataElementId>BVMg5Hz6S3S1rJwPTwXvoQ</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>8+lndL0ESrWowVkKfILsoA</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>BVMg5Hz6S3S1rJwPTwXvoQ</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="poms:attributeComplexType">
+    <com:id>b89LDFL-Qgue0dUcmhGO6Q</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>Rp7R1ntpSheTVeSVp+1Bxg</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>whSS3Ez+Rw+QcJFir6q1sg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>Rp7R1ntpSheTVeSVp+1Bxg</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>t9cjF7QnQ0OYqq+-Jtioxg</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>Rp7R1ntpSheTVeSVp+1Bxg</data:dataElementId>
+    <data:information lang="[default]">The description of the service.</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>yj9m6qI7SMSn3fAu1DSOsA</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>Rp7R1ntpSheTVeSVp+1Bxg</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="poms:attributeComplexType" index="true" name="id">
+    <com:id>7+jopkiPSEKIVkNieD-qkA</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>uLgnF34bSJOIhtfKtYmV7Q</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>ItGiGsvgT8+dDvgOISuIjQ</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>uLgnF34bSJOIhtfKtYmV7Q</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>ZYKTPPUgQluC8VMpWdi37A</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>uLgnF34bSJOIhtfKtYmV7Q</data:dataElementId>
+    <data:information lang="[default]">The id of the service.</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>6tyiPVX3TIaCKCg62uXKqQ</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>uLgnF34bSJOIhtfKtYmV7Q</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="poms:attributeComplexType" index="true" name="name">
+    <com:id>av4nuWLaS-m0GhYBLibY4w</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.AttributeElementDetails</com:elementType>
+    <data:dataElementId>ExhPOz1bSnajbG1eozw9AQ</data:dataElementId>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>yRo7zDeNSoSIKPTIr4-UcQ</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>ExhPOz1bSnajbG1eozw9AQ</data:dataElementId>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:internal>false</data:internal>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="data:dataElementInformationDetails">
+    <com:id>tHO+TM2ISDao4r3CiihoBA</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementInformation</com:elementType>
+    <data:dataElementId>ExhPOz1bSnajbG1eozw9AQ</data:dataElementId>
+    <data:information lang="[default]">The name of the service.</data:information>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:hintDetail">
+    <com:id>vgtTS7fOQQC08EwjJC7knQ</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.UIHintsDetail</com:elementType>
+    <data:dataElementId>ExhPOz1bSnajbG1eozw9AQ</data:dataElementId>
+    <layout:hints/>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="poms:relationshipComplexType">
+    <com:id>dZd436lEQRe-vqO51T9wCA</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.RelatedEntityElementDetails</com:elementType>
+    <data:dataElementId>ExhPOz1bSnajbG1eozw9AQ</data:dataElementId>
+  </data:dataElementDetails>
+  <inv:relatedSpecification>
+    <com:entity>BA_CFS</com:entity>
+    <com:entityType>configuration</com:entityType>
+    <com:relationship>Aprovisionamiento_BA_HFC To BA_CFS</com:relationship>
+    <inv:data xsi:type="inv:SpecificationRelationshipReferenceDataType">
+      <inv:relationship>CHILD</inv:relationship>
+      <inv:status>ACTIVE</inv:status>
+      <inv:parentsToChildMin>1</inv:parentsToChildMin>
+      <inv:parentsToChildMax>1</inv:parentsToChildMax>
+    </inv:data>
+  </inv:relatedSpecification>
+  <inv:entityType>BusinessInteraction</inv:entityType>
+</com:modelEntity>

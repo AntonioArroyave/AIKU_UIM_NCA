@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:data="http://xmlns.oracle.com/communications/studio/model/data" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="data:DataSchema" id="ds=BA_RFS" type="ds" typeName="Data Schema" name="BA_RFS" resource="\BA_RFS\dataDictionary\BA_RFS.xsd">
+    <displayName lang="default">BA_RFS</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="ivprj=BA_RFS" type="Inventory Project" name="Dependency">
+        <target name="BA_RFS" typeName="Inventory Project"/>
+      </relation>
+    </project>
+    <dataElements>
+      <element id="ds=BA_RFS+dataElement=Configuracion_Equipo_Premisa" type="dataElement" typeName="Schema Element" kind="Element" name="Configuracion_Equipo_Premisa" path="/Configuracion_Equipo_Premisa">
+        <displayName lang="default">Configuracion Equipo Premisa</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <dataElements/>
+        <primitiveType>structure</primitiveType>
+      </element>
+      <element id="ds=BA_RFS+dataElement=Uiltima_Milla" type="dataElement" typeName="Schema Element" kind="Element" name="Uiltima_Milla" path="/Uiltima_Milla">
+        <displayName lang="default">Uiltima Milla</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <dataElements/>
+        <primitiveType>structure</primitiveType>
+      </element>
+      <element id="ds=BA_RFS+dataElement=Elemento_de_Acceso" type="dataElement" typeName="Schema Element" kind="Element" name="Elemento_de_Acceso" path="/Elemento_de_Acceso">
+        <displayName lang="default">Elemento De Acceso</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <dataElements/>
+        <primitiveType>structure</primitiveType>
+      </element>
+      <element id="ds=BA_RFS+dataElement=Propiedades_de_servicio" type="dataElement" typeName="Schema Element" kind="Element" name="Propiedades_de_servicio" path="/Propiedades_de_servicio">
+        <displayName lang="default">Propiedades De Servicio</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <dataElements/>
+        <primitiveType>structure</primitiveType>
+      </element>
+      <element id="ds=BA_RFS+dataElement=bandwidth" type="dataElement" typeName="Schema Element" kind="Element" name="bandwidth" path="/bandwidth">
+        <displayName lang="default">Bandwidth</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=BA_RFS+dataElement=estadoDelServicio" type="dataElement" typeName="Schema Element" kind="Element" name="estadoDelServicio" path="/estadoDelServicio">
+        <displayName lang="default">Estado Del Servicio</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=BA_RFS+dataElement=buzonDeCorreo" type="dataElement" typeName="Schema Element" kind="Element" name="buzonDeCorreo" path="/buzonDeCorreo">
+        <displayName lang="default">Buzon De Correo</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <minLength inherited="false">0</minLength>
+        <maxLength inherited="false">40</maxLength>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ds=BA_RFS+dataElement=Plan_de_velocidad" type="dataElement" typeName="Schema Element" kind="Element" name="Plan_de_velocidad" path="/Plan_de_velocidad">
+        <displayName lang="default">Plan De Velocidad</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <dataElements/>
+        <primitiveType>structure</primitiveType>
+      </element>
+      <element id="ds=BA_RFS+dataElement=DireccionIP" type="dataElement" typeName="Schema Element" kind="Element" name="DireccionIP" path="/DireccionIP">
+        <displayName lang="default">Direccion IP</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <dataElements/>
+        <primitiveType>structure</primitiveType>
+      </element>
+    </dataElements>
+  </entity>
+</model:Model>

@@ -1,0 +1,27 @@
+<?xml version = '1.0'?>
+<mds:customization version="11.1.1.59.23" xmlns:mds="http://xmlns.oracle.com/mds">
+   <mds:modify element="cna">
+      <mds:attribute name="rows" value="3"/>
+      <mds:attribute name="maxColumns" value="2"/>
+      <mds:attribute name="labelAlignment" value="start"/>
+      <mds:attribute name="styleClass" value="UIHintsEditPANEL_FORM_LAYOUT"/>
+   </mds:modify>
+   <mds:modify element="cna-ras">
+      <mds:attribute name="styleClass" value="UIHintsEditPANEL_LABEL_AND_MESSAGE"/>
+   </mds:modify>
+   <mds:modify element="cna-specification">
+      <mds:attribute name="styleClass" value="UIHintsEditSELECT_ONE_CHOICE"/>
+   </mds:modify>
+   <mds:modify element="cna-adminstate">
+      <mds:attribute name="styleClass" value="UIHintsEditPANEL_LABEL_AND_MESSAGE"/>
+   </mds:modify>
+   <mds:modify element="cna-id">
+      <mds:attribute name="styleClass" value="UIHintsEditINPUT_TEXT"/>
+   </mds:modify>
+   <mds:modify element="cna-name">
+      <mds:attribute name="styleClass" value="UIHintsEditINPUT_TEXT"/>
+   </mds:modify>
+   <mds:modify element="cna-description">
+      <mds:attribute name="styleClass" value="UIHintsEditINPUT_TEXT"/>
+   </mds:modify>
+</mds:customization>

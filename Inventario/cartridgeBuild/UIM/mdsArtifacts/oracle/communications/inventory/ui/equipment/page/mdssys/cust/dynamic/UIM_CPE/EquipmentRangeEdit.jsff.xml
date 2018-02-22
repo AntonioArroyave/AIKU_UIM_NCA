@@ -1,0 +1,24 @@
+<?xml version = '1.0'?>
+<mds:customization version="11.1.1.59.23" xmlns:mds="http://xmlns.oracle.com/mds">
+   <mds:modify element="eqp">
+      <mds:attribute name="rows" value="5"/>
+      <mds:attribute name="maxColumns" value="1"/>
+      <mds:attribute name="labelAlignment" value="start"/>
+      <mds:attribute name="styleClass" value="UIHintsEditPANEL_FORM_LAYOUT"/>
+   </mds:modify>
+   <mds:modify element="eqp-quantity">
+      <mds:attribute name="styleClass" value="UIHintsEditINPUT_TEXT"/>
+   </mds:modify>
+   <mds:modify element="eqp-nel">
+      <mds:attribute name="styleClass" value="UIHintsEditINPUT_TEXT"/>
+   </mds:modify>
+   <mds:modify element="eqp-startID">
+      <mds:attribute name="styleClass" value="UIHintsEditINPUT_TEXT"/>
+   </mds:modify>
+   <mds:modify element="eqp-al1">
+      <mds:attribute name="styleClass" value="UIHintsEditPANEL_LABEL_AND_MESSAGE"/>
+   </mds:modify>
+   <mds:modify element="eqp-specification">
+      <mds:attribute name="styleClass" value="UIHintsEditSELECT_ONE_CHOICE"/>
+   </mds:modify>
+</mds:customization>

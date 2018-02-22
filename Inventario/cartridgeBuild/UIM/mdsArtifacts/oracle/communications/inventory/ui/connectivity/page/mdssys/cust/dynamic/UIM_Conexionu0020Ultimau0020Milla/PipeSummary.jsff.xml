@@ -1,0 +1,54 @@
+<?xml version = '1.0'?>
+<mds:customization version="11.1.1.59.23" xmlns:mds="http://xmlns.oracle.com/mds">
+   <mds:insert after="pipe-tst" parent="pipe">
+      <af:panelLabelAndMessage xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="pipe-dummy-5-1" label=" " styleClass="UIHintsSummaryPANEL_LABEL_AND_MESSAGE">
+         <af:outputText xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="x-pipe-dummy-5-1" value=" "/>
+      </af:panelLabelAndMessage>
+   </mds:insert>
+   <mds:modify element="pipe">
+      <mds:attribute name="rows" value="6"/>
+      <mds:attribute name="maxColumns" value="2"/>
+      <mds:attribute name="labelAlignment" value="start"/>
+      <mds:attribute name="styleClass" value="UIHintsSummaryPANEL_FORM_LAYOUT"/>
+   </mds:modify>
+   <mds:modify element="pipe-lmd">
+      <mds:attribute name="rendered" value="false"/>
+      <mds:attribute name="styleClass" value="UIHintsSummaryPANEL_LABEL_AND_MESSAGE"/>
+   </mds:modify>
+   <mds:modify element="pipe-ras">
+      <mds:attribute name="styleClass" value="UIHintsSummaryPANEL_LABEL_AND_MESSAGE"/>
+   </mds:modify>
+   <mds:modify element="pipe-cru">
+      <mds:attribute name="rendered" value="false"/>
+      <mds:attribute name="styleClass" value="UIHintsSummaryPANEL_LABEL_AND_MESSAGE"/>
+   </mds:modify>
+   <mds:modify element="pipe-specification">
+      <mds:attribute name="styleClass" value="UIHintsSummaryPANEL_LABEL_AND_MESSAGE"/>
+   </mds:modify>
+   <mds:modify element="pipe-tst">
+      <mds:attribute name="styleClass" value="UIHintsSummaryPANEL_LABEL_AND_MESSAGE"/>
+   </mds:modify>
+   <mds:modify element="pipe-crd">
+      <mds:attribute name="rendered" value="false"/>
+      <mds:attribute name="styleClass" value="UIHintsSummaryPANEL_LABEL_AND_MESSAGE"/>
+   </mds:modify>
+   <mds:modify element="pipe-lmu">
+      <mds:attribute name="rendered" value="false"/>
+      <mds:attribute name="styleClass" value="UIHintsSummaryPANEL_LABEL_AND_MESSAGE"/>
+   </mds:modify>
+   <mds:modify element="pipe-adminstate">
+      <mds:attribute name="styleClass" value="UIHintsSummaryPANEL_LABEL_AND_MESSAGE"/>
+   </mds:modify>
+   <mds:modify element="pipe-id">
+      <mds:attribute name="styleClass" value="UIHintsSummaryPANEL_LABEL_AND_MESSAGE"/>
+   </mds:modify>
+   <mds:modify element="pipe-name">
+      <mds:attribute name="styleClass" value="UIHintsSummaryPANEL_LABEL_AND_MESSAGE"/>
+   </mds:modify>
+   <mds:modify element="pipe-description">
+      <mds:attribute name="styleClass" value="invSummaryPanelLabelAndMessage UIHintsSummaryPANEL_LABEL_AND_MESSAGE"/>
+   </mds:modify>
+   <mds:modify element="pipe-medium">
+      <mds:attribute name="styleClass" value="UIHintsSummaryPANEL_LABEL_AND_MESSAGE"/>
+   </mds:modify>
+</mds:customization>

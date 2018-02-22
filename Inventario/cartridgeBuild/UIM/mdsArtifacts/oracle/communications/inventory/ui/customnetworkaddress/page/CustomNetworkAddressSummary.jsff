@@ -1,0 +1,448 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:f="http://java.sun.com/jsf/core">
+		  
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+<c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+      <af:panelStretchLayout id="pgl1" binding="#{backingBeanScope.CNA_summary_panelGroupLayout}" topHeight="#{pageFlowScope.CustomNetworkAddressSummaryBean.topHeight}">
+        <f:facet name="top">
+            <af:panelGroupLayout id="pgsl23" layout="scroll">
+                <af:panelGroupLayout id="pgl42" layout="horizontal" halign="left" rendered="#{!pageFlowScope.CustomNetworkAddressSummaryBean.previewLayout}">
+                    <af:outputText id="otbi" styleClass="invCommonText" noWrap="true"
+                                   value="#{pageFlowScope.CustomNetworkAddressSummaryBean.renderBILabel ? inventoryUIBundle.BUSINESS_INTERACTION_LABEL : null}"/>
+                    <af:menuBar id="menuBar1">
+                          <af:menu id="BIContextMenu" binding="#{backingBeanScope.InventoryMenuBean.biContextMenu}" styleClass="invSummaryMenu"
+                                   rendered="#{!(pageFlowScope.CustomNetworkAddressSummaryBean.popupMode)}"   />
+                    </af:menuBar>
+                    <af:popup id="BISearchPopup" binding="#{backingBeanScope.businessInteractionSearch3}" contentDelivery="lazyUncached">
+                        <af:dialog id="BISearchPopup_d1" type="none"
+                                   title="#{inventoryUIBundle.BUSINESS_INTERACTION_SEARCH}">
+                            <af:panelStretchLayout id="psl_1" styleClass="invCommonPanelStretchLayout">
+                                <f:facet name="center">
+                                   <af:region value="#{bindings.BusinessInteractionSearchResultsFlow1.regionModel}" id="BISP_r2"/>
+                                </f:facet>
+                            </af:panelStretchLayout>
+                        </af:dialog>
+                        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                        <af:serverListener type="refreshEntity" method="#{pageFlowScope.CustomNetworkAddressSummaryBean.afterBusinessInteractionSelectionChange}"/>
+                    </af:popup>
+                </af:panelGroupLayout>
+                
+                              
+                
+          </af:panelGroupLayout>
+          </f:facet>
+          <f:facet name="center">
+          
+          <af:panelHeader id="ph1" styleClass="invSummaryPanelHeader" helpTopicId="OHW_cnaSummary" 
+                                text="#{inventoryUIBundle.CUSTOM_NETWORK_ADDRESS_SUMMARY} - #{pageFlowScope.CustomNetworkAddressSummaryBean.displayInfo}">
+                    <f:facet name="menuBar">
+                        <af:group id="g2" rendered="#{!pageFlowScope.CustomNetworkAddressSummaryBean.previewLayout}">
+                          <!-- Menu Items -->
+                          <af:menuBar id="menuBar3">
+                            <af:menu id="menu5" binding="#{backingBeanScope.InventoryMenuBean.relatedPagesMenu}" styleClass="invSummaryMenu"/>
+                            <af:menu id="menu6" binding="#{backingBeanScope.InventoryMenuBean.actionsMenu}" styleClass="invSummaryMenu">
+                                  <af:clientListener type="propertyChange" method="goRefreshEntity"/>
+                                  <af:serverListener type="refreshEntity" method="#{pageFlowScope.CustomNetworkAddressSummaryBean.refresh}"/>
+                            </af:menu>
+                          </af:menuBar>
+                       </af:group>
+                    </f:facet>  
+          <!-- Entity Details -->
+          <af:panelGroupLayout layout="scroll" id="pgl23">
+          <af:showDetailHeader text="#{inventoryUIBundle.CUSTOM_NETWORK_ADDRESS_INFORMATION}"
+                               disclosed="true" id="sdh2">
+            <f:facet name="context"/>
+            <f:facet name="menuBar"/>
+            <f:facet name="toolbar">
+              <af:commandToolbarButton text="#{inventoryUIBundle.EDIT}" id="cb1" rendered="#{!pageFlowScope.CustomNetworkAddressSummaryBean.previewLayout}"
+                                action="edit" actionListener="#{bindings.openSubTaskForEdit.execute}"
+                                disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/customnetworkaddress/flow/CustomNetworkAddressEditFlow.xml#CustomNetworkAddressEditFlow']}"
+                                       accessKey="#{inventoryUIBundle.EDIT_ACCESS_KEY}">
+                   <af:setActionListener from="false" to="#{addMode}"/>
+              </af:commandToolbarButton>  
+            </f:facet>
+            <f:facet name="legend"/>
+            <f:facet name="info"/>
+            <af:panelFormLayout id="cna" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%">
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.ID}"
+                                       id="cna-id">
+                <af:outputText value="#{pageFlowScope.CustomNetworkAddressSummaryBean.entityObject.id}" id="ot3"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.NAME}"
+                                       id="cna-name">
+                <af:outputText value="#{pageFlowScope.CustomNetworkAddressSummaryBean.entityObject.name}" id="ot5"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.SPECIFICATION}"
+                                       id="cna-specification">
+                <af:commandImageLink action="SpecificationSummary" id="clSpec" actionListener="#{bindings.openSubTaskForSpec.execute}"
+                                     text="#{pageFlowScope.CustomNetworkAddressSummaryBean.entityObject.specification.name}"
+                                     shortDesc="#{inventoryUIBundle.LINK_FOR_SPECIFICATION_SUMMARY}">
+                    
+                    <af:setActionListener from="#{pageFlowScope.CustomNetworkAddressSummaryBean.entityObject.specification.oid}" to="#{specObjectId}"/>
+                </af:commandImageLink>
+                
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.DESCRIPTION}"
+                                       id="cna-description">
+                <af:outputText value="#{pageFlowScope.CustomNetworkAddressSummaryBean.entityObject.description}"
+                               id="outputText4"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage id="cna-adminstate" label="#{inventoryUIBundle.INVENTORY_STATUS}">
+                <af:outputText id="ot6" value="#{pageFlowScope.CustomNetworkAddressSummaryBean.inventoryStatus}"/>
+              <!--RMI 618 Start--><af:switcher defaultFacet="false" facetName="#{pageFlowScope.CustomNetworkAddressSummaryBean.popupMode}" id="swis618">
+<f:facet name="false">
+                        <af:commandImageLink action="#{pageFlowScope.CustomNetworkAddressSummaryBean.getSummaryAction}"
+                                             actionListener="#{pageFlowScope.CustomNetworkAddressSummaryBean.registerRecentItem}"
+                                             disabled="#{pageFlowScope.CustomNetworkAddressSummaryBean.installingBIDisabled}"
+                                             id="bid3"
+                                             shortDesc="#{pageFlowScope.CustomNetworkAddressSummaryBean.installingBIShortDesc}"
+                                             text="#{pageFlowScope.CustomNetworkAddressSummaryBean.installingBILabel}">
+                          <af:setActionListener from="#{pageFlowScope.CustomNetworkAddressSummaryBean.inventoryStatusBI.oid}"
+                                                to="#{objectId}"/>
+                        </af:commandImageLink>
+                      </f:facet>
+<f:facet name="true">
+<af:outputText id="swftis618" value="#{pageFlowScope.CustomNetworkAddressSummaryBean.installingBILabel}"/>
+</f:facet>
+</af:switcher>
+<af:outputText id="installingBIDueDate" value="#{pageFlowScope.CustomNetworkAddressSummaryBean.installingBIEffectiveDate}"/>
+<!--RMI 618 End-->
+</af:panelLabelAndMessage>
+              <af:panelLabelAndMessage id="cna-ras" label="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}">
+                <af:outputText id="outputText5" value="#{pageFlowScope.CustomNetworkAddressSummaryBean.resourceAssignmentStatus}"/>
+              <!--RMI 618 Start--><af:switcher defaultFacet="false" facetName="#{pageFlowScope.CustomNetworkAddressSummaryBean.popupMode}" id="swas618">
+<f:facet name="false">
+                        <af:commandImageLink action="#{pageFlowScope.CustomNetworkAddressSummaryBean.getSummaryAction}"
+                                             actionListener="#{pageFlowScope.CustomNetworkAddressSummaryBean.registerRecentItem}"
+                                             disabled="#{pageFlowScope.CustomNetworkAddressSummaryBean.consumerBIDisabled}"
+                                             id="bid4"
+                                             shortDesc="#{pageFlowScope.CustomNetworkAddressSummaryBean.consumerBIShortDesc}"
+                                             text="#{pageFlowScope.CustomNetworkAddressSummaryBean.consumerBILabel}">
+                          <af:setActionListener from="#{pageFlowScope.CustomNetworkAddressSummaryBean.assignmentBI.oid}"
+                                                to="#{objectId}"/>
+                        </af:commandImageLink>
+                      </f:facet>
+<f:facet name="true">
+<af:outputText id="swftas618" value="#{pageFlowScope.CustomNetworkAddressSummaryBean.consumerBILabel}"/>
+</f:facet>
+</af:switcher>
+<af:outputText id="consumerBIDueDate" value="#{pageFlowScope.CustomNetworkAddressSummaryBean.consumerBIEffectiveDate}"/>
+<!--RMI 618 End-->
+</af:panelLabelAndMessage>
+              <af:panelLabelAndMessage id="cna-lmd" label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" rendered="false">
+                <af:outputText id="ot9" value="#{pageFlowScope.CustomNetworkAddressSummaryBean.entityObject.lastModifiedDate}">
+                  <af:convertDateTime pattern="#{pageFlowScope.CustomNetworkAddressSummaryBean.dateTimeFormat}"/>
+                </af:outputText>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="cna-lmu" rendered="false">
+                <af:outputText value="#{pageFlowScope.CustomNetworkAddressSummaryBean.entityObject.lastModifiedUser}" id="ot12"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_DATE}" id="cna-crd" rendered="false">
+                <af:outputText value="#{pageFlowScope.CustomNetworkAddressSummaryBean.entityObject.createdDate}" id="ot15">
+                  <af:convertDateTime pattern="#{pageFlowScope.CustomNetworkAddressSummaryBean.dateTimeFormat}"/>
+                </af:outputText>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_USER}" id="cna-cru" rendered="false">
+                <af:outputText value="#{pageFlowScope.CustomNetworkAddressSummaryBean.entityObject.createdUser}" id="ot16"/>
+              </af:panelLabelAndMessage>
+            </af:panelFormLayout>
+            
+            <!-- show detail collapsible section for external identity -->
+            <af:showDetail disclosed="#{pageFlowScope.CustomNetworkAddressSummaryBean.externalIdentityPopulated}" id="sd1"
+                           disclosedText="#{inventoryUIBundle.EXTERNAL_SYSTEM}" undisclosedText="#{inventoryUIBundle.EXTERNAL_SYSTEM}"
+                           inlineStyle="width:50%;">
+                <af:panelFormLayout id="pfl101" maxColumns="1" rows="2" fieldWidth="69%" labelWidth="31%">
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.EXTERNAL_ARRANGEMENT}" id="plam104">
+                        <af:outputText value="#{pageFlowScope.CustomNetworkAddressSummaryBean.entityObject.externalArrangement}" id="ot104"/>
+                    </af:panelLabelAndMessage>
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.EXTERNAL_MANAGEMENT_DOMAIN}" id="plam101">
+                        <af:outputText value="#{pageFlowScope.CustomNetworkAddressSummaryBean.entityObject.externalManagementDomain}" id="ot101"/>
+                    </af:panelLabelAndMessage>
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.EXTERNAL_NAME}" id="plam102">
+                        <af:outputText value="#{pageFlowScope.CustomNetworkAddressSummaryBean.entityObject.externalName}" id="ot102"/>
+                    </af:panelLabelAndMessage>
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.EXTERNAL_OBJECT_ID}" id="plam103">
+                        <af:outputText value="#{pageFlowScope.CustomNetworkAddressSummaryBean.entityObject.externalObjectId}" id="ot103"/>
+                    </af:panelLabelAndMessage>
+                </af:panelFormLayout>
+            </af:showDetail>
+          </af:showDetailHeader>
+          <af:group rendered="#{!pageFlowScope.CustomNetworkAddressSummaryBean.previewLayout}" id ="group2" >
+          <!-- Portlets start from here -->
+          <af:spacer width="10" height="10" id="s1"/>
+          <af:showDetailHeader text="#{inventoryUIBundle.CUSTOM_NETWORK_ADDRESS_HIERARCHY}"
+                               disclosed="true" id="sdh5">
+            <f:facet name="context"/>
+            <f:facet name="menuBar"/>
+            <f:facet name="toolbar"/>
+            <f:facet name="legend"/>
+            <f:facet name="info"/>            
+            <af:panelCollection id="pc2" styleClass="invSummaryPanelCollection" featuresOff="freeze wrap">
+              <f:facet name="menus"/>
+              <f:facet name="toolbar"/>
+              <f:facet name="statusbar"/>
+              <af:treeTable id="cnaTreeTable"
+                            value="#{pageFlowScope.CustomNetworkAddressTreeBean.treeModel}"
+                            binding="#{backingBeanScope.CNA_treeBinding}"
+                            rowDisclosureListener="#{pageFlowScope.CustomNetworkAddressTreeBean.rowDisclosureListener}"
+                            disclosedRowKeys="#{pageFlowScope.CustomNetworkAddressTreeBean.treeDisclosedRowKeys}"
+                            var="node" rowSelection="single" expandAllEnabled="#{pageFlowScope.CustomNetworkAddressTreeBean.expandAllEnabled}"
+                            columnSelection="multiple" styleClass="invSummaryTree"
+                            fetchSize="#{pageFlowScope.CustomNetworkAddressSummaryBean.fetchSize}"
+                            contextMenuSelect="true" contentDelivery="immediate"
+                            selectionListener="#{pageFlowScope.CustomNetworkAddressTreeBean.nodeSelectedEvent}"
+                            horizontalGridVisible="false"
+                            summary="#{inventoryUIBundle.CUSTOM_NETWORK_ADDRESS_HIERARCHY_TREETABLE}">
+                <f:facet name="nodeStamp">
+                  <af:column id="c9" width="500" rowHeader="unstyled"
+                             headerText="#{inventoryUIBundle.CUSTOM_NETWORK_ADDRESS}">
+                    <af:panelGroupLayout id="pgl2">
+                      <af:image source="#{node.data.icon}" styleClass="invSummaryImage" shortDesc="icon" id="i1"/>
+                       <af:switcher id="idSwitcher" defaultFacet="false" facetName="#{pageFlowScope.CustomNetworkAddressTreeBean.treeModel.depth le 0}">
+                            <f:facet name="false">           
+                                <af:commandImageLink action="#{pageFlowScope.CustomNetworkAddressTreeBean.view}" id="cl1" actionListener="#{pageFlowScope.CustomNetworkAddressTreeBean.registerRecentItem}"
+                                                     text="#{node.data.label}"
+                                                     shortDesc="#{inventoryUIBundle.LINK_FOR_SUMMARY}">
+                                    
+                                </af:commandImageLink>
+                            </f:facet> 
+                            <f:facet name="true">           
+                                <af:outputText value="#{node.data.label}" id="ot8"/>
+                            </f:facet> 
+                         </af:switcher>
+                    </af:panelGroupLayout>
+                  </af:column>
+                </f:facet>
+                
+                <f:facet name="contextMenu">
+                  <af:popup contentDelivery="lazyUncached" id="popupContext"
+                            partialTriggers="::cnaTreeTable">
+                    <af:menu id="rootNodeMenu" text="rootNodeMenu">
+                      <af:commandMenuItem text="#{inventoryUIBundle.ADD_CHILD}" id="cmi5"
+                                          selected="true"
+                                          rendered="#{(pageFlowScope.CustomNetworkAddressTreeBean.rootNodePopupMenu || pageFlowScope.CustomNetworkAddressTreeBean.childNodePopupMenu) and securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=CustomNetworkAddress.ASSOCIATE_CNA;action=view']}">
+                        <af:setActionListener from="true" to="#{pageFlowScope.invokeCNA2}"/>
+                        <af:showPopupBehavior popupId="::childcnaPopup" triggerType="click"/>
+                      </af:commandMenuItem>
+       
+                      <af:commandMenuItem text="#{inventoryUIBundle.REMOVE}" id="commandMenuItem1"
+                                          rendered="#{pageFlowScope.CustomNetworkAddressTreeBean.childNodePopupMenu and securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=CustomNetworkAddress.DISASSOCIATE_CNA;action=view']}" 
+                                          actionListener="#{pageFlowScope.CustomNetworkAddressTreeBean.removeFromCustomNetworkAddress}">
+                        <af:clientListener method="goRefreshEntity"
+                                           type="click"/>
+                        <af:serverListener type="refreshEntity"
+                                           method="#{pageFlowScope.CustomNetworkAddressTreeBean.refreshTree}"/>
+                      </af:commandMenuItem>
+                    </af:menu>
+                  </af:popup>
+                </f:facet>
+
+              </af:treeTable>
+              
+              <af:popup id="childcnaPopup"
+                        binding="#{backingBeanScope.popupChildCNABinding}"
+                        contentDelivery="lazyUncached">
+                <af:dialog id="d1" type="none"
+                           title="#{inventoryUIBundle.CUSTOM_NETWORK_ADDRESS_SEARCH}">
+                <af:panelStretchLayout id="psl_2" styleClass="invCommonPanelStretchLayout">
+                  <f:facet name="center">                
+                  <af:region value="#{bindings.CustomNetworkAddressSearchResultsFlow2.regionModel}"
+                             id="r5"/>
+                  </f:facet>
+                </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity" method="#{pageFlowScope.CustomNetworkAddressTreeBean.refreshTree}"/>
+              </af:popup>
+            </af:panelCollection>
+          </af:showDetailHeader>
+         
+          <af:spacer width="10" height="10" id="s111"/>
+          <!-- Parent CNA -->
+          <af:showDetailHeader text="#{inventoryUIBundle.PARENT_CUSTOM_NETWORK_ADDRESS}"
+                               disclosed="true" id="sdh25">
+            <f:facet name="context"/>
+            <f:facet name="menuBar"/>
+            <f:facet name="toolbar"/>
+            <f:facet name="legend"/>
+            <f:facet name="info"/>
+            <af:panelCollection id="pc1" styleClass="invSummaryPanelCollection">
+              <af:popup id="parentCustomNetworkAddressPopup"
+                        contentDelivery="lazyUncached"
+                        binding="#{backingBeanScope.popupParentCNA}">
+                <af:dialog title="#{inventoryUIBundle.CUSTOM_NETWORK_ADDRESS}"
+                           id="d3" type="none">
+                <af:panelStretchLayout id="psl_3" styleClass="invCommonPanelStretchLayout">
+                  <f:facet name="center">                                   
+                  <af:region value="#{bindings.CustomNetworkAddressSearchResultsFlow1.regionModel}"
+                             id="r4"/>
+                  </f:facet>
+                </af:panelStretchLayout>
+                </af:dialog>
+              <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+              <af:serverListener type="refreshEntity"
+                                 method="#{pageFlowScope.CustomNetworkAddressSummaryBean.refresh}"/>
+              </af:popup>
+              <f:facet name="menus"/>
+              <f:facet name="toolbar">
+                <af:toolbar id="t1">
+                  <af:commandToolbarButton text="#{inventoryUIBundle.ASSOCIATE}"
+                                           id="cb1Create"
+                                           icon="#{InventoryHelperBean.associateIcon}" disabledIcon="#{InventoryHelperBean.disAssociateIcon}"
+                                           partialTriggers="resultsTableId" 
+                                           rendered="#{(pageFlowScope.CustomNetworkAddressSummaryBean.parentCustomNetworkAddressCollectionModel.rowCount == 0) and (securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=CustomNetworkAddress.ASSOCIATE_CNA;action=view'])}"
+                                           binding="#{backingBeanScope.associateButton}">
+                    <af:setActionListener from="true" to="#{pageFlowScope.invokeCNA1}"/>
+                    <af:showPopupBehavior popupId="parentCustomNetworkAddressPopup" triggerType="click"/>
+                  </af:commandToolbarButton>
+                  <af:commandToolbarButton text="#{inventoryUIBundle.DELETE}"
+                                           id="cb3Delete" rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=CustomNetworkAddress.DISASSOCIATE_CNA;action=view']}"
+                                           icon="#{InventoryHelperBean.deleteIcon}" disabledIcon="#{InventoryHelperBean.disDeleteIcon}"
+                                           actionListener="#{pageFlowScope.CustomNetworkAddressSummaryBean.disassociateParent}"
+                                            disabled="#{pageFlowScope.CustomNetworkAddressSummaryBean.resultsTable.selectedRowKeys == null || pageFlowScope.CustomNetworkAddressSummaryBean.resultsTable.selectedRowKeys.size lt 1}"
+                                           partialTriggers="resultsTableId"
+                                           binding="#{backingBeanScope.deleteButton}">
+                  </af:commandToolbarButton>
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="statusbar">
+          <af:toolbar id="t4">
+          <af:outputText value="#{inventoryUIBundle.ROW_COUNT} #{(pageFlowScope.CustomNetworkAddressSummaryBean.parentCustomNetworkAddressCollectionModel.rowCount lt 0) ? 0 :  pageFlowScope.CustomNetworkAddressSummaryBean.parentCustomNetworkAddressCollectionModel.rowCount}"
+                                 id="ol2" styleClass="invSearchOutputLabel"
+                                 binding="#{backingBeanScope.totalResultsLabel}"
+                                 partialTriggers="resultsTableId"/>                         
+                </af:toolbar>
+              </f:facet>
+              <af:table id="resultsTableId"
+                        value="#{pageFlowScope.CustomNetworkAddressSummaryBean.parentCustomNetworkAddressCollectionModel}"
+                        var="row" 
+                        emptyText="#{inventoryUIBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET}"
+                        fetchSize="1"
+                        rowBandingInterval="0" autoHeightRows="#{pageFlowScope.CustomNetworkAddressSummaryBean.portletHeight}"
+                        selectionListener="#{pageFlowScope.CustomNetworkAddressSummaryBean.parentCustomNetworkAddressSelectionListener}"
+                        binding="#{pageFlowScope.CustomNetworkAddressSummaryBean.resultsTable}"
+                        rowSelection="single"
+                        summary="#{inventoryUIBundle.PARENT_CUSTOM_NETWORK_ADDRESS_TABLE}">
+                <af:column headerText="#{inventoryUIBundle.ID}" id="c3"
+                           rowHeader="unstyled">
+                  <af:commandImageLink id="cl2" action="init" actionListener="#{bindings.openSubTaskForParentCustomNetworkAddress.execute}"
+                                       text="#{row.id}"
+                                       shortDesc="#{inventoryUIBundle.CUSTOM_NETWORK_ADDRESS_SUMMARY_LINK}">
+                    
+                    <af:setActionListener from="#{row.oid}" to="#{pageFlowScope.objectId}"/>
+                  </af:commandImageLink>
+                </af:column>
+                <af:column headerText="#{inventoryUIBundle.NAME}" id="c2">
+                  <af:outputText value="#{row.name}" id="ot1"/>
+                </af:column>
+                 <af:column headerText="#{inventoryUIBundle.SPECIFICATION}" id="c8">
+                    <af:commandImageLink action="SpecificationSummary" id="clSpec1" actionListener="#{bindings.openSubTaskForParentCNASpec.execute}"
+                                         text="#{row.specification.name}"
+                                         shortDesc="#{inventoryUIBundle.LINK_FOR_SPECIFICATION_SUMMARY}">
+                        
+                        <af:setActionListener from="#{row.specification.oid}" to="#{specObjectId}"/>
+                    </af:commandImageLink>
+                  </af:column>
+                 <af:column headerText="#{inventoryUIBundle.INVENTORY_STATUS}" id="c7">
+                  <af:outputText value="#{pageFlowScope.CustomNetworkAddressSummaryBean.parentInventoryStatus}"
+                                 id="ot11"/>
+                        <!-- RMI 618 Start -->
+                        <af:outputText value="#{pageFlowScope.CustomNetworkAddressSummaryBean.inventoryStatusBIDueDate}" id="pendingBIDueDate1"/>
+                        <af:switcher id="swispd618" defaultFacet="false"
+                                     facetName="#{pageFlowScope.CustomNetworkAddressSummaryBean.popupMode}">
+                          <f:facet name="false">
+                            <af:commandImageLink text="#{pageFlowScope.CustomNetworkAddressSummaryBean.inventoryStatusBILabel}"
+                                                 disabled="#{pageFlowScope.CustomNetworkAddressSummaryBean.invStatusDisabled}"
+                                                 id="isCI1"
+                                                 shortDesc="#{pageFlowScope.CustomNetworkAddressSummaryBean.invStatusShortDesc}"
+                                                 action="#{pageFlowScope.CustomNetworkAddressSummaryBean.getPendingBiSummaryAction}"
+                                                 actionListener="#{pageFlowScope.CustomNetworkAddressSummaryBean.registerPendingBiRecentItem}">
+                              <af:setActionListener from="#{pageFlowScope.CustomNetworkAddressSummaryBean.inventoryStatusBIOid}"
+                                                    to="#{objectId}"/>
+                            </af:commandImageLink>
+                          </f:facet>
+                          <f:facet name="true">
+                            <af:outputText value="#{pageFlowScope.CustomNetworkAddressSummaryBean.inventoryStatusBILabel}"
+                                           id="swftispd618"/>
+                          </f:facet>
+                        </af:switcher>
+                        <!-- RMI 618 End -->
+                </af:column>
+                <af:column headerText="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}" id="c6">
+                  <af:outputText value="#{pageFlowScope.CustomNetworkAddressSummaryBean.parentResourceAssignmentStatus}"
+                                 id="ot10"/>
+                        <!-- RMI 618 Start -->
+                        <af:outputText value="#{pageFlowScope.CustomNetworkAddressSummaryBean.assignmentBIDueDate}" id="pendingBIDueDate2"/>
+                        <af:switcher id="swaspd618" defaultFacet="false"
+                                     facetName="#{pageFlowScope.CustomNetworkAddressSummaryBean.popupMode}">
+                          <f:facet name="false">
+                           <af:commandImageLink text="#{pageFlowScope.CustomNetworkAddressSummaryBean.assignmentBILabel}"
+                                               disabled="#{pageFlowScope.CustomNetworkAddressSummaryBean.asnStatusDisabled}"
+                                               id="asCI"
+                                               shortDesc="#{pageFlowScope.CustomNetworkAddressSummaryBean.asnStatusShortDesc}"
+                                               action="#{pageFlowScope.CustomNetworkAddressSummaryBean.getPendingBiSummaryAction}"
+                                               actionListener="#{pageFlowScope.CustomNetworkAddressSummaryBean.registerPendingBiRecentItem}">
+                            <af:setActionListener from="#{pageFlowScope.CustomNetworkAddressSummaryBean.asnStatusBIOid}"
+                                                  to="#{objectId}"/>
+                          </af:commandImageLink>
+                          </f:facet>
+                          <f:facet name="true">
+                            <af:outputText value="#{pageFlowScope.CustomNetworkAddressSummaryBean.assignmentBILabel}"
+                                           id="swftaspd618"/>
+                          </f:facet>
+                        </af:switcher>
+                        <!-- RMI 618 End -->    
+                </af:column>
+                <af:column headerText="#{inventoryUIBundle.CONDITION_TYPE}" id="c5">
+                  <af:outputText value="#{pageFlowScope.CustomNetworkAddressSummaryBean.parentConditionType}" escape="false"
+                                 id="ot13"/>
+                </af:column>
+                <af:column headerText="#{inventoryUIBundle.RESERVATION_TYPE}" id="c4">
+                  <af:outputText value="#{pageFlowScope.CustomNetworkAddressSummaryBean.parentReservationType}" escape="false"
+                                 id="ot14"/>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:showDetailHeader>
+          <!-- Parent CNA -->
+          
+           <!-- IG -->
+          <af:spacer width="10" height="10" id="s4"/>
+          <af:region value="#{bindings.InventoryGroupListFlow1.regionModel}"
+                     id="r2"/>
+          <!-- IG -->
+          <!-- Places portlet -->
+          <af:spacer width="10" height="10" id="s2"/>
+          <af:region value="#{bindings.PlaceListFlow1.regionModel}" id="r1"/>
+          <!-- Places portlet -->
+          <!-- Involvements Section Starts Here -->
+          <af:spacer width="10" height="10" id="s6"/>
+          <af:region value="#{bindings.CustomInvolvementList1.regionModel}"
+                     id="custInvListRegion"/>
+          <!-- Involvements Section Ends Here -->
+          <!-- BI -->
+          <af:spacer width="10" height="10" id="s31"/>
+          <af:region value="#{bindings.BusinessInteractionListFlow1.regionModel}"
+                     id="r3"/>
+          <!-- BI -->          <!--Party-->
+          <af:spacer width="10" height="10" id="s5"/>
+          <af:region value="#{bindings.PartyListFlow1.regionModel}" id="r6"/>
+          <!--Party-->
+                <af:region value="#{bindings.NetworkListFlow1.regionModel}"
+                           id="r7"/>
+                <af:region value="#{bindings.ConsumerListFlow1.regionModel}" id="r8"/>
+              </af:group>
+          </af:panelGroupLayout>
+        </af:panelHeader>
+      
+      </f:facet>
+      </af:panelStretchLayout>
+    </f:facet>
+    <f:facet name="contextualArea"/>
+  </af:pageTemplate>
+</jsp:root>

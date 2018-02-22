@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<extent>
+  <object class="oracle.communications.platform.entity.impl.InventoryConfigurationSpecDAO" guid="http://xmlns.oracle.com/cgbu/inventory/nowhere/BA_CFS/model/BA_CFS.configuration#1.0.0.0.0_b0" oid="oracle.communications.platform.entity.impl.SpecificationDAO-0" version="0">
+    <field name="name">"BA_CFS"</field>
+    <field name="instanceType">"instanceType.oracle.communications.platform.entity.impl.ServiceConfigurationVersionDAO"</field>
+    <field name="description">null</field>
+    <field name="startDate">1519275601000</field>
+    <field name="relatedSpecs">
+      <element>oracle.communications.platform.ies.xfile.OID:oracle.communications.platform.entity.impl.SpecificationRelDAO-0</element>
+      <element>oracle.communications.platform.ies.xfile.OID:oracle.communications.platform.entity.impl.SpecificationRelDAO-1</element>
+      <element>oracle.communications.platform.ies.xfile.OID:oracle.communications.platform.entity.impl.SpecificationRelDAO-2</element>
+    </field>
+    <field mode="skip" name="fromSpecs"/>
+    <field name="type">null</field>
+    <field name="characteristicSpecUsages">
+      <element>oracle.communications.platform.ies.xfile.OID:oracle.communications.platform.entity.impl.CharacteristicSpecUsageDAO-0</element>
+    </field>
+    <field name="extensionPointRuleSets">
+      <element>oracle.communications.platform.ies.xfile.OID:oracle.communications.platform.entity.impl.ExtensionPointRuleSetDAO-0</element>
+    </field>
+    <field name="transitions"/>
+    <field name="media"/>
+    <field name="path">"BA_CFS"</field>
+    <field format="enum_name" name="configType">CONFIG</field>
+    <field name="activationParameter">false</field>
+    <field name="sharedBySpecs">false</field>
+    <field name="options"/>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.InventoryConfigurationSpecDAO" guid="http://xmlns.oracle.com/cgbu/inventory/nowhere/BA_CFS/model/BA_CFS.configuration.ACC.configItem-176957490#1.0.0.0.0_b0" oid="oracle.communications.platform.entity.impl.SpecificationDAO-1" version="0">
+    <field name="name">"ACC"</field>
+    <field name="instanceType">"instanceType.oracle.communications.platform.entity.impl.ServiceConfigurationItemDAO"</field>
+    <field name="description">""</field>
+    <field name="startDate">1519275601000</field>
+    <field mode="skip" name="fromSpecs"/>
+    <field name="type">null</field>
+    <field name="path">"BA_CFS,ACC,"</field>
+    <field format="enum_name" name="configType">ITEM</field>
+    <field name="activationParameter">false</field>
+    <field name="sharedBySpecs">false</field>
+    <field name="options">
+      <element>oracle.communications.platform.ies.xfile.OID:oracle.communications.platform.entity.impl.InventoryConfigSpecOptionDAO-0</element>
+    </field>
+    <field format="enum_name" name="itemOptionType">ASSIGNMENT</field>
+    <field name="characteristicSpecUsages"/>
+    <field name="relatedSpecs"/>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.InventoryConfigurationSpecDAO" guid="http://xmlns.oracle.com/cgbu/inventory/nowhere/BA_CFS/model/BA_CFS.configuration.EQ.configItem-3180013520#1.0.0.0.0_b0" oid="oracle.communications.platform.entity.impl.SpecificationDAO-2" version="0">
+    <field name="name">"EQ"</field>
+    <field name="instanceType">"instanceType.oracle.communications.platform.entity.impl.ServiceConfigurationItemDAO"</field>
+    <field name="description">""</field>
+    <field name="startDate">1519275601000</field>
+    <field mode="skip" name="fromSpecs"/>
+    <field name="type">null</field>
+    <field name="path">"BA_CFS,EQ,"</field>
+    <field format="enum_name" name="configType">ITEM</field>
+    <field name="activationParameter">false</field>
+    <field name="sharedBySpecs">false</field>
+    <field name="options">
+      <element>oracle.communications.platform.ies.xfile.OID:oracle.communications.platform.entity.impl.InventoryConfigSpecOptionDAO-1</element>
+    </field>
+    <field format="enum_name" name="itemOptionType">ASSIGNMENT</field>
+    <field name="characteristicSpecUsages"/>
+    <field name="relatedSpecs"/>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.InventoryConfigurationSpecDAO" guid="http://xmlns.oracle.com/cgbu/inventory/nowhere/BA_CFS/model/BA_CFS.configuration.BA.configItem-3133548458#1.0.0.0.0_b0" oid="oracle.communications.platform.entity.impl.SpecificationDAO-3" version="0">
+    <field name="name">"BA"</field>
+    <field name="instanceType">"instanceType.oracle.communications.platform.entity.impl.ServiceConfigurationItemDAO"</field>
+    <field name="description">""</field>
+    <field name="startDate">1519275601000</field>
+    <field mode="skip" name="fromSpecs"/>
+    <field name="type">null</field>
+    <field name="path">"BA_CFS,BA,"</field>
+    <field format="enum_name" name="configType">ITEM</field>
+    <field name="activationParameter">false</field>
+    <field name="sharedBySpecs">false</field>
+    <field name="options">
+      <element>oracle.communications.platform.ies.xfile.OID:oracle.communications.platform.entity.impl.InventoryConfigSpecOptionDAO-2</element>
+    </field>
+    <field format="enum_name" name="itemOptionType">ASSIGNMENT</field>
+    <field name="characteristicSpecUsages"/>
+    <field name="relatedSpecs"/>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.ServiceSpecificationDAO" guid="http://xmlns.oracle.com/cgbu/inventory/nowhere/BA_CFS/model/BA_CFS.service#1.0.0.0.0_b0" oid="oracle.communications.platform.entity.impl.SpecificationDAO-4" version="0">
+    <field name="name">"BA_CFS"</field>
+    <field name="instanceType">"instanceType.oracle.communications.platform.entity.impl.ServiceDAO"</field>
+    <field name="description">null</field>
+    <field name="consumableMayBeShared">false</field>
+    <field name="consumerAllowSharedConsumption">false</field>
+    <field name="startDate">1519275601000</field>
+    <field name="relatedSpecs">
+      <element>oracle.communications.platform.ies.xfile.OID:oracle.communications.platform.entity.impl.SpecificationRelDAO-3</element>
+    </field>
+    <field mode="skip" name="fromSpecs"/>
+    <field name="enterIdManually">false</field>
+    <field name="type">null</field>
+    <field name="characteristicSpecUsages"/>
+    <field name="extensionPointRuleSets"/>
+    <field name="transitions"/>
+    <field name="media"/>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.BusinessInteractionSpecDAO" guid="http://xmlns.oracle.com/cgbu/inventory/nowhere/BA_CFS/model/Aprovisionamiento_BA_HFC.bi#1.0.0.0.0_b0" oid="oracle.communications.platform.entity.impl.SpecificationDAO-5" version="0">
+    <field name="name">"Aprovisionamiento_BA_HFC"</field>
+    <field name="instanceType">"instanceType.oracle.communications.platform.entity.impl.BusinessInteractionDAO"</field>
+    <field name="description">null</field>
+    <field name="startDate">1519275601000</field>
+    <field name="relatedSpecs">
+      <element>oracle.communications.platform.ies.xfile.OID:oracle.communications.platform.entity.impl.SpecificationRelDAO-4</element>
+    </field>
+    <field mode="skip" name="fromSpecs"/>
+    <field name="enterIdManually">false</field>
+    <field name="type">null</field>
+    <field name="characteristicSpecUsages"/>
+    <field name="extensionPointRuleSets"/>
+    <field name="transitions"/>
+    <field name="media"/>
+  </object>
+</extent>

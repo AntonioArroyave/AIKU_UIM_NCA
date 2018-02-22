@@ -1,0 +1,9 @@
+LAST_FOLDER_Aprovisionamiento=Aprovisionamiento/model
+LAST_FOLDER_BA_CFS=BA_CFS/model
+LAST_FOLDER_BA_RFS=BA_RFS/model
+LAST_FOLDER_Inventario=Inventario/model
+LAST_FOLDER_Local=Local/model
+LAST_FOLDER_UIM_Local=UIM_Local/model
+com.mslv.studio.action.DeployConnectionRecentList=BA_CFS (UIMLocal);ora_uim_basetechnologies (UIMLocal);BA_RFS (UIMLocal);
+com.mslv.studio.action.EntityCreationRecentList=com.mslv.studio.inventory.ruleset;com.mslv.studio.inventory.ruleset.trigger;com.mslv.studio.core.environment;com.mslv.studio.inventory.custom.networkAddress;
+eclipse.preferences.version=1

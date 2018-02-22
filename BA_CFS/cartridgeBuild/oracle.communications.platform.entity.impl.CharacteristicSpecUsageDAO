@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<extent>
+  <object class="oracle.communications.platform.entity.impl.CharacteristicSpecUsageDAO" oid="oracle.communications.platform.entity.impl.CharacteristicSpecUsageDAO-0" version="0">
+    <field name="specification">oracle.communications.platform.ies.xfile.OID:oracle.communications.platform.entity.impl.SpecificationDAO-0</field>
+    <field name="characteristicSpecification">oracle.communications.platform.ies.xfile.GUID:http://xmlns.oracle.com/communications/sce/dictionary/BA_RFS/BA_RFS/bandwidth.characteristic#1.0.0.0.0_b0</field>
+    <field name="editMask">null</field>
+    <field name="displayMask">null</field>
+    <field name="valueValidationSource">null</field>
+    <field name="storeAbbreviation">null</field>
+    <field name="required">false</field>
+    <field name="isReadOnly">false</field>
+    <field name="displayOrder">0</field>
+    <field name="isRangeable">true</field>
+    <field name="values"/>
+  </object>
+</extent>

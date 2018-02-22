@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+/* Copyright (c) 2009, 2014, Oracle and/or its affiliates. 
+All rights reserved.*/
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    raattulu    4/09/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:f="http://java.sun.com/jsf/core"> 
+<c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+      <af:panelStretchLayout id="pgl1" binding="#{backingBeanScope.SER_summary_panelGroupLayout}">
+        
+          <f:facet name="center">
+          
+          <af:panelHeader text="#{inventoryUIBundle.SERVICE_SUMMARY} - #{pageFlowScope.ServiceSummaryBean.displayInfo}" helpTopicId="OHW_serviceSummary">
+          <f:facet name="menuBar">
+            <af:group id="g2" rendered="#{!pageFlowScope.ServiceSummaryBean.previewLayout}">
+            <af:menuBar>
+                <af:menu binding="#{pageFlowScope.ServiceSummaryBean.relatedPagesMenu}" styleClass="invSummaryMenu"/>
+                <af:menu binding="#{backingBeanScope.InventoryMenuBean.actionsMenu}" styleClass="invSummaryMenu">
+                    <af:clientListener method="goRefreshEntity" type="propertyChange"/>
+                    <af:serverListener type="refreshEntity" method="#{pageFlowScope.ServiceSummaryBean.refresh}"/>
+                </af:menu>
+            </af:menuBar>
+            </af:group>
+          </f:facet>
+          <af:panelGroupLayout layout="scroll" id="pgl23">
+          <af:showDetailHeader text="#{inventoryUIBundle.SERVICE_INFORMATION}" disclosed="true" styleClass="invSummaryShowDetailHeader">
+            <f:facet name="toolbar">
+                <af:commandButton text="#{inventoryUIBundle.EDIT}" action="edit" rendered="#{!pageFlowScope.ServiceSummaryBean.previewLayout}" 
+                                  actionListener="#{bindings.openSubTaskForEdit.execute}" 
+                                  disabled="#{pageFlowScope.ServiceSummaryBean.disableEditButton or !securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/service/flow/ServiceEditFlow.xml#ServiceEditFlow']}"
+                                  accessKey="#{inventoryUIBundle.EDIT_ACCESS_KEY}">
+                    <af:setActionListener from="#{pageFlowScope.ServiceSummaryBean.entityObject.oid}" to="#{objectId}"/>
+                    <af:setActionListener from="false" to="#{addMode}"/>
+                </af:commandButton>
+            </f:facet>
+            <af:panelFormLayout maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%" id="service">
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.ID}" id="service-id">
+                    <af:outputText value="#{pageFlowScope.ServiceSummaryBean.entityObject.id}"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.NAME}" id="service-name">
+                    <af:outputText value="#{pageFlowScope.ServiceSummaryBean.entityObject.name}"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.DESCRIPTION}" id="service-description" styleClass="invSummaryPanelLabelAndMessage">
+                    <af:outputText value="#{pageFlowScope.ServiceSummaryBean.entityObject.description}"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.NETWORK_ORIENTED_SERVICE_TYPE}" id="service-nos" styleClass="invSummaryPanelLabelAndMessage">
+                    <af:outputText value="#{pageFlowScope.ServiceSummaryBean.networkOrientedServiceType}"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.STATUS}" id="service-adminstate">
+                    <af:outputText value="#{pageFlowScope.ServiceSummaryBean.adminState}"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.STATUS_DATE}" id="service-statusdate">
+                    <af:outputText value="#{pageFlowScope.ServiceSummaryBean.entityObject.statusDate}">
+                     <af:convertDateTime pattern="#{pageFlowScope.ServiceSummaryBean.dateTimeFormat}"/>
+                    </af:outputText>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.SPECIFICATION}" id="service-specification">
+                    <af:commandImageLink action="SpecificationSummary" actionListener="#{bindings.openSubTaskForSpec.execute}"
+                                         text="#{pageFlowScope.ServiceSummaryBean.specDisplayName}"
+                                         shortDesc="#{inventoryUIBundle.LINK_FOR_SPECIFICATION_SUMMARY}">
+                        
+                        <af:setActionListener from="#{pageFlowScope.ServiceSummaryBean.entityObject.specification.oid}" to="#{specObjectId}"/>
+                    </af:commandImageLink>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="service-lmd" rendered="false">
+                    <af:outputText value="#{pageFlowScope.ServiceSummaryBean.entityObject.lastModifiedDate}" id="ot9">
+                      <af:convertDateTime pattern="#{pageFlowScope.ServiceSummaryBean.dateTimeFormat}"/>
+                    </af:outputText>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="service-lmu" rendered="false">
+                    <af:outputText value="#{pageFlowScope.ServiceSummaryBean.entityObject.lastModifiedUser}" id="ot10"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_DATE}" id="service-crd" rendered="false">
+                    <af:outputText value="#{pageFlowScope.ServiceSummaryBean.entityObject.createdDate}" id="ot11">
+                      <af:convertDateTime pattern="#{pageFlowScope.ServiceSummaryBean.dateTimeFormat}"/>
+                    </af:outputText>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_USER}" id="service-cru" rendered="false">
+                    <af:outputText value="#{pageFlowScope.ServiceSummaryBean.entityObject.createdUser}" id="ot12"/>
+                </af:panelLabelAndMessage>
+            </af:panelFormLayout>
+            
+            <!-- show detail collapsible section for external identity -->
+            <af:showDetail disclosed="#{pageFlowScope.ServiceSummaryBean.externalIdentityPopulated}" id="sd1"
+                           disclosedText="#{inventoryUIBundle.EXTERNAL_SYSTEM}" undisclosedText="#{inventoryUIBundle.EXTERNAL_SYSTEM}"
+                           inlineStyle="width:50%;">
+                <af:panelFormLayout id="pfl101" maxColumns="1" rows="2" fieldWidth="69%" labelWidth="31%">
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.EXTERNAL_MANAGEMENT_DOMAIN}" id="plam101">
+                        <af:outputText value="#{pageFlowScope.ServiceSummaryBean.entityObject.externalManagementDomain}" id="ot101"/>
+                    </af:panelLabelAndMessage>
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.EXTERNAL_NAME}" id="plam102">
+                        <af:outputText value="#{pageFlowScope.ServiceSummaryBean.entityObject.externalName}" id="ot102"/>
+                    </af:panelLabelAndMessage>
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.EXTERNAL_OBJECT_ID}" id="plam103">
+                        <af:outputText value="#{pageFlowScope.ServiceSummaryBean.entityObject.externalObjectId}" id="ot103"/>
+                    </af:panelLabelAndMessage>
+                </af:panelFormLayout>
+            </af:showDetail>
+          </af:showDetailHeader>
+          <af:spacer width="10" height="10"/>
+          <af:group rendered="#{!pageFlowScope.ServiceSummaryBean.previewLayout}" id ="group2" >
+                <af:region id="r1" value="#{bindings.ConfigurationListFlow1.regionModel}" rendered="#{pageFlowScope.ServiceSummaryBean.renderConfigPortlet}"/>
+                <af:spacer width="10" height="10"/>
+                <af:region id="r2" value="#{bindings.PartyListFlow1.regionModel}"/>
+                <af:spacer width="10" height="10"/>
+                <af:region id="r3" value="#{bindings.PlaceListFlow1.regionModel}"/>
+          </af:group>
+          </af:panelGroupLayout>
+        </af:panelHeader>
+      
+      </f:facet>
+      </af:panelStretchLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

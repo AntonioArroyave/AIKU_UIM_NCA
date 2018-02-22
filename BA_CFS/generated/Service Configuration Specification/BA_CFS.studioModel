@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:inventory="http://xmlns.oracle.com/communications/studio/model/inventory" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="inventory:ServiceConfigurationSpecification" id="sc=BA_CFS" type="sc" typeName="Service Configuration Specification" name="BA_CFS" resource="\BA_CFS\model\BA_CFS.configuration">
+    <note lang="default"/>
+    <project>
+      <relation ref="ivprj=BA_CFS" type="Inventory Project" name="Dependency">
+        <target name="BA_CFS" typeName="Inventory Project"/>
+      </relation>
+    </project>
+    <dataElements>
+      <element id="sc=BA_CFS+dataElement=eRxuGFBRTwOyooHeKFOUFQ" type="dataElement" typeName="Data Element" kind="Element" name="ACC" path="/BA_CFS/ACC">
+        <displayName lang="default">ACC</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">true</internal>
+        <sensitive inherited="false">false</sensitive>
+        <dataElements/>
+        <specificationOptions>
+          <specificationOptionList>
+            <element>
+              <specification>
+                <relation ref="ss=ACC_RFS_HFC" type="Service Specification" name="Spec Option" kind="Entity">
+                  <target name="ACC_RFS_HFC" typeName="Service Specification"/>
+                </relation>
+              </specification>
+              <sequence>1</sequence>
+            </element>
+          </specificationOptionList>
+          <itemOptionType>Assignment</itemOptionType>
+        </specificationOptions>
+        <primitiveType>structure</primitiveType>
+      </element>
+      <element id="sc=BA_CFS+dataElement=aGwmL0oXSWiQ7ogWeA9yLA" type="dataElement" typeName="Data Element" kind="Element" name="EQ" path="/BA_CFS/EQ">
+        <displayName lang="default">EQ</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">true</internal>
+        <sensitive inherited="false">false</sensitive>
+        <dataElements/>
+        <specificationOptions>
+          <specificationOptionList>
+            <element>
+              <specification>
+                <relation ref="ss=EQ_RFS" type="Service Specification" name="Spec Option" kind="Entity">
+                  <target name="EQ_RFS" typeName="Service Specification"/>
+                </relation>
+              </specification>
+              <sequence>1</sequence>
+            </element>
+          </specificationOptionList>
+          <itemOptionType>Assignment</itemOptionType>
+        </specificationOptions>
+        <primitiveType>structure</primitiveType>
+      </element>
+      <element id="sc=BA_CFS+dataElement=bUPoMnlwR+SO8p9xLsdCdA" type="dataElement" typeName="Data Element" kind="Element" name="BA" path="/BA_CFS/BA">
+        <displayName lang="default">BA</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">true</internal>
+        <sensitive inherited="false">false</sensitive>
+        <dataElements/>
+        <specificationOptions>
+          <specificationOptionList>
+            <element>
+              <specification>
+                <relation ref="ss=BA_RFS_HFC" type="Service Specification" name="Spec Option" kind="Entity">
+                  <target name="BA_RFS_HFC" typeName="Service Specification"/>
+                </relation>
+              </specification>
+              <sequence>1</sequence>
+            </element>
+          </specificationOptionList>
+          <itemOptionType>Assignment</itemOptionType>
+        </specificationOptions>
+        <primitiveType>structure</primitiveType>
+      </element>
+      <element id="sc=BA_CFS+dataElement=Cuoltk4ERcm17SDbepiNpQ" type="dataElement" typeName="Data Element" kind="Element" name="bandwidth" path="/BA_CFS/bandwidth">
+        <displayName lang="default">Bandwidth</displayName>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">40</maxLength>
+        <base>
+          <relation ref="ds=BA_RFS+dataElement=bandwidth" type="Schema Element" name="Type" kind="Element">
+            <target name="bandwidth" typeName="Schema Element"/>
+            <inEntity name="BA_RFS" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <tag>
+          <name>Characteristic</name>
+          <description></description>
+        </tag>
+        <primitiveType>string</primitiveType>
+      </element>
+    </dataElements>
+    <rules>
+      <relation ref="rep=AutoConfigurar_BA_CFS" type="Ruleset Extension Point" name="Rules" kind="Entity">
+        <target name="AutoConfigurar_BA_CFS" typeName="Ruleset Extension Point"/>
+      </relation>
+    </rules>
+    <relatedSpecificationList/>
+  </entity>
+</model:Model>

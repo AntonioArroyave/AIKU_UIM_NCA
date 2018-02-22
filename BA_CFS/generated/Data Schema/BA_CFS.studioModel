@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:data="http://xmlns.oracle.com/communications/studio/model/data" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="data:DataSchema" id="ds=BA_CFS" type="ds" typeName="Data Schema" name="BA_CFS" resource="\BA_CFS\dataDictionary\BA_CFS.xsd">
+    <displayName lang="default">BA_CFS</displayName>
+    <note lang="default"/>
+    <project>
+      <relation ref="ivprj=BA_CFS" type="Inventory Project" name="Dependency">
+        <target name="BA_CFS" typeName="Inventory Project"/>
+      </relation>
+    </project>
+    <dataElements>
+      <element id="ds=BA_CFS+dataElement=ACC" type="dataElement" typeName="Schema Element" kind="Element" name="ACC" path="/ACC">
+        <displayName lang="default">ACC</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <dataElements/>
+        <primitiveType>structure</primitiveType>
+      </element>
+      <element id="ds=BA_CFS+dataElement=EQ" type="dataElement" typeName="Schema Element" kind="Element" name="EQ" path="/EQ">
+        <displayName lang="default">EQ</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <dataElements/>
+        <primitiveType>structure</primitiveType>
+      </element>
+      <element id="ds=BA_CFS+dataElement=BA" type="dataElement" typeName="Schema Element" kind="Element" name="BA" path="/BA">
+        <displayName lang="default">BA</displayName>
+        <minOccurs inherited="false">0</minOccurs>
+        <maxOccurs inherited="false">1</maxOccurs>
+        <defaultValue inherited="false"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="false">false</sensitive>
+        <dataElements/>
+        <primitiveType>structure</primitiveType>
+      </element>
+    </dataElements>
+  </entity>
+</model:Model>

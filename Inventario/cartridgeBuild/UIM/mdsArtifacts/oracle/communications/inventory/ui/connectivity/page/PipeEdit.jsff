@@ -1,0 +1,199 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!--
+/* Copyright (c) 2009, 2015, Oracle and/or its affiliates. 
+All rights reserved.*/
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+       rnaguban  03/06/14 - Bug 18322354
+    raattulu    3/7/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:pf="/platform/functions">
+
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>		  
+<c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>          
+<af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+      <af:panelGroupLayout id="pgl11" binding="#{backingBeanScope.edit_panelGroupLayout}"
+                           layout="scroll">
+        <af:panelGroupLayout id="pgl42" layout="horizontal" halign="left" rendered ="#{!pageFlowScope.PipeEditBean.previewLayout}">
+            <af:outputText id="otbi" styleClass="invCommonText" noWrap="true"
+                           rendered="#{!(pageFlowScope.PipeEditBean.popupMode)}"
+                           value="#{pageFlowScope.PipeEditBean.renderBILabel ? inventoryUIBundle.BUSINESS_INTERACTION_LABEL : null}"/>
+            <af:menuBar id="menuBar1">
+                  <af:menu id="BIContextMenu" binding="#{backingBeanScope.InventoryMenuBean.biContextMenu}" styleClass="invEditMenu"
+                           rendered="#{!(pageFlowScope.PipeEditBean.popupMode)}"   />
+            </af:menuBar>
+            <af:popup id="BISearchPopup" binding="#{backingBeanScope.businessInteractionSearch3}" contentDelivery="lazyUncached">
+                <af:dialog id="BISearchPopup_d1" type="none"
+                           title="#{inventoryUIBundle.BUSINESS_INTERACTION_SEARCH}">
+                    <af:panelStretchLayout id="psl_1" styleClass="invCommonPanelStretchLayout">
+                        <f:facet name="center">
+                           <af:region value="#{bindings.BusinessInteractionSearchResultsFlow1.regionModel}" id="BISP_r2"/>
+                        </f:facet>
+                    </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity" method="#{pageFlowScope.PipeEditBean.afterBusinessInteractionSelectionChange}"/>
+            </af:popup>
+        </af:panelGroupLayout>
+     
+        
+        <af:panelHeader text="#{pageFlowScope.PipeEditBean.message}" id="ph45" messageType="confirmation" rendered="#{pageFlowScope.PipeEditBean.addAnotherMode}"/>
+        
+         <af:panelHeader text="#{inventoryUIBundle.PIPE} - #{pageFlowScope.PipeEditBean.displayInfo}" helpTopicId="#{pageFlowScope.PipeEditBean.helpTopic}" id="ph1">
+        <f:facet name="toolbar">
+            <af:panelGroupLayout id="pgl3" layout="horizontal" rendered ="#{!pageFlowScope.PipeEditBean.previewLayout}">
+              <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CONTINUE}" id="cb1" actionListener="#{pageFlowScope.PipeEditBean.save}"
+                                action="#{pageFlowScope.PipeEditBean.saveOutcome}" rendered="#{pageFlowScope.PipeEditBean.addMode and !pageFlowScope.PipeEditBean.providesMode and !pageFlowScope.PipeEditBean.popupMode}"
+                                accessKey="#{inventoryUIBundle.SAVE_AND_CONTINUE_ACCESS_KEY}">
+                                <af:setActionListener from="summary" to="#{pageFlowScope.saveActionOutcome}"/>
+              </af:commandButton>
+              <af:spacer width="10" height="10" id="s11"/>                                
+              <af:commandButton text="#{inventoryUIBundle.SAVE_AND_ADD_ANOTHER}" action="#{pageFlowScope.PipeEditBean.saveOutcome}" 
+                                actionListener="#{pageFlowScope.PipeEditBean.save}" id="cb3"
+                                rendered="#{pageFlowScope.PipeEditBean.addMode and !pageFlowScope.PipeEditBean.providesMode and !pageFlowScope.PipeEditBean.popupMode}"
+                                accessKey="#{inventoryUIBundle.SAVE_AND_ADD_ANOTHER_ACCESS_KEY}">
+                                                                <af:setActionListener from="init" to="#{pageFlowScope.saveActionOutcome}"/>                  
+              </af:commandButton>
+              <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CLOSE}" id="cb4"  actionListener="#{pageFlowScope.PipeEditBean.getAction}"
+                                action="#{pageFlowScope.PipeEditBean.saveOutcome}" rendered="#{(!pageFlowScope.PipeEditBean.addMode) || (pageFlowScope.PipeEditBean.providesMode) || (pageFlowScope.PipeEditBean.popupMode)}"
+                                accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}">
+<af:setActionListener from="saveAndClose" to="#{pageFlowScope.saveActionOutcome}"/>
+              </af:commandButton>
+              <af:spacer width="10" height="10" id="s12"/>
+              <af:commandButton text="#{inventoryUIBundle.CANCEL}" id="cb2" action="cancel" immediate="true" actionListener="#{bindings.closeSubTask.execute}"
+                                accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <af:panelGroupLayout layout="scroll" id="pgl23">
+        <af:showDetailHeader text="#{inventoryUIBundle.PIPE_INFORMATION}" disclosed="true" id="PAGE_TITLE">
+          <f:facet name="context"/>
+          <f:facet name="menuBar"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="legend"/>
+          <f:facet name="info"/>
+          <af:group id="g2">
+            <af:panelGroupLayout id="pgl1">
+              <af:panelFormLayout id="pipe" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%" binding="#{backingBeanScope.uiHintsPanel}">
+                <af:selectOneChoice id="pipe-specification" label="#{inventoryUIBundle.SPECIFICATION}" showRequired="true" required="true"
+                                    autoSubmit="true" valueChangeListener="#{pageFlowScope.PipeEditBean.specChanged}"
+                                    disabled="#{(!pageFlowScope.PipeEditBean.addMode) &amp;&amp; (!pageFlowScope.PipeEditBean.popupMode)}"
+                                    value="#{pageFlowScope.PipeEditBean.selectedSpec}">
+                   <f:selectItems binding="#{pageFlowScope.PipeEditBean.specifications}"/>
+                </af:selectOneChoice>
+                <af:inputText value="#{((pageFlowScope.PipeEditBean.addMode || pageFlowScope.PipeEditBean.popupMode) &amp;&amp; pageFlowScope.PipeEditBean.specificationCount > 0 ) ? (pageFlowScope.PipeEditBean.enterIdManually ? (pageFlowScope.PipeEditBean.entityObject.id) : inventoryUIBundle.AUTO_GENERATE) : (pageFlowScope.PipeEditBean.entityObject.id)}"
+                              label="#{inventoryUIBundle.ID}" maximumLength="50" columns="53"
+                              disabled="#{(pageFlowScope.PipeEditBean.specificationCount > 0) &amp;&amp; (!(pageFlowScope.PipeEditBean.addMode &amp;&amp; pageFlowScope.PipeEditBean.enterIdManually))}"
+                              required="true" id="pipe-id"
+                              binding="#{backingBeanScope.idBinding}">
+                </af:inputText>
+                <af:inputText value="#{pageFlowScope.PipeEditBean.entityObject.name}" maximumLength="50" columns="53"
+                              label="#{inventoryUIBundle.NAME}" id="pipe-name">
+                </af:inputText>
+                <af:inputText value="#{pageFlowScope.PipeEditBean.entityObject.description}" maximumLength="255" rows="5" columns="50"
+                              label="#{inventoryUIBundle.DESCRIPTION}" id="pipe-description">
+                </af:inputText>
+                <af:selectBooleanCheckbox value="#{pageFlowScope.PipeEditBean.versioned}" text="#{inventoryUIBundle.VERSIONED}"  partialTriggers="pipe-specification"
+                                          disabled="#{!(pageFlowScope.PipeEditBean.versionedPipe)}" id="pipe-versioned" valueChangeListener="#{pageFlowScope.PipeEditBean.versionedChanged}">
+                </af:selectBooleanCheckbox>
+                <af:selectBooleanCheckbox value="#{pageFlowScope.PipeEditBean.allowSecondaryEnablement}" text="#{inventoryUIBundle.ALLOW_SECONDARY_ENABLEMENT}"  
+                                          partialTriggers="pipe-specification" disabled="#{pageFlowScope.PipeEditBean.allowSecondaryEnablementsDisabled}" id="pipe-ase">
+                </af:selectBooleanCheckbox>
+                <af:selectOneChoice id="pipe-medium" label="#{inventoryUIBundle.MEDIUM}" autoSubmit="true" value="#{pageFlowScope.PipeEditBean.medium}">
+                   <f:selectItems binding="#{pageFlowScope.PipeEditBean.mediumList}"/>
+                </af:selectOneChoice>
+                <af:selectOneChoice id="pipe-tst" label="#{inventoryUIBundle.TRANSMISSION_SIGNAL_TYPE}" autoSubmit="true" value="#{pageFlowScope.PipeEditBean.transmissionSignalType}">
+                   <f:selectItems binding="#{pageFlowScope.PipeEditBean.transmissionSignalTypeList}"/>
+                </af:selectOneChoice>
+                <af:selectBooleanCheckbox value="#{pageFlowScope.PipeEditBean.entityObject.gapPipe}" text="#{inventoryUIBundle.GAP_PIPE}" disabled="true" id="pipe-gappipe"/>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.INVENTORY_STATUS}" id="pipe-adminstate">
+                    <af:outputText value="#{pageFlowScope.PipeEditBean.inventoryStatus}" id="ot7"/>
+                <!--RMI 618 Start-->
+		<af:switcher defaultFacet="false" facetName="#{pageFlowScope.PipeEditBean.popupMode}" id="swis618">
+<f:facet name="false">
+<af:commandImageLink action="#{pageFlowScope.PipeEditBean.getSummaryAction}" actionListener="#{pageFlowScope.PipeEditBean.registerRecentItem}" disabled="#{(pageFlowScope.PipeEditBean.installingBI_OID eq null) ? true : false}" id="bid3" shortDesc="#{(pageFlowScope.PipeEditBean.installingBI_OID eq null) ? '&amp;#160;' : inventoryUIBundle.BUSINESS_INTERACTION}" text="#{pageFlowScope.PipeEditBean.installingBILabel}">
+<af:setActionListener from="#{pageFlowScope.PipeEditBean.inventoryStatusBI.oid}" to="#{objectId}"/>
+</af:commandImageLink>
+</f:facet>
+<f:facet name="true">
+<af:outputText id="swftis618" value="#{pageFlowScope.PipeEditBean.installingBILabel}"/>
+</f:facet>
+</af:switcher>
+<af:outputText id="installingBIDueDate" value="#{pageFlowScope.PipeEditBean.installingBIEffectiveDate}"/>
+<!--RMI 618 End-->
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}" id="pipe-ras">
+                    <af:outputText value="#{pageFlowScope.PipeEditBean.resourceAssignmentStatus}" id="ot8"/>
+                <!--RMI 618 Start-->
+		<af:switcher defaultFacet="false" facetName="#{pageFlowScope.PipeEditBean.popupMode}" id="swas618">
+<f:facet name="false">
+<af:commandImageLink action="#{pageFlowScope.PipeEditBean.getSummaryAction}" actionListener="#{pageFlowScope.PipeEditBean.registerRecentItem}" disabled="#{(pageFlowScope.PipeEditBean.consumerBI_OID eq null) ? true : false}" id="bid4" shortDesc="#{(pageFlowScope.PipeEditBean.consumerBI_OID eq null) ? '&amp;#160;' : inventoryUIBundle.BUSINESS_INTERACTION}" text="#{pageFlowScope.PipeEditBean.consumerBILabel}">
+<af:setActionListener from="#{pageFlowScope.PipeEditBean.assignmentBI.oid}" to="#{objectId}"/>
+</af:commandImageLink>
+</f:facet>
+<f:facet name="true">
+<af:outputText id="swftas618" value="#{pageFlowScope.PipeEditBean.consumerBILabel}"/>
+</f:facet>
+</af:switcher>
+<af:outputText id="consumerBIDueDate" value="#{pageFlowScope.PipeEditBean.consumerBIEffectiveDate}"/>
+<!--RMI 618 End-->
+                </af:panelLabelAndMessage>
+                <af:inputText label="#{inventoryUIBundle.QUANTITY}" value="#{pageFlowScope.PipeEditBean.quantity}" maximumLength="25" 
+                              required="true" rendered="#{pageFlowScope.PipeEditBean.providesMode}" id="pipe-quantity">
+                      <af:validateRegExp pattern="[0-9]{1,1000}" messageDetailNoMatch="#{inventoryUIBundle.SORT_ORDER_VALIDATION}"/>
+                </af:inputText>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="pipe-lmd" rendered="false" visible="#{pageFlowScope.PipeEditBean.lastModifiedDate != null}">
+                   <af:outputText value="#{pageFlowScope.PipeEditBean.lastModifiedDate}" id="ot9">
+                    <af:convertDateTime pattern="#{pageFlowScope.PipeEditBean.dateTimeFormat}"/>
+                   </af:outputText>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="pipe-lmu" rendered="false" visible="#{pageFlowScope.PipeEditBean.entityObject.lastModifiedUser != null}">
+                   <af:outputText value="#{pageFlowScope.PipeEditBean.entityObject.lastModifiedUser}" id="ot10"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_DATE}" id="pipe-crd" rendered="false" visible="#{pageFlowScope.PipeEditBean.createdDate != null}">
+                   <af:outputText value="#{pageFlowScope.PipeEditBean.createdDate}" id="ot11">
+                     <af:convertDateTime pattern="#{pageFlowScope.PipeEditBean.dateTimeFormat}"/>
+                   </af:outputText>
+                </af:panelLabelAndMessage>
+		<af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_USER}" id="pipe-cru" rendered="false" visible="#{pageFlowScope.PipeEditBean.entityObject.createdUser != null}">
+                   <af:outputText value="#{pageFlowScope.PipeEditBean.entityObject.createdUser}" id="ot12"/>
+                </af:panelLabelAndMessage>
+              </af:panelFormLayout>
+              
+              <!-- additional input fields for External Identity -->
+              <af:showDetail disclosed="#{pageFlowScope.PipeEditBean.externalIdentityPopulated}" id="sd1"
+                             disclosedText="#{inventoryUIBundle.EXTERNAL_SYSTEM}" undisclosedText="#{inventoryUIBundle.EXTERNAL_SYSTEM}"
+                             inlineStyle="width:50%;">
+                <af:panelFormLayout id="pfl101" maxColumns="1" rows="2" fieldWidth="69%" labelWidth="31%">
+                    <af:selectOneChoice id="externalArrangementDropDown1" label="#{inventoryUIBundle.EXTERNAL_ARRANGEMENT}" 
+                                        autoSubmit="true" value="#{pageFlowScope.PipeEditBean.externalArrangement}">
+                        <f:selectItems binding="#{pageFlowScope.PipeEditBean.externalArrangementList}"/>
+                    </af:selectOneChoice>
+                    <af:inputText value="#{pageFlowScope.PipeEditBean.entityObject.externalManagementDomain}" maximumLength="50" columns="50"
+                                  label="#{inventoryUIBundle.EXTERNAL_MANAGEMENT_DOMAIN}" id="it1103" />
+                    <af:inputText value="#{pageFlowScope.PipeEditBean.entityObject.externalName}" maximumLength="50" columns="50"
+                                  label="#{inventoryUIBundle.EXTERNAL_NAME}" id="it1102" />
+                    <af:inputText value="#{pageFlowScope.PipeEditBean.entityObject.externalObjectId}" maximumLength="50" columns="50"
+                                  label="#{inventoryUIBundle.EXTERNAL_OBJECT_ID}" id="it1101" />
+                </af:panelFormLayout>
+              </af:showDetail>
+            </af:panelGroupLayout>
+          </af:group>
+        </af:showDetailHeader>
+        </af:panelGroupLayout>
+        </af:panelHeader>
+        
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

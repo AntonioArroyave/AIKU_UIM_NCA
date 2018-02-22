@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:pf="/platform/functions">
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+      <af:panelStretchLayout binding="#{backingBeanScope.IG_summary_panelGroupLayout}">
+        
+        <f:facet name="center">
+          
+          <af:panelHeader text="#{inventoryUIBundle.INVENTORY_GROUP_SUMMARY} - #{pageFlowScope.InventoryGroupSummaryBean.displayInfo}" helpTopicId="OHW_invGroupSummary">
+          <af:panelGroupLayout layout="scroll" id="pgl23">
+          <af:showDetailHeader text="#{inventoryUIBundle.INVENTORY_GROUP_INFORMATION}"
+                               disclosed="true"
+                               styleClass="invSummaryShowDetailHeader">
+            <f:facet name="toolbar">
+              <af:toolbar>
+                <af:commandButton text="#{inventoryUIBundle.EDIT}" 
+                                  action="edit" actionListener="#{bindings.openSubTaskForEdit.execute}"
+                                  rendered="#{!pageFlowScope.InventoryGroupSummaryBean.previewLayout}"
+                                  disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/inventorygroup/flow/InventoryGroupEditFlow.xml#InventoryGroupEditFlow']}"
+                                  accessKey="#{inventoryUIBundle.EDIT_ACCESS_KEY}">
+                  <af:setActionListener from="#{pageFlowScope.InventoryGroupSummaryBean.entityObject.oid}"
+                                        to="#{objectId}"/>
+                  <af:setActionListener from="false" to="#{addMode}"/>
+                </af:commandButton>
+              </af:toolbar>
+            </f:facet>
+            <!-- IG Information Starts here -->
+            <af:panelFormLayout maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%" id="invgrp">
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.SPECIFICATION}" id="invgrp-specification">
+                <af:commandImageLink action="SpecificationSummary" actionListener="#{bindings.openSubTaskForSpec.execute}"
+                                     text="#{pageFlowScope.InventoryGroupSummaryBean.entityObject.specification.name}"
+                                     shortDesc="#{pageFlowScope.InventoryGroupSummaryBean.entityObject.specification.name eq null ? '&#160;' : inventoryUIBundle.LINK_FOR_SPECIFICATION_SUMMARY}"
+                                     disabled="#{pageFlowScope.InventoryGroupSummaryBean.entityObject.specification.name eq null ? true : false}">
+                  
+                  <af:setActionListener from="#{pageFlowScope.InventoryGroupSummaryBean.entityObject.specification.oid}"
+                                        to="#{requestScope.oid}"/>
+                </af:commandImageLink>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.NAME}" id="invgrp-name">
+                <af:outputText value="#{pageFlowScope.InventoryGroupSummaryBean.entityObject.name}"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.DESCRIPTION}" styleClass="invSummaryPanelLabelAndMessage" id="invgrp-description">
+                <af:outputText value="#{pageFlowScope.InventoryGroupSummaryBean.entityObject.description}"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.START_DATE}" id="invgrp-startDate">
+                <af:outputText value="#{pageFlowScope.InventoryGroupSummaryBean.entityObject.validFor.startDate}">
+                  <af:convertDateTime pattern="#{pageFlowScope.InventoryGroupSummaryBean.dateTimeFormat}"/>
+                </af:outputText>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.END_DATE}" id="invgrp-endDate">
+                <af:outputText value="#{pageFlowScope.InventoryGroupSummaryBean.entityObject.validFor.endDate}">
+                  <af:convertDateTime pattern="#{pageFlowScope.InventoryGroupSummaryBean.dateTimeFormat}"/>
+                </af:outputText>
+              </af:panelLabelAndMessage>
+               <af:panelLabelAndMessage label="#{inventoryUIBundle.INVENTORY_GROUP_TYPE}" styleClass="invSummaryPanelLabelAndMessage" id="invgrp-inventoryGroupType" 
+                     visible="#{pageFlowScope.InventoryGroupSummaryBean.entityObject.specification.inventoryGroupType.name != null}">
+                <af:outputText value="#{pageFlowScope.InventoryGroupSummaryBean.entityObject.specification.inventoryGroupType.name}"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="invgrp-lmd" rendered="false">
+                    <af:outputText value="#{pageFlowScope.InventoryGroupSummaryBean.entityObject.lastModifiedDate}" id="ot10">
+                        <af:convertDateTime pattern="#{pageFlowScope.InventoryGroupSummaryBean.dateTimeFormat}"/>
+                    </af:outputText>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="invgrp-lmu" rendered="false">
+                    <af:outputText value="#{pageFlowScope.InventoryGroupSummaryBean.entityObject.lastModifiedUser}" id="ot12"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_DATE}" id="invgrp-crd" rendered="false">
+                    <af:outputText value="#{pageFlowScope.InventoryGroupSummaryBean.entityObject.createdDate}" id="ot13">
+                        <af:convertDateTime pattern="#{pageFlowScope.InventoryGroupSummaryBean.dateTimeFormat}"/>
+                    </af:outputText>
+              </af:panelLabelAndMessage>
+	      <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_USER}" id="invgrp-cru" rendered="false">
+                    <af:outputText value="#{pageFlowScope.InventoryGroupSummaryBean.entityObject.createdUser}" id="ot14"/>
+              </af:panelLabelAndMessage>
+            </af:panelFormLayout>
+          </af:showDetailHeader>
+          <af:group rendered="#{!pageFlowScope.InventoryGroupSummaryBean.previewLayout}" id="group2">
+              <!-- IG Information Ends here -->
+              <af:spacer  width="10" height="10"/>
+              <!-- IG Items Starts here -->
+              <af:region id="r1" value="#{bindings.InventoryGroupItemsListFlow1.regionModel}"/>
+              <!-- IG Items Ends here -->
+              <af:spacer width="10" height="10"/>
+              <!-- IG Tree Starts here -->
+              <af:showDetailHeader text="#{inventoryUIBundle.INVENTORY_GROUP_HIERARCHY}"
+                                   disclosed="true">
+                <af:panelCollection styleClass="invSummaryPanelCollection" featuresOff="freeze wrap">
+                  <af:treeTable value="#{pageFlowScope.InventoryGroupTreeBean.treeModel}"
+                                var="node" 
+                                binding="#{backingBeanScope.IG_treeBinding}"
+                                rowDisclosureListener="#{pageFlowScope.InventoryGroupTreeBean.rowDisclosureListener}"
+                                disclosedRowKeys="#{pageFlowScope.InventoryGroupTreeBean.treeDisclosedRowKeys}"
+                                id="InvGroupTreeTable" styleClass="invSummaryTree" rowSelection="single"
+                                fetchSize="#{pageFlowScope.InventoryGroupSummaryBean.fetchSize}"
+                                contextMenuSelect="true" rowBandingInterval="0"
+                                expandAllEnabled="#{pageFlowScope.InventoryGroupTreeBean.expandAllEnabled}"
+                                horizontalGridVisible="false" contentDelivery="immediate"
+                                selectionListener="#{pageFlowScope.InventoryGroupTreeBean.nodeSelectedEvent}"
+                                summary="#{inventoryUIBundle.INVENTORY_GROUP_HIERARCHY_TREETABLE}">
+                    <f:facet name="nodeStamp">
+                      <af:column sortable="false" width="500"
+                                 rowHeader="unstyled"
+                                 headerText="#{inventoryUIBundle.INVENTORY_GROUP}">
+                        <af:panelGroupLayout>
+                          <af:image source="#{node.data.icon}" id="nodeIcon"
+                                    styleClass="invSummaryImage" shortDesc="icon"/>
+                          <af:switcher id="idSwitcher" defaultFacet="false"
+                                       facetName="#{node.data.rootNode}">
+                            <f:facet name="false">
+                              <af:commandImageLink action="#{pageFlowScope.InventoryGroupTreeBean.view}" actionListener="#{bindings.openSubTaskForSummary.execute}"
+                                                   text="#{node.data.label}"
+                                                   shortDesc="#{inventoryUIBundle.LINK_FOR_SUMMARY}">
+                                <af:setActionListener from="#{pageFlowScope.InventoryGroupTreeBean.selectedTreeNode.object.oid}"
+                                                      to="#{pageFlowScope.objectId}"/>
+                                
+                              </af:commandImageLink>
+                            </f:facet>
+                            <f:facet name="true">
+                              <af:outputText value="#{node.data.label}"/>
+                            </f:facet>
+                          </af:switcher>
+                        </af:panelGroupLayout>
+                      </af:column>
+                    </f:facet>
+                    <f:facet name="contextMenu">
+                      <af:popup contentDelivery="lazyUncached" id="popupContext"
+                                partialTriggers="::InvGroupTreeTable">
+                        <af:menu id="rootNodeMenu" text="rootNodeMenu">
+                          <af:commandMenuItem text="#{inventoryUIBundle.ADD_CHILD}" rendered="#{pageFlowScope.InventoryGroupTreeBean.rootNodePopupMenu and securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=InventoryGroup.ASSOCIATE_IG;action=view']}"
+                                              selected="true" id="cmi1">
+                            <af:setActionListener from="true" to="#{pageFlowScope.invokeIGSearch}"/>
+                            <af:showPopupBehavior triggerType="click" popupId="::childInvGroupPopup"/>
+                          </af:commandMenuItem>
+                          <af:commandMenuItem text="#{inventoryUIBundle.ADD_CHILD}" rendered="#{pageFlowScope.InventoryGroupTreeBean.childNodePopupMenu and securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=InventoryGroup.ASSOCIATE_IG;action=view']}"
+                                              id="AddChild" selected="true">
+                             <af:setActionListener from="true" to="#{pageFlowScope.invokeIGSearch}"/>
+                            <af:showPopupBehavior triggerType="click"
+                                                  popupId="::childInvGroupPopup"/>
+                          </af:commandMenuItem>
+                          <af:commandMenuItem text="#{inventoryUIBundle.REMOVE}" rendered="#{pageFlowScope.InventoryGroupTreeBean.childNodePopupMenu and securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=InventoryGroup.DISASSOCIATE_IG;action=view']}"
+                                              actionListener="#{pageFlowScope.InventoryGroupTreeBean.removeIgFromHirarchyTree}" id="cmi2">
+                            <af:clientListener method="goRefreshEntity"
+                                               type="click"/>
+                            <af:serverListener type="refreshEntity"
+                                               method="#{pageFlowScope.InventoryGroupTreeBean.refreshTree}"/>
+                          </af:commandMenuItem>
+                        </af:menu>
+                      </af:popup>
+                    </f:facet>
+                  </af:treeTable>
+                  <af:popup id="childInvGroupPopup"
+                            binding="#{backingBeanScope.popupChildInvGroupBinding}"
+                            contentDelivery="lazyUncached">
+                    <af:dialog type="none"
+                               title="#{inventoryUIBundle.INVENTORY_GROUP_SEARCH}">
+                      <af:panelStretchLayout styleClass="invCommonPanelStretchLayout">
+                        <f:facet name="center">
+                          <af:region id="r2" value="#{bindings.InventoryGroupSearchResultsFlow2.regionModel}"/>
+                        </f:facet>
+                      </af:panelStretchLayout>
+                    </af:dialog>
+                    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                    <af:serverListener type="refreshEntity"
+                                       method="#{pageFlowScope.InventoryGroupTreeBean.refreshTree}"/>
+                  </af:popup>
+                </af:panelCollection>
+              </af:showDetailHeader>
+              <!-- IG Tree Ends here -->
+              <af:spacer width="10" height="10"/>
+              <!-- Parent IG Starts here -->
+              <af:region id="r3" value="#{bindings.ParentInventoryGroupListFlow1.regionModel}"/>
+              <!-- Parent IG Ends here -->
+              <af:spacer width="10" height="10"/>
+              <!-- Place Starts here -->
+              <af:region id="r4" value="#{bindings.PlaceListFlow1.regionModel}"/>
+              <!-- Place Ends here -->
+          </af:group>
+          </af:panelGroupLayout>
+        </af:panelHeader>
+      
+      </f:facet>
+      </af:panelStretchLayout>
+    </f:facet>
+    <f:facet name="contextualArea"/>
+  </af:pageTemplate>
+</jsp:root>

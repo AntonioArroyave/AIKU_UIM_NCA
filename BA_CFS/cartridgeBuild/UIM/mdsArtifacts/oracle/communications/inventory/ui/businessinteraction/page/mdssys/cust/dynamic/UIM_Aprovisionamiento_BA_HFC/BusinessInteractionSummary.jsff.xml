@@ -1,0 +1,51 @@
+<?xml version = '1.0'?>
+<mds:customization version="11.1.1.59.23" xmlns:mds="http://xmlns.oracle.com/mds">
+   <mds:insert after="bi-description" parent="bi">
+      <af:panelLabelAndMessage xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="bi-dummy-3-1" label=" " styleClass="UIHintsSummaryPANEL_LABEL_AND_MESSAGE">
+         <af:outputText xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="x-bi-dummy-3-1" value=" "/>
+      </af:panelLabelAndMessage>
+   </mds:insert>
+   <mds:modify element="bi">
+      <mds:attribute name="rows" value="4"/>
+      <mds:attribute name="maxColumns" value="2"/>
+      <mds:attribute name="labelAlignment" value="start"/>
+      <mds:attribute name="styleClass" value="UIHintsSummaryPANEL_FORM_LAYOUT"/>
+   </mds:modify>
+   <mds:modify element="bi-lmd">
+      <mds:attribute name="rendered" value="false"/>
+      <mds:attribute name="styleClass" value="UIHintsSummaryPANEL_LABEL_AND_MESSAGE"/>
+   </mds:modify>
+   <mds:modify element="bi-crd">
+      <mds:attribute name="rendered" value="false"/>
+      <mds:attribute name="styleClass" value="UIHintsSummaryPANEL_LABEL_AND_MESSAGE"/>
+   </mds:modify>
+   <mds:modify element="bi-lmu">
+      <mds:attribute name="rendered" value="false"/>
+      <mds:attribute name="styleClass" value="UIHintsSummaryPANEL_LABEL_AND_MESSAGE"/>
+   </mds:modify>
+   <mds:modify element="bi-cru">
+      <mds:attribute name="rendered" value="false"/>
+      <mds:attribute name="styleClass" value="UIHintsSummaryPANEL_LABEL_AND_MESSAGE"/>
+   </mds:modify>
+   <mds:modify element="bi-specification">
+      <mds:attribute name="styleClass" value="UIHintsSummaryPANEL_LABEL_AND_MESSAGE"/>
+   </mds:modify>
+   <mds:modify element="bi-effdate">
+      <mds:attribute name="styleClass" value="UIHintsSummaryPANEL_LABEL_AND_MESSAGE"/>
+   </mds:modify>
+   <mds:modify element="bi-adminstate">
+      <mds:attribute name="styleClass" value="UIHintsSummaryPANEL_LABEL_AND_MESSAGE"/>
+   </mds:modify>
+   <mds:modify element="bi-id">
+      <mds:attribute name="styleClass" value="UIHintsSummaryPANEL_LABEL_AND_MESSAGE"/>
+   </mds:modify>
+   <mds:modify element="bi-name">
+      <mds:attribute name="styleClass" value="UIHintsSummaryPANEL_LABEL_AND_MESSAGE"/>
+   </mds:modify>
+   <mds:modify element="bi-workflowTemplate">
+      <mds:attribute name="styleClass" value="UIHintsSummaryPANEL_LABEL_AND_MESSAGE"/>
+   </mds:modify>
+   <mds:modify element="bi-description">
+      <mds:attribute name="styleClass" value="UIHintsSummaryPANEL_LABEL_AND_MESSAGE"/>
+   </mds:modify>
+</mds:customization>

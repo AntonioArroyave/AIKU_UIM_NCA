@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>Inventario</name>
+	<comment></comment>
+	<projects>
+		<project>ora_uim_model</project>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>com.mslv.studio.core.builder.generator</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>com.mslv.studio.core.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>com.mslv.studio.inventory.core.nature</nature>
+		<nature>com.mslv.studio.core.nature</nature>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+</projectDescription>

@@ -1,0 +1,19 @@
+package oracle.communications.inventory.rules.custom
+
+import oracle.communications.inventory.extensibility.extension.util.ExtensionPointContext;
+import oracle.communications.inventory.api.entity.ServiceConfigurationVersion;
+import oracle.communications.inventory.api.framework.logging.Log;
+import aiku.provision.cfs.manager.AikuCfsManager;
+
+global Log log;
+
+rule "Autoconfigurar BA_CFS"
+    salience 0
+    when
+        svcConVers : ServiceConfigurationVersion()
+        context : ExtensionPointContext()
+    then    
+    	log.debug ("", "Automatizando la configuracion de BA_CFS");
+    	AikuCfsManager manager = new AikuCfsManager();
+		manager.processCfsServiceConfiguration(context, svcConVers);
+	end

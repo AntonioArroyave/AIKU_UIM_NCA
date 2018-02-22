@@ -1,0 +1,5 @@
+package aiku.provision.cfs.worker;
+
+public class configurationWorker {
+
+}

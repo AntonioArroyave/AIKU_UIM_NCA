@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core" xmlns:pf="/platform/functions" xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <c:set var="inventoryUIBundle"
+           value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+    <c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>
+    <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx"
+                     value="#{bindings.ptb1}" id="pt1">
+        <f:facet name="localArea">
+            <af:panelGroupLayout id="pgl1" layout="scroll">
+                <af:panelHeader text="#{pageFlowScope.OrchestrationRequestEditBean.message}" id="ph45"
+                                messageType="confirmation"
+                                rendered="#{pageFlowScope.OrchestrationRequestEditBean.addAnotherMode}"/>
+                <af:panelHeader text="#{pageFlowScope.OrchestrationRequestEditBean.biLabel} - #{pageFlowScope.OrchestrationRequestEditBean.displayInfo}"
+                                id="ph1" helpTopicId="#{pageFlowScope.OrchestrationRequestEditBean.helpTopic}">
+                    <f:facet name="context"/>
+                    <f:facet name="menuBar"/>
+                    <f:facet name="toolbar">
+                        <af:panelGroupLayout id="pgl3" layout="horizontal"
+                                             rendered="#{!pageFlowScope.OrchestrationRequestEditBean.previewLayout}">
+                            <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CLOSE}" id="cb1"
+                                              actionListener="#{pageFlowScope.OrchestrationRequestEditBean.save}"
+                                              action="#{pageFlowScope.OrchestrationRequestEditBean.saveOutcome}"
+                                              disabled="#{pageFlowScope.OrchestrationRequestEditBean.saveAndCloseDisabled}"
+                                              rendered="#{!pageFlowScope.OrchestrationRequestEditBean.addMode || pageFlowScope.OrchestrationRequestEditBean.popupMode}"
+                                              accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}">
+                                <af:setActionListener from="saveAndClose" to="#{pageFlowScope.saveActionOutcome}"/>
+                            </af:commandButton>
+                            <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CONTINUE}" id="cb2"
+                                              actionListener="#{pageFlowScope.OrchestrationRequestEditBean.save}"
+                                              rendered="#{pageFlowScope.OrchestrationRequestEditBean.addMode and !pageFlowScope.OrchestrationRequestEditBean.popupMode}"
+                                              action="#{pageFlowScope.OrchestrationRequestEditBean.saveOutcome}"
+                                              accessKey="#{inventoryUIBundle.SAVE_AND_CONTINUE_ACCESS_KEY}">
+                                <af:setActionListener from="summary" to="#{pageFlowScope.saveActionOutcome}"/>
+                            </af:commandButton>
+                            <af:spacer width="10" height="10" id="s12"/>
+                            <af:commandButton text="#{inventoryUIBundle.SAVE_AND_ADD_ANOTHER}"
+                                              actionListener="#{pageFlowScope.OrchestrationRequestEditBean.save}"
+                                              action="#{pageFlowScope.OrchestrationRequestEditBean.saveOutcome}" id="cb3"
+                                              rendered="#{pageFlowScope.OrchestrationRequestEditBean.addMode and !pageFlowScope.OrchestrationRequestEditBean.popupMode}"
+                                              accessKey="#{inventoryUIBundle.SAVE_AND_ADD_ANOTHER_ACCESS_KEY}">
+                                <af:setActionListener from="init" to="#{pageFlowScope.saveActionOutcome}"/>
+                            </af:commandButton>
+                            <af:spacer width="10" height="10" id="s13"
+                                       rendered="#{pageFlowScope.OrchestrationRequestEditBean.addMode and !pageFlowScope.OrchestrationRequestEditBean.popupMode}"/>
+                            <af:commandButton text="#{inventoryUIBundle.CANCEL}" id="cb4" action="cancel"
+                                              actionListener="#{bindings.closeSubTask.execute}" immediate="true"
+                                              accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <af:panelGroupLayout layout="scroll" id="pgl23">
+                        <af:showDetailHeader text="#{pageFlowScope.OrchestrationRequestEditBean.biLabel} #{inventoryUIBundle.SUFFIX_INFO}"
+                                             disclosed="true" id="PAGE_TITLE">
+                            <f:facet name="context"/>
+                            <f:facet name="menuBar"/>
+                            <f:facet name="toolbar"/>
+                            <f:facet name="legend"/>
+                            <f:facet name="info"/>
+                            <af:group id="g2">
+                                <af:spacer height="10" id="s2"/>
+                                <af:panelGroupLayout id="pgl2">
+                                    <af:panelFormLayout id="bi" maxColumns="2" rows="2" labelWidth="33%"
+                                                        fieldWidth="67%" binding="#{backingBeanScope.uiHintsPanel}">
+                                        <af:selectOneChoice id="bi-specification"
+                                                            label="#{inventoryUIBundle.SPECIFICATION}" autoSubmit="true"
+                                                            disabled="#{!(pageFlowScope.OrchestrationRequestEditBean.addMode)}"
+                                                            value="#{pageFlowScope.OrchestrationRequestEditBean.selectedSpec}"
+                                                            rendered="#{!pageFlowScope.OrchestrationRequestEditBean.workOrder}"
+                                                            valueChangeListener="#{pageFlowScope.OrchestrationRequestEditBean.specChanged}"
+                                                            required="true">
+                                            <f:selectItems binding="#{pageFlowScope.OrchestrationRequestEditBean.BISpecifications}"
+                                                           id="si1"/>
+                                        </af:selectOneChoice>
+                                        <af:inputText value="#{(pageFlowScope.OrchestrationRequestEditBean.addMode &amp;&amp; pageFlowScope.OrchestrationRequestEditBean.specificationCount > 0)  ? (pageFlowScope.OrchestrationRequestEditBean.enterIdManually ? pageFlowScope.OrchestrationRequestEditBean.entityObject.id : inventoryUIBundle.AUTO_GENERATE) : (pageFlowScope.OrchestrationRequestEditBean.entityObject.id)}"
+                                                      label="#{inventoryUIBundle.ID}" required="true" maximumLength="50"
+                                                      columns="53"
+                                                      disabled="#{(pageFlowScope.OrchestrationRequestEditBean.specificationCount > 0) &amp;&amp; (!(pageFlowScope.OrchestrationRequestEditBean.addMode &amp;&amp; pageFlowScope.OrchestrationRequestEditBean.enterIdManually))}"
+                                                      binding="#{backingBeanScope.idBinding}" id="bi-id"/>
+                                        <af:inputText value="#{pageFlowScope.OrchestrationRequestEditBean.entityObject.name}"
+                                                      label="#{inventoryUIBundle.NAME}" required="true"
+                                                      maximumLength="50" columns="53" id="bi-name"/>
+                                        <af:inputDate value="#{pageFlowScope.OrchestrationRequestEditBean.entityObject.effDate}"
+                                                      label="#{inventoryUIBundle.EFFECTIVE_DATE}" required="true"
+                                                      disabled="#{(pageFlowScope.OrchestrationRequestEditBean.effDateDisabled)}"
+                                                      id="bi-effdate" binding="#{backingBeanScope.effDateBinding}">
+                                            <af:convertDateTime pattern="#{pageFlowScope.OrchestrationRequestEditBean.dateTimeFormat}"/>
+                                        </af:inputDate>
+                                        <af:inputText value="#{pageFlowScope.OrchestrationRequestEditBean.entityObject.description}"
+                                                      label="#{inventoryUIBundle.DESCRIPTION}" maximumLength="255"
+                                                      rows="5" columns="50" id="bi-description"/>
+                                        <af:panelLabelAndMessage label="#{inventoryUIBundle.STATUS}" id="bi-adminstate">
+                                            <af:outputText value="#{pageFlowScope.OrchestrationRequestEditBean.inventoryStatus}"
+                                                           id="ot7"/>
+                                        </af:panelLabelAndMessage>
+                                    </af:panelFormLayout>
+                                    <!-- additional input fields for External Identity -->
+                                    <af:showDetail disclosed="#{pageFlowScope.OrchestrationRequestEditBean.externalIdentityPopulated}"
+                                                   id="sd1" disclosedText="#{inventoryUIBundle.EXTERNAL_SYSTEM}"
+                                                   undisclosedText="#{inventoryUIBundle.EXTERNAL_SYSTEM}"
+                                                   inlineStyle="width:50%;">
+                                        <af:panelFormLayout id="pfl101" maxColumns="1" rows="2" fieldWidth="69%"
+                                                            labelWidth="31%">
+                                            <af:inputText value="#{pageFlowScope.OrchestrationRequestEditBean.entityObject.externalManagementDomain}"
+                                                          label="#{inventoryUIBundle.EXTERNAL_MANAGEMENT_DOMAIN}"
+                                                          maximumLength="50" columns="50" id="it103"/>
+                                            <af:inputText value="#{pageFlowScope.OrchestrationRequestEditBean.entityObject.externalName}"
+                                                          label="#{inventoryUIBundle.EXTERNAL_NAME}" maximumLength="50"
+                                                          columns="50" id="it102"/>
+                                            <af:inputText value="#{pageFlowScope.OrchestrationRequestEditBean.entityObject.externalObjectId}"
+                                                          label="#{inventoryUIBundle.EXTERNAL_OBJECT_ID}"
+                                                          maximumLength="50" columns="50" id="it101"/>
+                                        </af:panelFormLayout>
+                                    </af:showDetail>
+                                    <af:spacer width="10" height="10" id="s14"/>
+                                </af:panelGroupLayout>
+                            </af:group>
+                        </af:showDetailHeader>
+                    </af:panelGroupLayout>
+                </af:panelHeader>
+            </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="contextualArea"/>
+        <f:facet name="localAreaScroll"/>
+    </af:pageTemplate>
+</jsp:root>

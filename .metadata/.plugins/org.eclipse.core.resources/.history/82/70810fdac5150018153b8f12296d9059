@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns="http://www.mslv.com/studio/core/model/common" xsi:type="com:dataDictionaryCompanionType" name="Aprovisionamiento_companion">
+  <com:displayName>DDCM</com:displayName>
+  <com:id>c3H1+CvQS0yNv46JUM+LoQ</com:id>
+</com:modelEntity>

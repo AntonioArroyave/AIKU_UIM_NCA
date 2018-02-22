@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:data="http://www.oracle.com/communications/studio/core/model/common/data" xmlns:inv="http://www.mslv.com/studio/inventory/model/specification" xmlns="http://www.mslv.com/studio/inventory/model/specification" xmlns:layout="http://xmlns.oracle.com/communications/sce/poms/model/layout" xmlns:poms="http://xmlns.oracle.com/communications/sce/poms/model/poms" xsi:type="inv:ServiceSpecificationType" name="BA_CFS">
+  <com:saveVersion>2</com:saveVersion>
+  <com:baseEntityRef>
+    <com:entity>Service</com:entity>
+    <com:entityType>inventoryEntity</com:entityType>
+    <com:relationship>unknown</com:relationship>
+  </com:baseEntityRef>
+  <com:id>hDxnwlvtTUmMQD2uDSHenQ</com:id>
+  <data:dataElementNode virtual="true">
+    <com:id>hDxnwlvtTUmMQD2uDSHenQ</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElement</com:elementType>
+    <data:name>BA_CFS</data:name>
+    <data:displayName lang="[default]">BA_CFS</data:displayName>
+    <data:primitiveType>none</data:primitiveType>
+  </data:dataElementNode>
+  <data:dataElementDetails xsi:type="data:dataElementCommonDetail">
+    <com:id>0XWOcfQxQP6Gr0WEAUtD9Q</com:id>
+    <com:elementType>oracle.communications.studio.model.data.StudioModelDataElementCommonDetails</com:elementType>
+    <data:dataElementId>hDxnwlvtTUmMQD2uDSHenQ</data:dataElementId>
+    <data:defaultValue></data:defaultValue>
+    <data:key></data:key>
+    <data:deprecated>false</data:deprecated>
+    <data:sensitive>false</data:sensitive>
+    <data:minLength>0</data:minLength>
+    <data:maxLength>40</data:maxLength>
+    <data:minMultiplicity>0</data:minMultiplicity>
+    <data:maxMultiplicity>-1</data:maxMultiplicity>
+  </data:dataElementDetails>
+  <data:dataElementDetails xsi:type="layout:uiConfigurationType">
+    <com:id>NUfPPHu1TDOOemK4216ytA</com:id>
+    <com:elementType>oracle.communications.sce.poms.model.data.LayoutDetailType</com:elementType>
+    <data:dataElementId>hDxnwlvtTUmMQD2uDSHenQ</data:dataElementId>
+  </data:dataElementDetails>
+  <inv:inventoryConfig>
+    <com:entity>BA_CFS</com:entity>
+    <com:entityType>configuration</com:entityType>
+    <com:relationship>com.mslv.studio.inventory.service.inventoryConfigRef</com:relationship>
+  </inv:inventoryConfig>
+</com:modelEntity>

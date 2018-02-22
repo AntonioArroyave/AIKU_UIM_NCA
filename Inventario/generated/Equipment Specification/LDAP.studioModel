@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:inventory="http://xmlns.oracle.com/communications/studio/model/inventory" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="inventory:EquipmentSpecification" id="es=LDAP" type="es" typeName="Equipment Specification" name="LDAP" resource="\Inventario\model\LDAP.equipment">
+    <note lang="default"/>
+    <extends>
+      <relation ref="ie=Equipment" type="Inventory Entity" name="Dependency" kind="Entity">
+        <target name="Equipment" typeName="Inventory Entity"/>
+      </relation>
+    </extends>
+    <project>
+      <relation ref="ivprj=Inventario" type="Inventory Project" name="Dependency">
+        <target name="Inventario" typeName="Inventory Project"/>
+      </relation>
+    </project>
+    <dataElements>
+      <element id="es=LDAP+dataElement=z-gRjj3nQ8ihs-F+Nr8kGw~description" type="dataElement" typeName="Data Element" kind="Element" name="description" path="/description" inherited="true">
+        <displayName lang="default">description</displayName>
+        <displayName lang="default">description</displayName>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">255</maxLength>
+        <base>
+          <relation ref="ie=Equipment+dataElement=description" type="Data Element" name="Type" kind="Element">
+            <target name="description" typeName="Data Element"/>
+            <inEntity name="Equipment" typeName="Inventory Entity"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="es=LDAP+dataElement=z-gRjj3nQ8ihs-F+Nr8kGw~id" type="dataElement" typeName="Data Element" kind="Element" name="id" path="/id" inherited="true">
+        <displayName lang="default">id</displayName>
+        <displayName lang="default">id</displayName>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">255</maxLength>
+        <base>
+          <relation ref="ie=Equipment+dataElement=id" type="Data Element" name="Type" kind="Element">
+            <target name="id" typeName="Data Element"/>
+            <inEntity name="Equipment" typeName="Inventory Entity"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="es=LDAP+dataElement=z-gRjj3nQ8ihs-F+Nr8kGw~name" type="dataElement" typeName="Data Element" kind="Element" name="name" path="/name" inherited="true">
+        <displayName lang="default">name</displayName>
+        <displayName lang="default">name</displayName>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">50</maxLength>
+        <base>
+          <relation ref="ie=Equipment+dataElement=name" type="Data Element" name="Type" kind="Element">
+            <target name="name" typeName="Data Element"/>
+            <inEntity name="Equipment" typeName="Inventory Entity"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="es=LDAP+dataElement=z-gRjj3nQ8ihs-F+Nr8kGw~networkLocationCode" type="dataElement" typeName="Data Element" kind="Element" name="networkLocationCode" path="/networkLocationCode" inherited="true">
+        <displayName lang="default">networkLocationCode</displayName>
+        <displayName lang="default">networkLocationCode</displayName>
+        <note lang="default">Holds the denormalized value of PropertyLocation for the Equipment. This attribute will be set by the application by the API call, and used internally in the Equipment search when the user searches for a device by Network Location. This field value if specified by a caller will be ignored by the APIs.</note>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">10</maxLength>
+        <base>
+          <relation ref="ie=Equipment+dataElement=networkLocationCode" type="Data Element" name="Type" kind="Element">
+            <target name="networkLocationCode" typeName="Data Element"/>
+            <inEntity name="Equipment" typeName="Inventory Entity"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="es=LDAP+dataElement=z-gRjj3nQ8ihs-F+Nr8kGw~serialNumber" type="dataElement" typeName="Data Element" kind="Element" name="serialNumber" path="/serialNumber" inherited="true">
+        <displayName lang="default">serialNumber</displayName>
+        <displayName lang="default">serialNumber</displayName>
+        <note lang="default">Represents a manufacturer-allocated identification used to identify unique instances of the same type of physical resource. The preferred value is the serial number string actually printed on the component itself (if present). This attribute, in combination with the ModelNumber and the VendorName, can be used to differentiate between different instances of the same type of hardware item. Whether the attribute is populated is a function of specific business requirements for various types of physical resources. For instance, the serial number of a device as a whole is often more important than the serial number of each individual component of a device. Likewise, physical ports may not have specific serial numbers.</note>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">32</maxLength>
+        <base>
+          <relation ref="ie=Equipment+dataElement=serialNumber" type="Data Element" name="Type" kind="Element">
+            <target name="serialNumber" typeName="Data Element"/>
+            <inEntity name="Equipment" typeName="Inventory Entity"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+    </dataElements>
+    <relatedSpecificationList/>
+  </entity>
+</model:Model>

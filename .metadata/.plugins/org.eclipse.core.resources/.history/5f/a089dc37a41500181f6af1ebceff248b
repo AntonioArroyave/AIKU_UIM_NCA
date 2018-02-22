@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.mslv.com/studio/inventory/model/cartridge" xmlns:cart="http://www.mslv.com/studio/inventory/model/cartridge" xmlns:com="http://www.mslv.com/studio/core/model/common" xmlns:inv="http://www.mslv.com/studio/inventory/model/inventory" xsi:type="inventoryCartridgeType" name="Inventario">
+  <com:id>A07RJQ-AQTuv8pIwSPHwVg</com:id>
+  <com:provider>InventoryCartridge</com:provider>
+  <com:version>
+    <com:major>1</com:major>
+    <com:minor>0</com:minor>
+    <com:efix>0</com:efix>
+    <com:build>0</com:build>
+  </com:version>
+  <com:targetApplicationVersion>
+    <com:major>7</com:major>
+    <com:minor>2</com:minor>
+    <com:maintenance>2</com:maintenance>
+  </com:targetApplicationVersion>
+  <com:sealed>false</com:sealed>
+  <com:deploymentList displayName="Sample" includeAll="true" relationship="com.mslv.studio.inventory.cartridge.packageSamples">
+    <com:modelID>com.mslv.studio.inventory.sample</com:modelID>
+    <com:elementLocationName>model</com:elementLocationName>
+  </com:deploymentList>
+  <com:deploymentList displayName="Java Libraries" includeAll="true" relationship="com.mslv.studio.provisioning.cartridge.packageLibrary">
+    <com:extension>jar</com:extension>
+    <com:elementLocationName>lib</com:elementLocationName>
+  </com:deploymentList>
+  <com:propertyCategory name="Cartridge Management">
+    <com:property name="wladmin.host.name">
+      <com:defaultValue>localhost</com:defaultValue>
+    </com:property>
+    <com:property name="wladmin.host.port">
+      <com:defaultValue>7001</com:defaultValue>
+    </com:property>
+  </com:propertyCategory>
+  <com:dependencies>
+    <com:minVersion inclusive="true"></com:minVersion>
+    <com:maxVersion inclusive="false"></com:maxVersion>
+    <com:projectRef>
+      <com:entity>ora_uim_model</com:entity>
+      <com:entityType>pomsCartridge</com:entityType>
+      <com:relationship>unknown</com:relationship>
+    </com:projectRef>
+    <com:dependencyType>design</com:dependencyType>
+  </com:dependencies>
+  <com:dependencyViolationErrorLevel>error</com:dependencyViolationErrorLevel>
+  <com:catridgeElement>
+    <com:id>gljVmqq3RTicICe0FFj8NQ</com:id>
+    <com:elementType>oracle.communications.studio.model.StudioCartridgeElement</com:elementType>
+  </com:catridgeElement>
+</com:modelEntity>

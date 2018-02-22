@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="model:Project" id="ivprj=Aprovisionamiento" type="ivprj" typeName="Inventory Project" name="Aprovisionamiento" resource="\Aprovisionamiento\Aprovisionamiento.inventoryCartridge">
+    <note lang="default"/>
+    <version>
+      <major>1</major>
+      <minor>0</minor>
+      <maintenance>0</maintenance>
+      <servicePack>0</servicePack>
+      <efix>0</efix>
+      <build>40</build>
+    </version>
+    <targetVersion xsi:type="model:BuildVersion">
+      <major>7</major>
+      <minor>3</minor>
+      <maintenance>5</maintenance>
+      <servicePack>0</servicePack>
+      <efix>0</efix>
+      <build>0</build>
+    </targetVersion>
+    <propertyCategory name="Cartridge Management">
+      <property defaultValue="localhost" name="wladmin.host.name"/>
+      <property defaultValue="7001" name="wladmin.host.port"/>
+    </propertyCategory>
+    <dependencies>
+      <element id="ivprj=Aprovisionamiento+prjd=ora_uim_model" type="prjd" typeName="Project Dependency" name="ora_uim_model">
+        <supportedVersion>
+          <minVersion exclusive="false"></minVersion>
+          <maxVersion exclusive="true"></maxVersion>
+        </supportedVersion>
+        <project>
+          <relation ref="omprj=ora_uim_model" type="OCIM Model Project" name="Dependency">
+            <target name="ora_uim_model" typeName="OCIM Model Project"/>
+          </relation>
+        </project>
+      </element>
+    </dependencies>
+    <identifier>Aprovisionamiento</identifier>
+    <provider>InventoryCartridge</provider>
+    <sealed>false</sealed>
+    <package></package>
+  </entity>
+</model:Model>

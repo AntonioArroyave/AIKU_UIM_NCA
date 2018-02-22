@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:inventory="http://xmlns.oracle.com/communications/studio/model/inventory" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="inventory:RoleSpecification" id="rs=Residencial" type="rs" typeName="Role Specification" name="Residencial" resource="\Inventario\model\Residencial.role">
+    <note lang="default"/>
+    <extends>
+      <relation ref="ie=InventoryRole" type="Inventory Entity" name="Dependency" kind="Entity">
+        <target name="InventoryRole" typeName="Inventory Entity"/>
+      </relation>
+    </extends>
+    <project>
+      <relation ref="ivprj=Inventario" type="Inventory Project" name="Dependency">
+        <target name="Inventario" typeName="Inventory Project"/>
+      </relation>
+    </project>
+    <dataElements/>
+    <relatedSpecificationList/>
+  </entity>
+</model:Model>

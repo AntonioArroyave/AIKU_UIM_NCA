@@ -1,0 +1,194 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:pf="/platform/functions">
+		  
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+<c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/> 
+<af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+      <af:panelGroupLayout id="pgl1" binding="#{backingBeanScope.edit_panelGroupLayout}"
+                           layout="scroll">
+          <af:panelGroupLayout id="pgl42" layout="horizontal" halign="left" rendered ="#{!pageFlowScope.LogicalDeviceAccountEditBean.previewLayout}">
+            <af:outputText id="otbi" styleClass="invCommonText" noWrap="true"
+                           rendered="#{!(pageFlowScope.LogicalDeviceAccountEditBean.popupMode)}"
+                           value="#{pageFlowScope.LogicalDeviceAccountEditBean.renderBILabel ? inventoryUIBundle.BUSINESS_INTERACTION_LABEL : null}"/>
+            <af:menuBar id="menuBar1">
+                  <af:menu id="BIContextMenu" binding="#{backingBeanScope.InventoryMenuBean.biContextMenu}" styleClass="invEditMenu"
+                           rendered="#{!(pageFlowScope.LogicalDeviceAccountEditBean.popupMode)}"   />
+            </af:menuBar>
+            <af:popup id="BISearchPopup" binding="#{backingBeanScope.ldaEdit_businessInteractionSearchPopup}" contentDelivery="lazyUncached">
+                <af:dialog id="BISearchPopup_d1" type="none"
+                           title="#{inventoryUIBundle.BUSINESS_INTERACTION_SEARCH}">
+                    <af:panelStretchLayout id="psl_1" styleClass="invCommonPanelStretchLayout">
+                        <f:facet name="center">
+                           <af:region value="#{bindings.BusinessInteractionSearchResultsFlow1.regionModel}" id="BISP_r2"/>
+                        </f:facet>
+                    </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity" method="#{pageFlowScope.LogicalDeviceAccountEditBean.afterBusinessInteractionSelectionChange}"/>
+            </af:popup>
+        </af:panelGroupLayout>
+      
+       
+        <af:panelHeader text="#{pageFlowScope.LogicalDeviceAccountEditBean.message}" id="ph45" messageType="confirmation" 
+                            rendered="#{pageFlowScope.LogicalDeviceAccountEditBean.addAnotherMode}"/>
+        
+        <af:panelHeader text="#{inventoryUIBundle.LOGICAL_DEVICE_ACCOUNT} - #{pageFlowScope.LogicalDeviceAccountEditBean.displayInfo}"
+                      id="ph1" helpTopicId="#{pageFlowScope.LogicalDeviceAccountEditBean.helpTopic}">
+          <f:facet name="toolbar">
+          <af:panelGroupLayout id="g2" layout="horizontal" rendered ="#{!pageFlowScope.LogicalDeviceAccountEditBean.previewLayout}">
+            <!--CRUD Buttons Starts -->
+            <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CONTINUE}"
+                              id="cb12"
+                              actionListener="#{pageFlowScope.LogicalDeviceAccountEditBean.save}"
+                              rendered="#{pageFlowScope.LogicalDeviceAccountEditBean.addMode and !pageFlowScope.LogicalDeviceAccountEditBean.popupMode}"
+                              action="#{pageFlowScope.LogicalDeviceAccountEditBean.saveOutcome}"
+                              accessKey="#{inventoryUIBundle.SAVE_AND_CONTINUE_ACCESS_KEY}">
+                <af:setActionListener from="summary" to="#{pageFlowScope.saveActionOutcome}"/>
+            </af:commandButton>
+            <af:spacer width="10" height="10" id="s41"/>
+            <af:commandButton text="#{inventoryUIBundle.SAVE_AND_ADD_ANOTHER}"
+                              actionListener="#{pageFlowScope.LogicalDeviceAccountEditBean.save}"
+                              action="#{pageFlowScope.LogicalDeviceAccountEditBean.saveOutcome}"
+                              id="cb3"
+                              rendered="#{pageFlowScope.LogicalDeviceAccountEditBean.addMode and !pageFlowScope.LogicalDeviceAccountEditBean.popupMode}"
+                              accessKey="#{inventoryUIBundle.SAVE_AND_ADD_ANOTHER_ACCESS_KEY}">
+                <af:setActionListener from="init" to="#{pageFlowScope.saveActionOutcome}"/>
+            </af:commandButton>
+            <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CLOSE}"
+                              id="cb1"
+                              actionListener="#{pageFlowScope.LogicalDeviceAccountEditBean.save}"
+                              action="#{pageFlowScope.LogicalDeviceAccountEditBean.saveOutcome}"
+                              rendered="#{!pageFlowScope.LogicalDeviceAccountEditBean.addMode || pageFlowScope.LogicalDeviceAccountEditBean.popupMode}"
+                              accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}">
+                <af:setActionListener from="saveAndClose" to="#{pageFlowScope.saveActionOutcome}"/>
+            </af:commandButton>
+            <af:spacer width="10" height="10" id="s5"/>
+            <af:commandButton text="#{inventoryUIBundle.CANCEL}" id="cb2" action="cancel" actionListener="#{bindings.closeSubTask.execute}" immediate="true"
+                              accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+            <!--CRUD Buttons Ends -->
+         </af:panelGroupLayout>
+        </f:facet>
+        <af:panelGroupLayout layout="scroll" id="pgl23">
+        <af:showDetailHeader text="#{inventoryUIBundle.LOGICAL_DEVICE_ACCOUNT_INFO}" disclosed="true" id="PAGE_TITLE">
+          <f:facet name="context"/>
+          <f:facet name="menuBar"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="legend"/>
+          <f:facet name="info"/>
+          <af:group id="g1">
+            <af:spacer width="10" height="10" id="s51"/>
+            <af:panelGroupLayout id="pgl2">
+              <af:panelFormLayout id="ldacc" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%" binding="#{backingBeanScope.uiHintsPanel}">
+                <af:selectOneChoice id="ldacc-specification"
+                                    label="#{inventoryUIBundle.SPECIFICATION}" showRequired="true"
+                                    autoSubmit="true"
+                                    value="#{pageFlowScope.LogicalDeviceAccountEditBean.selectedSpec}"
+                                    disabled="#{!(pageFlowScope.LogicalDeviceAccountEditBean.addMode)}"
+                                    valueChangeListener="#{pageFlowScope.LogicalDeviceAccountEditBean.specChanged}">
+                  <f:selectItems binding="#{pageFlowScope.LogicalDeviceAccountEditBean.specifications}" id="si2"/>
+                </af:selectOneChoice>
+                <!-- The id field has partial trigger from specDropDown. When specification changes, 
+                  id field gets disabled / enabled based on enterIdManually setting of specification.-->
+                <af:inputText value="#{(pageFlowScope.LogicalDeviceAccountEditBean.addMode &amp;&amp; pageFlowScope.LogicalDeviceAccountEditBean.specificationCount > 0)  ? 
+                                    (pageFlowScope.LogicalDeviceAccountEditBean.enterIdManually ? pageFlowScope.LogicalDeviceAccountEditBean.entityObject.id : inventoryUIBundle.AUTO_GENERATE) : (pageFlowScope.LogicalDeviceAccountEditBean.entityObject.id)}"
+                              label="#{inventoryUIBundle.ID}" showRequired="true"
+                    disabled="#{(pageFlowScope.LogicalDeviceAccountEditBean.specificationCount > 0) &amp;&amp; (!(pageFlowScope.LogicalDeviceAccountEditBean.addMode &amp;&amp; pageFlowScope.LogicalDeviceAccountEditBean.enterIdManually))}"
+                              maximumLength="25" id="ldacc-id" binding="#{backingBeanScope.idBinding}"/>
+                
+                <af:inputText value="#{pageFlowScope.LogicalDeviceAccountEditBean.name}" label="#{inventoryUIBundle.NAME}"
+                              id="ldacc-name" maximumLength="50" columns="53"/>
+                
+                <af:inputText value="#{pageFlowScope.LogicalDeviceAccountEditBean.description}" maximumLength="255" rows="5" columns="50"
+                              label="#{inventoryUIBundle.DESCRIPTION}" id="ldacc-description"/>
+                
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.INVENTORY_STATUS}" id="ldacc-adminstate">
+                    <af:outputText value="#{pageFlowScope.LogicalDeviceAccountEditBean.inventoryStatus}" id="ot7"/>
+		 <!--RMI 618 Start--><af:switcher defaultFacet="false" facetName="#{pageFlowScope.LogicalDeviceAccountEditBean.popupMode}" id="swis618">
+		<f:facet name="false">
+		<af:commandImageLink action="#{pageFlowScope.LogicalDeviceAccountEditBean.getSummaryAction}" actionListener="#{pageFlowScope.LogicalDeviceAccountEditBean.registerRecentItem}" disabled="#{(pageFlowScope.LogicalDeviceAccountEditBean.installingBI_OID eq null) ? true : false}" id="bid3" shortDesc="#{(pageFlowScope.LogicalDeviceAccountEditBean.installingBI_OID eq null) ? '&amp;#160;' : inventoryUIBundle.BUSINESS_INTERACTION}" text="#{pageFlowScope.LogicalDeviceAccountEditBean.installingBILabel}">
+		<af:setActionListener from="#{pageFlowScope.LogicalDeviceAccountEditBean.inventoryStatusBI.oid}" to="#{objectId}"/>
+		</af:commandImageLink>
+		</f:facet>
+		<f:facet name="true">
+		<af:outputText id="swftis618" value="#{pageFlowScope.LogicalDeviceAccountEditBean.installingBILabel}"/>
+		</f:facet>
+		</af:switcher>
+		<af:outputText id="installingBIDueDate" value="#{pageFlowScope.LogicalDeviceAccountEditBean.installingBIEffectiveDate}"/>
+		<!--RMI 618 End-->
+                </af:panelLabelAndMessage>
+                
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}" id="ldacc-ras">
+                    <af:outputText value="#{pageFlowScope.LogicalDeviceAccountEditBean.resourceAssignmentStatus}" id="ot8"/>
+		<!--RMI 618 Start--><af:switcher defaultFacet="false" facetName="#{pageFlowScope.LogicalDeviceAccountEditBean.popupMode}" id="swas618">
+		<f:facet name="false">
+		<af:commandImageLink action="#{pageFlowScope.LogicalDeviceAccountEditBean.getSummaryAction}" actionListener="#{pageFlowScope.LogicalDeviceAccountEditBean.registerRecentItem}" disabled="#{(pageFlowScope.LogicalDeviceAccountEditBean.consumerBI_OID eq null) ? true : false}" id="bid4" shortDesc="#{(pageFlowScope.LogicalDeviceAccountEditBean.consumerBI_OID eq null) ? '&amp;#160;' : inventoryUIBundle.BUSINESS_INTERACTION}" text="#{pageFlowScope.LogicalDeviceAccountEditBean.consumerBILabel}">
+		<af:setActionListener from="#{pageFlowScope.LogicalDeviceAccountEditBean.assignmentBI.oid}" to="#{objectId}"/>
+		</af:commandImageLink>
+		</f:facet>
+		<f:facet name="true">
+		<af:outputText id="swftas618" value="#{pageFlowScope.LogicalDeviceAccountEditBean.consumerBILabel}"/>
+		</f:facet>
+		</af:switcher>
+		<af:outputText id="consumerBIDueDate" value="#{pageFlowScope.LogicalDeviceAccountEditBean.consumerBIEffectiveDate}"/>
+		<!--RMI 618 End-->
+                </af:panelLabelAndMessage>
+                
+                <af:panelLabelAndMessage id="ldacc-ldaldid" label="#{inventoryUIBundle.LOGICAL_DEVICE_ID}">
+                        <af:inputText value="#{pageFlowScope.LogicalDeviceAccountEditBean.logicalDeviceId}" simple="true"
+                                       id="ldacc-idb" disabled="false" binding="#{backingBeanScope.ldIdBinding}"
+                                     label="#{inventoryUIBundle.LOGICAL_DEVICE_ID}"/>                 
+                        <af:commandImageLink id="ldacc-ldcreate" icon="/images/search_ena.png" shortDesc="#{inventoryUIBundle.BROWSE}">
+                            <af:showPopupBehavior popupId="searchLDPopup" triggerType="click"/>
+                            <af:setActionListener from="true" to="#{pageFlowScope.invokeLDSearch}"/>
+                        </af:commandImageLink>
+                </af:panelLabelAndMessage>
+                
+                <af:inputText value="#{pageFlowScope.LogicalDeviceAccountEditBean.logicalDeviceName}" id="ldacc-ldname" disabled="true" label="#{inventoryUIBundle.LOGICAL_DEVICE_NAME}"
+                              binding="#{backingBeanScope.ldNameBinding}"/>                 
+                
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="ldacc-lmd" rendered="false" visible="#{pageFlowScope.LogicalDeviceAccountEditBean.lastModifiedDate != null}">
+                    <af:outputText value="#{pageFlowScope.LogicalDeviceAccountEditBean.lastModifiedDate}" id="ot9">
+                        <af:convertDateTime pattern="#{pageFlowScope.LogicalDeviceAccountEditBean.dateTimeFormat}"/>
+                    </af:outputText>
+                </af:panelLabelAndMessage>
+                
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="ldacc-lmu" rendered="false" visible="#{pageFlowScope.LogicalDeviceAccountEditBean.entityObject.lastModifiedUser != null}">
+                    <af:outputText value="#{pageFlowScope.LogicalDeviceAccountEditBean.entityObject.lastModifiedUser}" id="ot10"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_DATE}" id="ldacc-crd" rendered="false" visible="#{pageFlowScope.LogicalDeviceAccountEditBean.createdDate != null}">
+                    <af:outputText value="#{pageFlowScope.LogicalDeviceAccountEditBean.createdDate}" id="ot11">
+                        <af:convertDateTime pattern="#{pageFlowScope.LogicalDeviceAccountEditBean.dateTimeFormat}"/>
+                    </af:outputText>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_USER}" id="ldacc-cru" rendered="false" visible="#{pageFlowScope.LogicalDeviceAccountEditBean.entityObject.createdUser != null}">
+                    <af:outputText value="#{pageFlowScope.LogicalDeviceAccountEditBean.entityObject.createdUser}" id="ot12"/>
+                </af:panelLabelAndMessage>
+              </af:panelFormLayout>
+              <af:popup id="searchLDPopup" binding="#{backingBeanScope.searchLD}" contentDelivery="lazyUncached">
+                    <af:dialog id="d1" type="none"
+                               title="#{inventoryUIBundle.LOGICAL_DEVICE_SEARCH}">
+                      <af:panelStretchLayout id="psl_2" styleClass="invCommonPanelStretchLayout">
+                          <f:facet name="center">                 
+                              <af:region value="#{bindings.LogicalDeviceSearchResultsFlow1.regionModel}" id="r1"/>
+                           </f:facet>
+                       </af:panelStretchLayout>          
+                    </af:dialog>
+                    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                    <af:serverListener type="refreshEntity" method="#{pageFlowScope.LogicalDeviceAccountEditBean.refresh}"/>
+              </af:popup>
+            </af:panelGroupLayout>
+          </af:group>        
+        </af:showDetailHeader> 
+        </af:panelGroupLayout>
+      </af:panelHeader>
+     
+     </af:panelGroupLayout>
+    </f:facet>
+    <f:facet name="contextualArea"/>
+  </af:pageTemplate>
+</jsp:root>

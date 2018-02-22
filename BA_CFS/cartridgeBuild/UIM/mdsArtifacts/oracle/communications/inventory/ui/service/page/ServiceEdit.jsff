@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+/* Copyright (c) 2009, 2014, Oracle and/or its affiliates. 
+All rights reserved.*/
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    raattulu    4/09/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:pf="/platform/functions">
+<c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+      <af:panelGroupLayout id="pglid1" layout="scroll">
+          <af:panelHeader text="#{pageFlowScope.ServiceEditBean.message}" id="ph45" messageType="confirmation" rendered="#{pageFlowScope.ServiceEditBean.addAnotherMode}"/>
+         
+          <af:panelHeader text="#{inventoryUIBundle.MENU_SERVICE} - #{pageFlowScope.ServiceEditBean.displayInfo}" helpTopicId="#{pageFlowScope.ServiceEditBean.helpTopic}">
+          <f:facet name="toolbar">
+            <af:panelGroupLayout layout="horizontal" rendered ="#{!pageFlowScope.ServiceEditBean.previewLayout}">
+              <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CLOSE}"
+                                actionListener="#{pageFlowScope.ServiceEditBean.save}"
+                                action="#{pageFlowScope.ServiceEditBean.saveOutcome}"
+                                rendered="#{!pageFlowScope.ServiceEditBean.addMode || pageFlowScope.ServiceEditBean.popupMode}"
+                                accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}">
+                <af:setActionListener from="saveAndClose" to="#{pageFlowScope.saveActionOutcome}"/>
+              </af:commandButton>
+              <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CONTINUE}"
+                                actionListener="#{pageFlowScope.ServiceEditBean.save}"
+                                action="#{pageFlowScope.ServiceEditBean.saveOutcome}"
+                                rendered="#{pageFlowScope.ServiceEditBean.addMode and !pageFlowScope.ServiceEditBean.popupMode }"
+                                accessKey="#{inventoryUIBundle.SAVE_AND_CONTINUE_ACCESS_KEY}">
+                <af:setActionListener from="summary" to="#{pageFlowScope.saveActionOutcome}"/>
+              </af:commandButton>
+              <af:spacer width="10" height="10"/>
+              <af:commandButton text="#{inventoryUIBundle.SAVE_AND_ADD_ANOTHER}"
+                                actionListener="#{pageFlowScope.ServiceEditBean.save}"
+                                action="#{pageFlowScope.ServiceEditBean.saveOutcome}"
+                                rendered="#{pageFlowScope.ServiceEditBean.addMode and !pageFlowScope.ServiceEditBean.popupMode}"
+                                accessKey="#{inventoryUIBundle.SAVE_AND_ADD_ANOTHER_ACCESS_KEY}">
+                <af:setActionListener from="init" to="#{pageFlowScope.saveActionOutcome}"/>
+              </af:commandButton>
+              <af:spacer width="10" height="10" rendered="#{pageFlowScope.ServiceEditBean.addMode and !pageFlowScope.ServiceEditBean.popupMode}"/>
+              <af:commandButton text="#{inventoryUIBundle.CANCEL}" actionListener="#{pageFlowScope.ServiceEditBean.cancel}" action="cancel" immediate="true"
+                                accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+            </af:panelGroupLayout>
+          </f:facet>           <af:panelGroupLayout layout="scroll" id="pgl23">
+              <af:showDetailHeader text="#{inventoryUIBundle.SERVICE_INFORMATION}" disclosed="true">
+                <af:group>
+                  <af:panelGroupLayout>
+                    <af:panelFormLayout id="service" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%" binding="#{backingBeanScope.uiHintsPanel}">
+                      <af:selectOneChoice id="service-specification"
+                                          label="#{inventoryUIBundle.SPECIFICATION}"
+                                          autoSubmit="true"
+                                          value="#{pageFlowScope.ServiceEditBean.selectedSpec}"
+                                          valueChangeListener="#{pageFlowScope.ServiceEditBean.specChanged}"
+                                          disabled="#{!(pageFlowScope.ServiceEditBean.addMode)}"
+                                          required="true">
+                        <f:selectItems value="#{pageFlowScope.ServiceEditBean.specDropdown}"/>
+                      </af:selectOneChoice>
+                      <af:inputText value="#{(pageFlowScope.ServiceEditBean.addMode &amp;&amp; pageFlowScope.ServiceEditBean.specificationCount > 0)  ? 
+                                        (pageFlowScope.ServiceEditBean.enterIdManually ? pageFlowScope.ServiceEditBean.entityObject.id : inventoryUIBundle.AUTO_GENERATE) : (pageFlowScope.ServiceEditBean.entityObject.id)}"
+                                    label="#{inventoryUIBundle.ID}" required="true" id="service-id"
+                                    disabled="#{(pageFlowScope.ServiceEditBean.specificationCount > 0) &amp;&amp; (!(pageFlowScope.ServiceEditBean.addMode &amp;&amp; pageFlowScope.ServiceEditBean.enterIdManually))}"
+                                    maximumLength="25" binding="#{backingBeanScope.idBinding}"/>
+                      <af:inputText value="#{pageFlowScope.ServiceEditBean.entityObject.name}" id="service-name"
+                                    label="#{inventoryUIBundle.NAME}"
+                                    required="true" maximumLength="50" columns="53"/>
+                      <af:inputText value="#{pageFlowScope.ServiceEditBean.entityObject.description}" id="service-description"
+                                    label="#{inventoryUIBundle.DESCRIPTION}" maximumLength="255" rows="5" columns="50"/>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.NETWORK_ORIENTED_SERVICE_TYPE}" id="service-nos" rendered="true">
+                    <af:outputText value="#{pageFlowScope.ServiceEditBean.networkOrientedServiceType}" id="ot13"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="service-lmd" rendered="false" visible="#{pageFlowScope.ServiceEditBean.lastModifiedDate != null}">
+                        <af:outputText value="#{pageFlowScope.ServiceEditBean.lastModifiedDate}" id="ot9">
+                            <af:convertDateTime pattern="#{pageFlowScope.ServiceEditBean.dateTimeFormat}"/>
+                        </af:outputText>
+                    </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="service-lmu" rendered="false" visible="#{pageFlowScope.ServiceEditBean.entityObject.lastModifiedUser != null}">
+                        <af:outputText value="#{pageFlowScope.ServiceEditBean.entityObject.lastModifiedUser}" id="ot10"/>
+                    </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_DATE}" id="service-crd" rendered="false" visible="#{pageFlowScope.ServiceEditBean.createdDate != null}">
+                        <af:outputText value="#{pageFlowScope.ServiceEditBean.createdDate}" id="ot11">
+                            <af:convertDateTime pattern="#{pageFlowScope.ServiceEditBean.dateTimeFormat}"/>
+                        </af:outputText>
+                    </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_USER}" id="service-cru" rendered="false" visible="#{pageFlowScope.ServiceEditBean.entityObject.createdUser != null}">
+                        <af:outputText value="#{pageFlowScope.ServiceEditBean.entityObject.createdUser}" id="ot12"/>
+                    </af:panelLabelAndMessage>
+                    </af:panelFormLayout>
+                    
+                    <!-- additional input fields for External Identity -->
+                  <af:showDetail disclosed="#{pageFlowScope.ServiceEditBean.externalIdentityPopulated}" id="sd1"
+                                 disclosedText="#{inventoryUIBundle.EXTERNAL_SYSTEM}" undisclosedText="#{inventoryUIBundle.EXTERNAL_SYSTEM}"
+                                 inlineStyle="width:50%;">
+                    <af:panelFormLayout id="pfl101" maxColumns="1" rows="2" fieldWidth="69%" labelWidth="31%">
+                        <af:inputText value="#{pageFlowScope.ServiceEditBean.entityObject.externalManagementDomain}" maximumLength="50" columns="50"
+                                      label="#{inventoryUIBundle.EXTERNAL_MANAGEMENT_DOMAIN}" id="it1103" />
+                        <af:inputText value="#{pageFlowScope.ServiceEditBean.entityObject.externalName}" maximumLength="50" columns="50"
+                                      label="#{inventoryUIBundle.EXTERNAL_NAME}" id="it1102" />
+                        <af:inputText value="#{pageFlowScope.ServiceEditBean.entityObject.externalObjectId}" maximumLength="50" columns="50"
+                                      label="#{inventoryUIBundle.EXTERNAL_OBJECT_ID}" id="it1101" />
+                    </af:panelFormLayout>
+                  </af:showDetail>
+                  </af:panelGroupLayout>
+                </af:group>
+              </af:showDetailHeader>
+              </af:panelGroupLayout>
+        </af:panelHeader>
+     </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

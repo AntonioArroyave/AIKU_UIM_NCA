@@ -1,0 +1,23 @@
+<?xml version = '1.0'?>
+<mds:customization version="11.1.1.59.23" xmlns:mds="http://xmlns.oracle.com/mds">
+   <mds:insert parent="conf" position="last">
+      <af:inputText xmlns:af="http://xmlns.oracle.com/adf/faces/rich" binding="#{pageFlowScope.ConfigurationMaintainCharacteristicsBean.characteristicsMap['bandwidth'].component}" readOnly="false" shortDesc="#{bundle['ConfigurationMaintainCharacteristicsu002ejsffCO__BA__RFS__HFCu002cPropiedades__de__serviciou002c_bandwidth_TOOLTIP']}" secret="false" label="#{bundle['ConfigurationMaintainCharacteristicsu002ejsffCO__BA__RFS__HFCu002cPropiedades__de__serviciou002c_bandwidth_LABEL']}" id="conf-bandwidth" value="#{pageFlowScope.ConfigurationMaintainCharacteristicsBean.characteristicsMap['bandwidth'].characteristic.value}" required="false" styleClass="UIHintsEditINPUT_TEXT"/>
+   </mds:insert>
+   <mds:insert parent="conf" position="last">
+      <af:inputText xmlns:af="http://xmlns.oracle.com/adf/faces/rich" binding="#{pageFlowScope.ConfigurationMaintainCharacteristicsBean.characteristicsMap['estadoDelServicio'].component}" readOnly="false" shortDesc="#{bundle['ConfigurationMaintainCharacteristicsu002ejsffCO__BA__RFS__HFCu002cPropiedades__de__serviciou002c_estadoDelServicio_TOOLTIP']}" secret="false" label="#{bundle['ConfigurationMaintainCharacteristicsu002ejsffCO__BA__RFS__HFCu002cPropiedades__de__serviciou002c_estadoDelServicio_LABEL']}" id="conf-estadoDelServicio" value="#{pageFlowScope.ConfigurationMaintainCharacteristicsBean.characteristicsMap['estadoDelServicio'].characteristic.value}" required="false" styleClass="UIHintsEditINPUT_TEXT"/>
+   </mds:insert>
+   <mds:insert after="conf-bandwidth">
+      <af:inputText xmlns:af="http://xmlns.oracle.com/adf/faces/rich" binding="#{pageFlowScope.ConfigurationMaintainCharacteristicsBean.characteristicsMap['buzonDeCorreo'].component}" readOnly="false" shortDesc="#{bundle['ConfigurationMaintainCharacteristicsu002ejsffCO__BA__RFS__HFCu002cPropiedades__de__serviciou002c_buzonDeCorreo_TOOLTIP']}" secret="false" label="#{bundle['ConfigurationMaintainCharacteristicsu002ejsffCO__BA__RFS__HFCu002cPropiedades__de__serviciou002c_buzonDeCorreo_LABEL']}" id="conf-buzonDeCorreo" value="#{pageFlowScope.ConfigurationMaintainCharacteristicsBean.characteristicsMap['buzonDeCorreo'].characteristic.value}" required="false" styleClass="UIHintsEditINPUT_TEXT"/>
+   </mds:insert>
+   <mds:insert parent="conf" position="last">
+      <af:panelLabelAndMessage xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="conf-dummy-1-1" label=" " styleClass="UIHintsEditPANEL_LABEL_AND_MESSAGE">
+         <af:outputText xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="x-conf-dummy-1-1" value=" "/>
+      </af:panelLabelAndMessage>
+   </mds:insert>
+   <mds:modify element="conf">
+      <mds:attribute name="rows" value="2"/>
+      <mds:attribute name="maxColumns" value="2"/>
+      <mds:attribute name="labelAlignment" value="start"/>
+      <mds:attribute name="styleClass" value="UIHintsEditPANEL_FORM_LAYOUT"/>
+   </mds:modify>
+</mds:customization>

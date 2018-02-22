@@ -1,0 +1,335 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!--
+/* Copyright (c) 2009, 2015, Oracle and/or its affiliates. 
+All rights reserved.*/
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    raattulu    4/09/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"  xmlns:c="http://java.sun.com/jsp/jstl/core">
+		   
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>               
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+      <af:panelStretchLayout id="pgl2">
+      
+          <f:facet name="center">
+         
+         <af:panelHeader text="#{inventoryUIBundle.PLACE_SUMMARY} - #{pageFlowScope.PlaceSummaryBean.displayInfo}" id="PAGE_TITLE"
+                        styleClass="invSummaryPanelHeader" helpTopicId="OHW_placeSummary">
+          <f:facet name="context"/>
+          <f:facet name="menuBar">
+            <af:group id="g1" rendered="#{!pageFlowScope.PlaceSummaryBean.previewLayout}" >
+              <af:menuBar id="menuBar2">
+                <af:menu id="menu5" binding="#{backingBeanScope.InventoryMenuBean.relatedPagesMenu}" styleClass="invSummaryMenu"/>
+              </af:menuBar>
+            </af:group>
+          </f:facet>
+           <af:panelGroupLayout layout="scroll" id="pgl23">
+          <af:showDetailHeader text="#{inventoryUIBundle.PLACE_INFO}" disclosed="true" id="sdh1" styleClass="invSummaryShowDetailHeader">
+            <f:facet name="context"/>
+            <f:facet name="menuBar"/>
+            <f:facet name="toolbar">
+              <af:commandToolbarButton text="#{inventoryUIBundle.EDIT}" action="edit" actionListener="#{bindings.openSubTaskForEdit.execute}" id="cb1_place"
+               disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/place/flow/PlaceEditFlow.xml#PlaceEditFlow']}"
+               rendered="#{!pageFlowScope.PlaceSummaryBean.previewLayout}"
+                                       accessKey="#{inventoryUIBundle.EDIT_ACCESS_KEY}">
+                <af:setActionListener from="false" to="#{addMode}"/>
+              </af:commandToolbarButton>
+            </f:facet>
+            <f:facet name="legend"/>
+            <f:facet name="info"/>
+            <af:panelFormLayout id="place1" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%">
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.PLACE_TYPE}" id="place1-placeType">
+                <af:outputText value="#{pageFlowScope.PlaceSummaryBean.placeType}" id="ot15"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.SPECIFICATION}" id="place1-specification">
+                <af:commandImageLink action="SpecificationSummary" actionListener="#{bindings.openSubTaskForSpec.execute}" id="cl1"
+                                shortDesc="#{inventoryUIBundle.LINK_FOR_SPECIFICATION_SUMMARY}"
+                                text="#{pageFlowScope.PlaceSummaryBean.entityObject.specification.name}">
+                  
+                  <af:setActionListener from="#{pageFlowScope.PlaceSummaryBean.entityObject.specification.oid}" to="#{specObjectId}"/>
+                </af:commandImageLink>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.ID}" id="place1-id">
+                <af:outputText value="#{pageFlowScope.PlaceSummaryBean.entityObject.id}" id="ot4"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.NAME}" id="place1-name">
+                <af:outputText value="#{pageFlowScope.PlaceSummaryBean.entityObject.name}" id="ot7"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.DESCRIPTION}" styleClass="invSummaryPanelLabelAndMessage" id="place1-description">
+                <af:outputText value="#{pageFlowScope.PlaceSummaryBean.entityObject.description}" id="ot2"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.FORMATTED_IDENTIFIER}" id="place1-formattedIdentifier">
+                <af:outputText value="#{pageFlowScope.PlaceSummaryBean.entityObject.formattedIdentifier}" id="ot5"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.LATITUDE}" id="place1-latitude">
+                <af:outputText value="#{pageFlowScope.PlaceSummaryBean.entityObject.latitude}" id="ot8"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.LONGITUDE}" id="place1-longitude">
+                <af:outputText value="#{pageFlowScope.PlaceSummaryBean.entityObject.longitude}" id="ot3"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.VERTICAL}" id="place1-vertical">
+                <af:outputText value="#{pageFlowScope.PlaceSummaryBean.entityObject.vertical}" id="ot6"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.HORIZONTAL}" id="place1-horizontal">
+                <af:outputText value="#{pageFlowScope.PlaceSummaryBean.entityObject.horizontal}" id="ot1"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="place1-lmd" rendered="false">
+                <af:outputText value="#{pageFlowScope.PlaceSummaryBean.entityObject.lastModifiedDate}" id="ot9">
+                  <af:convertDateTime pattern="#{pageFlowScope.PlaceSummaryBean.dateTimeFormat}"/>
+                </af:outputText>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="place1-lmu" rendered="false">
+                <af:outputText value="#{pageFlowScope.PlaceSummaryBean.entityObject.lastModifiedUser}" id="ot10"/>
+              </af:panelLabelAndMessage>              
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_DATE}" id="place1-crd" rendered="false">
+                <af:outputText value="#{pageFlowScope.PlaceSummaryBean.entityObject.createdDate}" id="ot13">
+                  <af:convertDateTime pattern="#{pageFlowScope.PlaceSummaryBean.dateTimeFormat}"/>
+                </af:outputText>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_USER}" id="place1-cru" rendered="false">
+                <af:outputText value="#{pageFlowScope.PlaceSummaryBean.entityObject.createdUser}" id="ot14"/>
+              </af:panelLabelAndMessage>
+              <af:switcher id="idSwitcher1" defaultFacet="true" facetName="#{pageFlowScope.PlaceSummaryBean.showParentSpec}">
+                <f:facet name="true">
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.PARENTPLACE}" id="place1-parentplace">
+                    <af:commandImageLink action="init" id="cil1" actionListener="#{bindings.openSubTaskForParentPlace.execute}"
+                                         text="#{pageFlowScope.PlaceSummaryBean.parentPlaceName}">
+                    <af:setActionListener from="#{pageFlowScope.PlaceSummaryBean.parentOid}"
+                                      to="#{pageFlowScope.objectId}"/>
+                        
+                    </af:commandImageLink>
+                    </af:panelLabelAndMessage>
+                </f:facet> 
+             </af:switcher>
+            </af:panelFormLayout>
+          </af:showDetailHeader>
+          
+          <af:group rendered="#{!pageFlowScope.PlaceSummaryBean.previewLayout}" id ="group2" >
+              <af:spacer width="10" height="10" id="s1"/>
+              <!--Configuration Portlet -->
+              <af:region value="#{bindings.ConfigurationListFlow1.regionModel}" id="r3" rendered="#{pageFlowScope.PlaceSummaryBean.renderConfigPortlet}"/>
+              <af:spacer width="10" height="10" id="s2"/>
+              <!-- Roles -->
+              <af:region value="#{bindings.InventoryRoleListFlow1.regionModel}" id="r2"/>
+              <af:spacer width="10" height="10" id="s4"/>
+              <af:region value="#{bindings.NetworkListFlow1.regionModel}" id="r4"/>
+             <af:spacer width="10" height="10" id="s3"/>
+              <!-- PLACE_HIERARCHY -->
+              <af:showDetailHeader text="#{inventoryUIBundle.PLACE_HIERARCHY}" disclosed="true" id="sdh3">
+                <f:facet name="context"/>
+                <f:facet name="menuBar"/>
+                <f:facet name="toolbar"/>
+                <f:facet name="legend"/>
+                <f:facet name="info"/>
+                <af:panelCollection id="pc2" styleClass="invSummaryPanelCollection">
+                  <f:facet name="menus"/>
+                  <f:facet name="toolbar"/>
+                  <f:facet name="statusbar"/>
+                  <af:treeTable id="placeTreeTable" 
+                                value="#{pageFlowScope.PlaceTreeBean.treeModel}" 
+                                binding="#{backingBeanScope.PLACE_treeBinding}"
+                                rowDisclosureListener="#{pageFlowScope.PlaceTreeBean.rowDisclosureListener}"
+                                disclosedRowKeys="#{pageFlowScope.PlaceTreeBean.treeDisclosedRowKeys}"
+                                var="node"
+                                rowSelection="single" expandAllEnabled="#{pageFlowScope.PlaceTreeBean.expandAllEnabled}"
+                                styleClass="invSummaryTree" contentDelivery="immediate"
+                                fetchSize="#{pageFlowScope.PlaceSummaryBean.fetchSize}" 
+                                contextMenuSelect="true" rowBandingInterval="0"
+                                horizontalGridVisible="false" 
+                                selectionListener="#{pageFlowScope.PlaceTreeBean.nodeSelectedEvent}"
+                                summary="#{inventoryUIBundle.PLACE_HIERARCHY_TREETABLE}">
+                    <f:facet name="nodeStamp">
+                      <af:column sortable="false" id="column2" width="500"
+                                 rowHeader="unstyled"
+                                 headerText="#{inventoryUIBundle.PLACE}">
+                        <af:panelGroupLayout id="pgl5">
+                          <af:image source="#{node.data.icon}" id="nodeIcon" styleClass="invSummaryImage" shortDesc="icon"/>
+                          <af:switcher id="idSwitcher" defaultFacet="false" facetName="#{pageFlowScope.PlaceTreeBean.treeModel.depth le 0}">
+                            <f:facet name="false">
+                              <af:commandImageLink action="#{pageFlowScope.PlaceTreeBean.view}" actionListener="#{pageFlowScope.PlaceTreeBean.registerRecentItem}" id="cl2"
+                                                   text="#{node.data.label}"
+                                                   shortDesc="#{inventoryUIBundle.LINK_FOR_SUMMARY}">
+                             
+                              </af:commandImageLink>
+                            </f:facet>
+                            <f:facet name="true">
+                              <af:outputText value="#{node.data.label}" id="ot12"/>
+                            </f:facet>
+                          </af:switcher>
+                        </af:panelGroupLayout>
+                      </af:column>
+                    </f:facet>
+                    <f:facet name="contextMenu">
+                      <af:popup contentDelivery="lazyUncached" id="popupContext" partialTriggers="::placeTreeTable">
+                        <!--Physical Device menu Starts -->
+                        <af:menu id="rootNodeMenu" text="rootNodeMenu">
+                          <af:commandMenuItem text="#{inventoryUIBundle.ADD_NEW}" id="cmi5" selected="true"
+                          rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Place.ASSOCIATE_PLACE;action=view']}">
+                            <af:setActionListener from="true" to="#{pageFlowScope.addNewPlace}"/>
+                            <af:setActionListener from="true" to="#{pageFlowScope.invokePlace}"/>
+                            <af:showPopupBehavior triggerType="click" popupId="::childPlacePopup"/>
+                          </af:commandMenuItem>
+                          <af:commandMenuItem text="#{inventoryUIBundle.ADD_NEW_PL}" id="cmi1" selected="true"
+                          rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Place.ASSOCIATE_PL;action=view']}">
+                            <af:setActionListener from="true" to="#{pageFlowScope.addPL}"/>
+                            <af:setActionListener from="true" to="#{pageFlowScope.invokePL}"/>
+                            <af:showPopupBehavior triggerType="click" popupId="::childPLPopup"/>
+                          </af:commandMenuItem>
+                          <af:commandMenuItem text="#{inventoryUIBundle.REMOVE}" id="commandMenuItem1"
+                                              rendered="#{pageFlowScope.PlaceTreeBean.childNodePopupMenu and securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=Place.DISASSOCIATE_PLACE;action=view']}"
+                                              actionListener="#{pageFlowScope.PlaceTreeBean.removeFromGeographicPlace}"/>
+                        </af:menu>
+                      </af:popup>
+                    </f:facet>
+                  </af:treeTable>
+                  <af:popup id="childPlacePopup" binding="#{backingBeanScope.popupChildPlaceBinding}" contentDelivery="lazyUncached">
+                    <af:dialog id="dialog1" type="none"
+                               title="#{inventoryUIBundle.CHILD_PLACE}">
+                      <af:panelStretchLayout id="pt_ps21" styleClass="invCommonPanelStretchLayout">
+                        <f:facet name="center">
+                          <af:region value="#{bindings.PlaceSearchResultsFlow2.regionModel}" id="r1"/>
+                        </f:facet>
+                      </af:panelStretchLayout>
+                    </af:dialog>
+                    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                    <af:serverListener type="refreshEntity" method="#{pageFlowScope.PlaceTreeBean.refreshTree}"/>
+                  </af:popup>
+                  <af:popup id="childPLPopup" binding="#{backingBeanScope.popupChildPLBinding}" contentDelivery="lazyUncached">
+                    <af:dialog id="dialog2" type="none"
+                               title="#{inventoryUIBundle.CHILD_PL}">
+                      <af:panelStretchLayout id="psl1" styleClass="invCommonPanelStretchLayout">
+                        <f:facet name="center">
+                                <af:region value="#{bindings.LocationSearchResultsFlow1.regionModel}"
+                                           id="r5"/>
+                              </f:facet>
+                      </af:panelStretchLayout>
+                    </af:dialog>
+                    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                    <af:serverListener type="refreshEntity" method="#{pageFlowScope.PlaceTreeBean.refreshTree}"/>
+                  </af:popup>
+                </af:panelCollection>
+              </af:showDetailHeader>
+              <af:spacer width="10" height="10"/>
+              <!--af:showDetailHeader text="#{inventoryUIBundle.ASSOCIATED_LDS}"
+                                     disclosed="true" id="sdh2">
+                  <f:facet name="context"/>
+                  <f:facet name="menuBar"/>
+                  <f:facet name="toolbar"/>
+                  <f:facet name="legend"/>
+                  <f:facet name="info"/>
+                  <af:panelCollection id="LDList" styleClass="invSummaryPanelCollection">
+                    <f:facet name="toolbar">
+                      <af:toolbar id="t129">
+                        <af:commandToolbarButton text="#{inventoryUIBundle.ASSOCIATE}"
+                                                 id="cb1Create" disabledIcon="#{InventoryHelperBean.disAssociateIcon}" 
+                                                 rendered="#{pageFlowScope.PlaceSummaryBean.logicalDeviceCollectionModel.rowCount == 0 and securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=LogicalDevice.ASSOCIATE_LD;action=view']}"
+                                                 icon="#{InventoryHelperBean.associateIcon}" binding="#{backingBeanScope.associateButton}">
+                          <af:showPopupBehavior popupId="associateLogicalDevicePopup" triggerType="click"/>  
+                          <af:setActionListener from="true" to="#{pageFlowScope.invokeLD2}"/>
+                        </af:commandToolbarButton>
+                        <af:commandToolbarButton text="#{inventoryUIBundle.DELETE}"
+                                                 id="cb3Delete" partialTriggers="tableId1" 
+                                                 icon="#{InventoryHelperBean.deleteIcon}" disabledIcon="#{InventoryHelperBean.disDeleteIcon}"
+                                                 disabled="#{pageFlowScope.PlaceSummaryBean.resultsTable.selectedRowKeys == null || pageFlowScope.PlaceSummaryBean.resultsTable.selectedRowKeys.size lt 1}"
+                                                 binding="#{backingBeanScope.deleteButton}" rendered="#{securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=LogicalDevice.DISASSOCIATE_LD;action=view']}"
+                                                 actionListener="#{pageFlowScope.PlaceSummaryBean.disassociateLogicalDevice}">
+                        </af:commandToolbarButton>
+                      </af:toolbar>
+                    </f:facet>
+                    <f:facet name="statusbar">
+                     <af:toolbar id="t4">
+                                  <af:outputText value="#{inventoryUIBundle.ROW_COUNT} #{(pageFlowScope.PlaceSummaryBean.logicalDeviceCollectionModel.rowCount lt 0) ? 0 :  pageFlowScope.PlaceSummaryBean.logicalDeviceCollectionModel.rowCount}"
+                                  id="ol2" styleClass="invSearchOutputLabel" binding="#{backingBeanScope.totalResultsLabel}"
+                                  partialTriggers="tableId1"/>                         
+                    </af:toolbar>
+                  </f:facet>
+                    <af:table id="tableId1"
+                              value="#{pageFlowScope.PlaceSummaryBean.logicalDeviceCollectionModel}"
+                              var="row" rows="1" autoHeightRows="#{pageFlowScope.PlaceSummaryBean.portletHeight}" contentDelivery="immediate" 
+                              emptyText="#{inventoryUIBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET}"
+                              fetchSize="1"
+                              rowBandingInterval="0"
+                              selectionListener="#{pageFlowScope.PlaceSummaryBean.logicalDeviceSelectionListener}"
+                              rowSelection="#{pageFlowScope.PlaceSummaryBean.rowSelection}" width="100%"
+                              binding="#{pageFlowScope.PlaceSummaryBean.resultsTable}"
+                              summary="#{inventoryUIBundle.ASSOCIATED_LDS}"> 
+                      <af:column headerText="#{inventoryUIBundle.ID}" id="c3"
+                                 rowHeader="unstyled">
+                        <af:commandImageLink id="c200" action="LogicalDeviceSummaryFlow" actionListener="#{bindings.openSubTaskLogicalDeviceSummary.execute}"
+                                             text="#{row.id}"
+                                             shortDesc="#{inventoryUIBundle.LINK_FOR_SUMMARY}">
+                         
+                          <af:setActionListener from="#{row.oid}" to="#{pageFlowScope.objectId}"/>
+                        </af:commandImageLink>
+                      </af:column>
+                      <af:column headerText="#{inventoryUIBundle.NAME}" id="c1">
+                        <af:outputText value="#{row.name}" id="ot18"/>
+                      </af:column>
+                      <af:column headerText="#{inventoryUIBundle.SPECIFICATION}"
+                                 id="c2">
+                        <af:commandImageLink action="SpecificationSummary" id="clSpec1"
+                                             text="#{row.specification.name}"
+                                             shortDesc="#{inventoryUIBundle.LINK_FOR_SPECIFICATION_SUMMARY}">
+                        
+                            <af:setActionListener from="#{row.specification.oid}" to="#{specObjectId}"/>
+                        </af:commandImageLink>
+                      </af:column>
+                      <af:column sortProperty="adminState" sortable="true"
+                               filterable="true"
+                               headerText="#{inventoryUIBundle.INVENTORY_STATUS}" id="c41">
+                      <af:outputText value="#{pageFlowScope.PlaceSummaryBean.inventoryStatus}"
+                                     id="ot17"/>
+                    </af:column>
+                    <af:column headerText="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}"
+                               id="c5">
+                      <af:outputText value="#{pageFlowScope.PlaceSummaryBean.resourceAssignmentStatus}"
+                                     id="ot11"/>
+                    </af:column>
+                    </af:table>
+                    <af:popup id="associateLogicalDevicePopup"
+                              binding="#{backingBeanScope.associateLogicalDevice}"
+                              contentDelivery="lazyUncached">
+                      <af:dialog id="d1" type="none"
+                                 title="#{inventoryUIBundle.ASSOCIATE_LOGICAL_DEVICE}">
+                        <af:panelStretchLayout id="pt_psl1" styleClass="invCommonPanelStretchLayout">
+                            <f:facet name="center">
+                               <af:region value="#{bindings.LogicalDeviceSearchResultsFlow2.regionModel}"
+                                   id="r9"/> 
+                            </f:facet>
+                         </af:panelStretchLayout>              
+                      </af:dialog>
+                      <af:clientListener method="goRefreshEntity"
+                                         type="popupClosed"/>
+                      <af:serverListener type="refreshEntity"
+                                         method="#{pageFlowScope.PlaceSummaryBean.refresh}"/>
+                    </af:popup>
+                  </af:panelCollection>
+                </af:showDetailHeader>
+                <af:spacer width="10" height="10"/>
+                <af:region value="#{bindings.PhysicalDeviceListFlow1.regionModel}"
+                           id="r7"/>
+                <af:spacer width="10" height="10"/>
+                <af:region value="#{bindings.EquipmentListFlow1.regionModel}"
+                           id="r6"/>
+                <af:spacer width="10" height="10" id="sp11"/-->
+                <af:region value="#{bindings.CustomInvolvementListFlow1.regionModel}" id="r8"/>
+             </af:group>
+            </af:panelGroupLayout>
+        </af:panelHeader>
+      
+       </f:facet>
+       </af:panelStretchLayout>
+    </f:facet>
+    <f:facet name="contextualArea"/>
+  </af:pageTemplate>
+</jsp:root>

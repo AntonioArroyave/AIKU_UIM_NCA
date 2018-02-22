@@ -1,0 +1,13 @@
+package aiku.provision.cfs.manager;
+
+import oracle.communications.inventory.extensibility.extension.util.ExtensionPointContext;
+import oracle.communications.inventory.api.entity.ServiceConfigurationVersion;
+import oracle.communications.inventory.api.framework.logging.Log;
+import oracle.communications.inventory.api.framework.logging.LogFactory;
+
+public class AikuCfsManager {
+	protected Log log = LogFactory.getLog(AikuCfsManager.class);
+	public void processCfsServiceConfiguration(ExtensionPointContext context, ServiceConfigurationVersion version) {
+		log.debug("", "Hola Mundo");
+	}
+}

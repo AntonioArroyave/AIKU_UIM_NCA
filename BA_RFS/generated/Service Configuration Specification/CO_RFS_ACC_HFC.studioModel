@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:inventory="http://xmlns.oracle.com/communications/studio/model/inventory" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="inventory:ServiceConfigurationSpecification" id="sc=CO_RFS_ACC_HFC" type="sc" typeName="Service Configuration Specification" name="CO_RFS_ACC_HFC" resource="\BA_RFS\model\CO_RFS_ACC_HFC.configuration">
+    <note lang="default"/>
+    <project>
+      <relation ref="ivprj=BA_RFS" type="Inventory Project" name="Dependency">
+        <target name="BA_RFS" typeName="Inventory Project"/>
+      </relation>
+    </project>
+    <dataElements>
+      <element id="sc=CO_RFS_ACC_HFC+dataElement=htbtHfY8ROin7I8X50eoyw" type="dataElement" typeName="Data Element" kind="Element" name="Uiltima_Milla" path="/CO_RFS_ACC_HFC/Uiltima_Milla">
+        <displayName lang="default">Uiltima Milla</displayName>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <base>
+          <relation ref="ds=BA_RFS+dataElement=Uiltima_Milla" type="Schema Element" name="Type" kind="Element">
+            <target name="Uiltima_Milla" typeName="Schema Element"/>
+            <inEntity name="BA_RFS" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <specificationOptions>
+          <specificationOptionList>
+            <element>
+              <specification>
+                <relation ref="ps=Conexion Ultima Milla" type="Pipe Specification" name="Spec Option" kind="Entity">
+                  <target name="Conexion Ultima Milla" typeName="Pipe Specification"/>
+                </relation>
+              </specification>
+              <sequence>1</sequence>
+            </element>
+          </specificationOptionList>
+          <itemOptionType>Reference</itemOptionType>
+        </specificationOptions>
+        <primitiveType>structure</primitiveType>
+      </element>
+      <element id="sc=CO_RFS_ACC_HFC+dataElement=Jx2GrwNgTnWuNiITWJrw3Q" type="dataElement" typeName="Data Element" kind="Element" name="Elemento_de_Acceso" path="/CO_RFS_ACC_HFC/Elemento_de_Acceso">
+        <displayName lang="default">Elemento De Acceso</displayName>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <base>
+          <relation ref="ds=BA_RFS+dataElement=Elemento_de_Acceso" type="Schema Element" name="Type" kind="Element">
+            <target name="Elemento_de_Acceso" typeName="Schema Element"/>
+            <inEntity name="BA_RFS" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <specificationOptions>
+          <specificationOptionList>
+            <element>
+              <specification>
+                <relation ref="lds=CDI" type="Logical Device Specification" name="Spec Option" kind="Entity">
+                  <target name="CDI" typeName="Logical Device Specification"/>
+                </relation>
+              </specification>
+              <sequence>1</sequence>
+            </element>
+          </specificationOptionList>
+          <itemOptionType>Reference</itemOptionType>
+        </specificationOptions>
+        <primitiveType>structure</primitiveType>
+      </element>
+    </dataElements>
+    <relatedSpecificationList/>
+  </entity>
+</model:Model>

@@ -1,0 +1,4 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.53.52" id="ServiceConfigurationCO_RFS_EQ" Package="oracle.communications.inventory.ui.common.bundle" BeanClass="oracle.communications.inventory.ui.common.bundle.ServiceConfigurationCO_RFS_EQ" isJavaBased="true">
+<ResourceBundle xmlns="http://xmlns.oracle.com/adfm/beanmodel"><XliffBundle xmlns="http://xmlns.oracle.com/adfm/resourcebundle" id="oracle.communications.inventory.ui.common.bundle.ServiceConfigurationCO_RFS_EQMsgBundle"/></ResourceBundle>
+</JavaBean>

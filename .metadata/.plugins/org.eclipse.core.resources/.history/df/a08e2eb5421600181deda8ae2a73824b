@@ -1,0 +1,10 @@
+package aiku.provision.cfs.manager;
+
+import oracle.communications.inventory.extensibility.extension.util.ExtensionPointContext;
+import oracle.communications.inventory.api.entity.ServiceConfigurationVersion;
+
+public class AikuCfsManager {
+	public void processCfsServiceConfiguration(ExtensionPointContext context, ServiceConfigurationVersion version) {
+	
+	}
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:com="http://www.mslv.com/studio/core/model/common" 
+	xmlns:inv="http://www.mslv.com/studio/inventory/model/specification"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns="http://www.mslv.com/studio/inventory/model/specification" 
+	xsi:type="ServiceSpecificationType" 
+	name="service">
+  <com:baseEntityRef>
+    <com:entity>Service</com:entity>
+    <com:entityType>inventoryEntity</com:entityType>
+    <com:relationship>unknown</com:relationship>
+  </com:baseEntityRef>
+ </com:modelEntity>

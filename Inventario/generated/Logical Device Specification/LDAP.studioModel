@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:inventory="http://xmlns.oracle.com/communications/studio/model/inventory" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="inventory:LogicalDeviceSpecification" id="lds=LDAP" type="lds" typeName="Logical Device Specification" name="LDAP" resource="\Inventario\model\LDAP.device">
+    <note lang="default"/>
+    <extends>
+      <relation ref="ie=LogicalDevice" type="Inventory Entity" name="Dependency" kind="Entity">
+        <target name="LogicalDevice" typeName="Inventory Entity"/>
+      </relation>
+    </extends>
+    <project>
+      <relation ref="ivprj=Inventario" type="Inventory Project" name="Dependency">
+        <target name="Inventario" typeName="Inventory Project"/>
+      </relation>
+    </project>
+    <dataElements>
+      <element id="lds=LDAP+dataElement=7gDFDdkRRJ+NRQAKqFtwQw~description" type="dataElement" typeName="Data Element" kind="Element" name="description" path="/description" inherited="true">
+        <displayName lang="default">description</displayName>
+        <displayName lang="default">description</displayName>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">255</maxLength>
+        <base>
+          <relation ref="ie=LogicalDevice+dataElement=description" type="Data Element" name="Type" kind="Element">
+            <target name="description" typeName="Data Element"/>
+            <inEntity name="LogicalDevice" typeName="Inventory Entity"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="lds=LDAP+dataElement=7gDFDdkRRJ+NRQAKqFtwQw~deviceIdentifier" type="dataElement" typeName="Data Element" kind="Element" name="deviceIdentifier" path="/deviceIdentifier" inherited="true">
+        <displayName lang="default">deviceIdentifier</displayName>
+        <displayName lang="default">deviceIdentifier</displayName>
+        <note lang="default">Represents a business meaningful identifier for the Logical Device. This field can be populated if the Logical Device has a propertyLocation value. The API will default this field value if the propertyLocation is given and the caller hasn’t specified a value. This field must be unique within all logical devices.</note>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">32</maxLength>
+        <base>
+          <relation ref="ie=LogicalDevice+dataElement=deviceIdentifier" type="Data Element" name="Type" kind="Element">
+            <target name="deviceIdentifier" typeName="Data Element"/>
+            <inEntity name="LogicalDevice" typeName="Inventory Entity"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="lds=LDAP+dataElement=7gDFDdkRRJ+NRQAKqFtwQw~id" type="dataElement" typeName="Data Element" kind="Element" name="id" path="/id" inherited="true">
+        <displayName lang="default">id</displayName>
+        <displayName lang="default">id</displayName>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">255</maxLength>
+        <base>
+          <relation ref="ie=LogicalDevice+dataElement=id" type="Data Element" name="Type" kind="Element">
+            <target name="id" typeName="Data Element"/>
+            <inEntity name="LogicalDevice" typeName="Inventory Entity"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="lds=LDAP+dataElement=7gDFDdkRRJ+NRQAKqFtwQw~name" type="dataElement" typeName="Data Element" kind="Element" name="name" path="/name" inherited="true">
+        <displayName lang="default">name</displayName>
+        <displayName lang="default">name</displayName>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">50</maxLength>
+        <base>
+          <relation ref="ie=LogicalDevice+dataElement=name" type="Data Element" name="Type" kind="Element">
+            <target name="name" typeName="Data Element"/>
+            <inEntity name="LogicalDevice" typeName="Inventory Entity"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="lds=LDAP+dataElement=7gDFDdkRRJ+NRQAKqFtwQw~networkLocationEntityCode" type="dataElement" typeName="Data Element" kind="Element" name="networkLocationEntityCode" path="/networkLocationEntityCode" inherited="true">
+        <displayName lang="default">networkLocationEntityCode</displayName>
+        <displayName lang="default">networkLocationEntityCode</displayName>
+        <note lang="default">Holds the denormalized values of the combined PropertyLocation.NetworkLocationCode and the NetworkEntityCode.NetworkLocationEntityCode field values for the logical device, including the '.' delimiter if specified based on the system preference. This attribute will be set by the application by the API call, and used internally in the Logical Device search when the user searches for a device by Network/Entity Location. This field value if specified by a caller will be ignored by the APIs.</note>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">15</maxLength>
+        <base>
+          <relation ref="ie=LogicalDevice+dataElement=networkLocationEntityCode" type="Data Element" name="Type" kind="Element">
+            <target name="networkLocationEntityCode" typeName="Data Element"/>
+            <inEntity name="LogicalDevice" typeName="Inventory Entity"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+    </dataElements>
+    <relatedSpecificationList/>
+  </entity>
+</model:Model>

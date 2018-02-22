@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.1.53.52" id="ServiceEditPageDef" Package="oracle.communications.inventory.ui.service.page">
+  <executables xmlns="http://xmlns.oracle.com/adfm/uimodel">
+    <methodIterator Binds="findByOID.result" DataControl="POMSDelegate" RangeSize="25" BeanClass="oracle.communications.platform.persistence.Persistent" id="findByOIDIterator" xmlns="http://xmlns.oracle.com/adfm/uimodel"/>
+</executables>
+  <bindings xmlns="http://xmlns.oracle.com/adfm/uimodel">
+    <methodAction xmlns="http://xmlns.oracle.com/adfm/uimodel" id="findByOID" RequiresUpdateModel="true" Action="invokeMethod" MethodName="findByOID" IsViewObjectMethod="false" DataControl="POMSDelegate" InstanceName="POMSDelegate.dataProvider" ReturnName="POMSDelegate.methodResults.findByOID_POMSDelegate_dataProvider_findByOID_result" CacheReturnDefinition="false"><NamedData NDName="oid" NDValue="#{pageFlowScope.objectId}" NDType="java.lang.String"/></methodAction>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<extent>
+  <object class="oracle.communications.platform.entity.impl.CharacteristicSpecificationDAO" guid="http://xmlns.oracle.com/communications/sce/dictionary/BA_RFS/BA_RFS/bandwidth.characteristic#1.0.0.0.0_b0" oid="oracle.communications.platform.entity.impl.CharacteristicSpecificationDAO-0" version="0">
+    <field name="name">"bandwidth"</field>
+    <field name="id">null</field>
+    <field name="description">""</field>
+    <field name="startDate">1519306801540</field>
+    <field name="minQty">0</field>
+    <field name="maxQty">1</field>
+    <field name="derivationFormula">null</field>
+    <field name="restrictedAssociationToSpec">false</field>
+    <field name="multiValued">false</field>
+    <field mode="skip" name="characteristicSpecUsages"/>
+    <field mode="skip" name="childCharSpecRels"/>
+    <field name="passwordType">false</field>
+    <field format="enum_name" name="controlType">TEXT_FIELD</field>
+    <field format="enum_name" name="valueType">ALPHANUMERIC</field>
+    <field format="enum_name" name="textCase">MIXED</field>
+    <field name="persisted">false</field>
+    <field name="displayLabel">"Bandwidth"</field>
+    <field name="minLength">0</field>
+    <field name="maxLength">40</field>
+    <field name="values"/>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.CharacteristicSpecificationDAO" guid="http://xmlns.oracle.com/communications/sce/dictionary/BA_RFS/BA_RFS/estadoDelServicio.characteristic#1.0.0.0.0_b0" oid="oracle.communications.platform.entity.impl.CharacteristicSpecificationDAO-1" version="0">
+    <field name="name">"estadoDelServicio"</field>
+    <field name="id">null</field>
+    <field name="description">""</field>
+    <field name="startDate">1519306801541</field>
+    <field name="minQty">0</field>
+    <field name="maxQty">1</field>
+    <field name="derivationFormula">null</field>
+    <field name="restrictedAssociationToSpec">false</field>
+    <field name="multiValued">false</field>
+    <field mode="skip" name="characteristicSpecUsages"/>
+    <field mode="skip" name="childCharSpecRels"/>
+    <field name="passwordType">false</field>
+    <field format="enum_name" name="controlType">TEXT_FIELD</field>
+    <field format="enum_name" name="valueType">ALPHANUMERIC</field>
+    <field format="enum_name" name="textCase">MIXED</field>
+    <field name="persisted">false</field>
+    <field name="displayLabel">"Estado Del Servicio"</field>
+    <field name="minLength">0</field>
+    <field name="maxLength">40</field>
+    <field name="values"/>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.CharacteristicSpecificationDAO" guid="http://xmlns.oracle.com/communications/sce/dictionary/BA_RFS/BA_RFS/buzonDeCorreo.characteristic#1.0.0.0.0_b0" oid="oracle.communications.platform.entity.impl.CharacteristicSpecificationDAO-2" version="0">
+    <field name="name">"buzonDeCorreo"</field>
+    <field name="id">null</field>
+    <field name="description">""</field>
+    <field name="startDate">1519306801541</field>
+    <field name="minQty">0</field>
+    <field name="maxQty">1</field>
+    <field name="derivationFormula">null</field>
+    <field name="restrictedAssociationToSpec">false</field>
+    <field name="multiValued">false</field>
+    <field mode="skip" name="characteristicSpecUsages"/>
+    <field mode="skip" name="childCharSpecRels"/>
+    <field name="passwordType">false</field>
+    <field format="enum_name" name="controlType">TEXT_FIELD</field>
+    <field format="enum_name" name="valueType">ALPHANUMERIC</field>
+    <field format="enum_name" name="textCase">MIXED</field>
+    <field name="persisted">false</field>
+    <field name="displayLabel">"Buzon De Correo"</field>
+    <field name="minLength">0</field>
+    <field name="maxLength">40</field>
+    <field name="values"/>
+  </object>
+</extent>

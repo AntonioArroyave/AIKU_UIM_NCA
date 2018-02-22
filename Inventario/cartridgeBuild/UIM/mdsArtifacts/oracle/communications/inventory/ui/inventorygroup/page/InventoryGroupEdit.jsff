@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:pf="/platform/functions"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+          
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+      <af:panelGroupLayout id="pglid1" layout="scroll">
+        
+          
+        <af:panelHeader text="#{pageFlowScope.InventoryGroupEditBean.message}" id="ph45" messageType="confirmation" rendered="#{pageFlowScope.InventoryGroupEditBean.addAnotherMode}"/>
+       
+        <af:panelHeader text="#{inventoryUIBundle.INVENTORY_GROUP} - #{pageFlowScope.InventoryGroupEditBean.displayInfo}"
+                        id="ph1" helpTopicId="#{pageFlowScope.InventoryGroupEditBean.helpTopic}">
+          <f:facet name="toolbar">
+            <af:panelGroupLayout layout="horizontal" id="pgl1" rendered ="#{!pageFlowScope.InventoryGroupEditBean.previewLayout}">
+              <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CLOSE}"
+                                id="cb4"
+                                actionListener="#{pageFlowScope.InventoryGroupEditBean.save}"
+                                action="#{pageFlowScope.InventoryGroupEditBean.saveOutcome}"
+                                rendered="#{!pageFlowScope.InventoryGroupEditBean.addMode || pageFlowScope.InventoryGroupEditBean.popupMode}"
+                                accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}">
+                <af:setActionListener from="saveAndClose"
+                                      to="#{pageFlowScope.saveActionOutcome}"/>
+              </af:commandButton>
+              <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CONTINUE}"
+                                actionListener="#{pageFlowScope.InventoryGroupEditBean.save}"
+                                action="#{pageFlowScope.InventoryGroupEditBean.saveOutcome}"
+                                rendered="#{pageFlowScope.InventoryGroupEditBean.addMode and !pageFlowScope.InventoryGroupEditBean.popupMode }"
+                                id="cb2" accessKey="#{inventoryUIBundle.SAVE_AND_CONTINUE_ACCESS_KEY}">
+                <af:setActionListener from="summary"
+                                      to="#{pageFlowScope.saveActionOutcome}"/>
+              </af:commandButton>
+              <af:spacer width="10" height="10" id="s3"/>
+              <af:commandButton text="#{inventoryUIBundle.SAVE_AND_ADD_ANOTHER}"
+                                actionListener="#{pageFlowScope.InventoryGroupEditBean.save}"
+                                action="#{pageFlowScope.InventoryGroupEditBean.saveOutcome}"
+                                rendered="#{pageFlowScope.InventoryGroupEditBean.addMode and !pageFlowScope.InventoryGroupEditBean.popupMode}"
+                                id="cb1" accessKey="#{inventoryUIBundle.SAVE_AND_ADD_ANOTHER_ACCESS_KEY}">
+                <af:setActionListener from="init"
+                                      to="#{pageFlowScope.saveActionOutcome}"/>
+              </af:commandButton>
+              <af:spacer width="10" height="10" rendered="#{pageFlowScope.InventoryGroupEditBean.addMode and !pageFlowScope.InventoryGroupEditBean.popupMode}"/>
+              <af:commandButton text="#{inventoryUIBundle.CANCEL}" actionListener="#{bindings.closeSubTask.execute}"
+                                action="cancel" immediate="true" id="cb3"
+                                accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+            </af:panelGroupLayout>
+          </f:facet>
+           <af:panelGroupLayout layout="scroll" id="pgl23">
+          <af:showDetailHeader text="#{inventoryUIBundle.INVENTORY_GROUP_INFORMATION}" disclosed="true" id="sdh1">
+            <af:group id="g1">
+              <af:panelGroupLayout id="pgl2">
+                <af:panelFormLayout maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%" id="invgrp" binding="#{backingBeanScope.uiHintsPanel}" >
+                  <af:selectOneChoice id="invgrp-specification"
+                                      label="#{inventoryUIBundle.SPECIFICATION}"
+                                      autoSubmit="true"
+                                      value="#{pageFlowScope.InventoryGroupEditBean.selectedSpec}"
+                                      valueChangeListener="#{pageFlowScope.InventoryGroupEditBean.invGrpTypeChanged}"
+                                      disabled="#{!(pageFlowScope.InventoryGroupEditBean.addMode)}">
+                    <f:selectItems binding="#{pageFlowScope.InventoryGroupEditBean.specifications}"
+                                   id="si2"/>
+                  </af:selectOneChoice>
+                  <af:inputText value="#{pageFlowScope.InventoryGroupEditBean.entityObject.name}"
+                                label="#{inventoryUIBundle.NAME}"
+                                maximumLength="50" columns="53"
+                                required="true" id="invgrp-name"/>
+                  <af:inputText value="#{pageFlowScope.InventoryGroupEditBean.entityObject.description}"
+                                maximumLength="255" rows="5" columns="50"
+                                label="#{inventoryUIBundle.DESCRIPTION}"
+                                id="invgrp-description"/>
+                  <af:inputDate value="#{pageFlowScope.InventoryGroupEditBean.entityObject.validFor.startDate}"
+                                label="#{inventoryUIBundle.START_DATE}"
+                                required="true" id="invgrp-startDate">
+                    <af:convertDateTime pattern="#{pageFlowScope.InventoryGroupEditBean.dateTimeFormat}"/>
+                  </af:inputDate>
+                  <af:inputDate value="#{pageFlowScope.InventoryGroupEditBean.entityObject.validFor.endDate}"
+                                label="#{inventoryUIBundle.END_DATE}" id="invgrp-endDate">
+                    <af:convertDateTime pattern="#{pageFlowScope.InventoryGroupEditBean.dateTimeFormat}"/>
+                  </af:inputDate>
+                  
+                  <af:panelLabelAndMessage label="#{inventoryUIBundle.INVENTORY_GROUP_TYPE}" id="invgrp-inventoryGroupType" 
+                     visible="#{pageFlowScope.InventoryGroupEditBean.entityObject.specification.inventoryGroupType.name != null}">
+                        <af:outputText value="#{pageFlowScope.InventoryGroupEditBean.entityObject.specification.inventoryGroupType.name}"
+                                       id="ig-igt"
+                                       partialTriggers="invgrp-specification"/>
+                  </af:panelLabelAndMessage>
+                    
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="invgrp-lmd" rendered="false" visible="#{pageFlowScope.InventoryGroupEditBean.lastModifiedDate != null}">
+                        <af:outputText value="#{pageFlowScope.InventoryGroupEditBean.lastModifiedDate}" id="ot9">
+                            <af:convertDateTime pattern="#{pageFlowScope.InventoryGroupEditBean.dateTimeFormat}"/>
+                        </af:outputText>
+                    </af:panelLabelAndMessage>
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="invgrp-lmu" rendered="false" visible="#{pageFlowScope.InventoryGroupEditBean.entityObject.lastModifiedUser != null}">
+                        <af:outputText value="#{pageFlowScope.InventoryGroupEditBean.entityObject.lastModifiedUser}" id="ot10"/>
+                    </af:panelLabelAndMessage>
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_DATE}" id="invgrp-crd" rendered="false" visible="#{pageFlowScope.InventoryGroupEditBean.createdDate != null}">
+                        <af:outputText value="#{pageFlowScope.InventoryGroupEditBean.createdDate}" id="ot11">
+                            <af:convertDateTime pattern="#{pageFlowScope.InventoryGroupEditBean.dateTimeFormat}"/>
+                        </af:outputText>
+                    </af:panelLabelAndMessage>
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_USER}" id="invgrp-cru" rendered="false" visible="#{pageFlowScope.InventoryGroupEditBean.entityObject.createdUser != null}">
+                        <af:outputText value="#{pageFlowScope.InventoryGroupEditBean.entityObject.createdUser}" id="ot12"/>
+                    </af:panelLabelAndMessage>
+                </af:panelFormLayout>                
+              </af:panelGroupLayout>
+            </af:group>
+          </af:showDetailHeader>
+          </af:panelGroupLayout>
+        </af:panelHeader>
+      
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

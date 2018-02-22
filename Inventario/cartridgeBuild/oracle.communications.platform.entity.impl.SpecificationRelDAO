@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<extent>
+  <object class="oracle.communications.platform.entity.impl.SpecificationRelDAO" oid="oracle.communications.platform.entity.impl.SpecificationRelDAO-0" version="0">
+    <field name="name">"com.mslv.studio.inventory.logical.device.inventoryConfigRef"</field>
+    <field name="parent">oracle.communications.platform.ies.xfile.OID:oracle.communications.platform.entity.impl.SpecificationDAO-1</field>
+    <field name="child">oracle.communications.platform.ies.xfile.OID:oracle.communications.platform.entity.impl.SpecificationDAO-2</field>
+    <field name="description">"null"</field>
+    <field format="enum_name" name="relationshipType">COMPOSITE</field>
+    <field format="enum_name" name="status">ACTIVE</field>
+    <field name="orderInGroup">0</field>
+    <field name="childrenToParentMin">0</field>
+    <field name="childrenToParentMax">0</field>
+    <field name="parentsToChildMin">0</field>
+    <field name="parentsToChildMax">1</field>
+    <field name="id">0</field>
+    <field name="parentage">0</field>
+  </object>
+</extent>

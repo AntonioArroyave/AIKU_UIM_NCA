@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="oracle.communications.inventory.api.framework.logging.Log"/>
+<fullyQualifiedTypeName name="org.apache.log4j.spi.LoggerFactory"/>
+<fullyQualifiedTypeName name="oracle.communications.inventory.api.framework.logging.LogFactory"/>
+<fullyQualifiedTypeName name="oracle.communications.inventory.api.service.ServiceConfigurationManager"/>
+<fullyQualifiedTypeName name="oracle.communications.inventory.api.entity.ServiceConfigurationVersion"/>
+<fullyQualifiedTypeName name="oracle.communications.inventory.api.entity.Service"/>
+<fullyQualifiedTypeName name="oracle.communications.inventory.api.entity.ServiceConfigurationItem"/>
+<fullyQualifiedTypeName name="oracle.communications.platform.persistence.Persistent"/>
+<fullyQualifiedTypeName name="oracle.communications.platform.persistence.Finder"/>
+<fullyQualifiedTypeName name="oracle.communications.platform.persistence.PersistenceHelper"/>
+<fullyQualifiedTypeName name="oracle.communications.inventory.api.exception.ValidationException"/>
+<fullyQualifiedTypeName name="oracle.communications.inventory.api.businessinteraction.BusinessInteractionManager"/>
+<fullyQualifiedTypeName name="aiku.provision.cfs.worker.configurationWorker"/>
+<fullyQualifiedTypeName name="aiku.provision.cfs.worker.serviceWorker"/>
+<fullyQualifiedTypeName name="aiku.provision.cfs.worker.xmlbeanWorker"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+</qualifiedTypeNameHistroy>

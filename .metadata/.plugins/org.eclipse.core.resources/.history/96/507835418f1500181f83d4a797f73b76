@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com:modelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.mslv.com/studio/provisioning/model/workgroup" xmlns:com="http://www.mslv.com/studio/core/model/common" xsi:type="com:environmentType" name="UIM7.3.5OEL6.8">
+  <com:displayName>Environment</com:displayName>
+  <com:id>A8yNbEkbQ9G7oi85U8dowA</com:id>
+  <com:endpoint>http://localhost:7001/cartridge/wsapi</com:endpoint>
+</com:modelEntity>

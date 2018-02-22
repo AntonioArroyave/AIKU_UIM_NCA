@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: Aprovisionamiento
+Bundle-Name: Aprovisionamiento
+Bundle-Version: 1.0.0.0.0
+Bundle-BuildTime: 2018-02-22 10:18:12
+Bundle-BuildNumber: 42
+Bundle-Category: Inventory
+Bundle-Vendor: InventoryCartridge
+Bundle-RequiredExecutionEnvironment: Oracle-Communications/Inventory-7.3.5,
+ JavaSE-1.8
+Bundle-RequiredTargetVersion: 7.3.5

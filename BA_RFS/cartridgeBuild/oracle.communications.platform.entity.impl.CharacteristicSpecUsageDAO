@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<extent>
+  <object class="oracle.communications.platform.entity.impl.CharacteristicSpecUsageDAO" oid="oracle.communications.platform.entity.impl.CharacteristicSpecUsageDAO-0" version="0">
+    <field name="specification">oracle.communications.platform.ies.xfile.OID:oracle.communications.platform.entity.impl.SpecificationDAO-5</field>
+    <field name="characteristicSpecification">oracle.communications.platform.ies.xfile.OID:oracle.communications.platform.entity.impl.CharacteristicSpecificationDAO-0</field>
+    <field name="editMask">null</field>
+    <field name="displayMask">null</field>
+    <field name="valueValidationSource">null</field>
+    <field name="storeAbbreviation">null</field>
+    <field name="required">false</field>
+    <field name="isReadOnly">false</field>
+    <field name="displayOrder">0</field>
+    <field name="isRangeable">true</field>
+    <field name="values"/>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.CharacteristicSpecUsageDAO" oid="oracle.communications.platform.entity.impl.CharacteristicSpecUsageDAO-1" version="0">
+    <field name="specification">oracle.communications.platform.ies.xfile.OID:oracle.communications.platform.entity.impl.SpecificationDAO-5</field>
+    <field name="characteristicSpecification">oracle.communications.platform.ies.xfile.OID:oracle.communications.platform.entity.impl.CharacteristicSpecificationDAO-1</field>
+    <field name="editMask">null</field>
+    <field name="displayMask">null</field>
+    <field name="valueValidationSource">null</field>
+    <field name="storeAbbreviation">null</field>
+    <field name="required">false</field>
+    <field name="isReadOnly">false</field>
+    <field name="displayOrder">0</field>
+    <field name="isRangeable">true</field>
+    <field name="values"/>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.CharacteristicSpecUsageDAO" oid="oracle.communications.platform.entity.impl.CharacteristicSpecUsageDAO-2" version="0">
+    <field name="specification">oracle.communications.platform.ies.xfile.OID:oracle.communications.platform.entity.impl.SpecificationDAO-5</field>
+    <field name="characteristicSpecification">oracle.communications.platform.ies.xfile.OID:oracle.communications.platform.entity.impl.CharacteristicSpecificationDAO-2</field>
+    <field name="editMask">null</field>
+    <field name="displayMask">null</field>
+    <field name="valueValidationSource">null</field>
+    <field name="storeAbbreviation">null</field>
+    <field name="required">false</field>
+    <field name="isReadOnly">false</field>
+    <field name="displayOrder">0</field>
+    <field name="isRangeable">true</field>
+    <field name="values"/>
+  </object>
+</extent>

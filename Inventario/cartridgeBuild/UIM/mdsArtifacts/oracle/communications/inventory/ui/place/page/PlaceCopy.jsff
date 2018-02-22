@@ -1,0 +1,164 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+/* Copyright (c) 2009, 2016, Oracle and/or its affiliates. 
+All rights reserved.*/
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    raattulu    4/08/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:pf="/platform/functions">
+		  
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>               
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+      <af:panelGroupLayout id="pgl1"
+                           binding="#{backingBeanScope.edit_panelGroupLayout}"
+                           layout="scroll">
+     <af:panelGroupLayout id="pgl42" layout="horizontal" halign="left"
+                             rendered="#{!pageFlowScope.PlaceCopyBean.previewLayout}">
+      <af:outputText id="otbi" styleClass="invCommonText" noWrap="true"
+                         rendered="#{!(pageFlowScope.PlaceCopyBean.popupMode)}"
+                         value="#{pageFlowScope.PlaceCopyBean.renderBILabel ? inventoryUIBundle.BUSINESS_INTERACTION_LABEL : null}"/>
+      <af:menuBar id="menuBar1">
+        <af:menu id="BIContextMenu"
+                     binding="#{backingBeanScope.InventoryMenuBean.biContextMenu}"
+                     styleClass="invEditMenu"
+                     rendered="#{!(pageFlowScope.PlaceCopyBean.popupMode)}"/>
+        </af:menuBar>                       
+      </af:panelGroupLayout>
+      
+      <af:panelHeader text="#{inventoryUIBundle.PLACE} - #{pageFlowScope.PlaceCopyBean.displayInfo}"
+                    id="ph1" >
+        <f:facet name="toolbar">
+            <af:panelGroupLayout id="pgl3" layout="horizontal"
+                                 rendered="#{!pageFlowScope.PlaceCopyBean.previewLayout}">
+              <!--CRUD Buttons Starts -->
+              <af:commandButton text="#{inventoryUIBundle.CLONE}"
+                                actionListener="#{pageFlowScope.PlaceCopyBean.clone}"
+                                id="cb31"
+                                action="#{pageFlowScope.PlaceCopyBean.getCloningAction}"/>
+              <af:spacer width="10" height="10" id="s51"/>
+              <af:commandButton text="#{inventoryUIBundle.CANCEL}" id="cb2"
+                                action="cancelAndReturn"
+                                immediate="true"/>
+              <!--CRUD Buttons Ends -->
+            </af:panelGroupLayout>
+          </f:facet>
+          
+          <af:panelGroupLayout layout="scroll" id="pgl23">
+            <af:showDetailHeader text="#{inventoryUIBundle.EXISTING_PLACE_INFO}"
+                                   disclosed="true" id="Place_inf">
+                 <af:group id="g2">
+                  <af:spacer height="10" id="spacer2"/>
+                  <af:panelGroupLayout id="pgl12">
+                        <!-- Fields start here -->
+                    <af:panelFormLayout id="place1" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%">    
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.PLACE_TYPE}" id="place1-placeType">
+                        <af:outputText value="#{pageFlowScope.PlaceCopyBean.placeTypeStr}" id="ot15"/>
+                    </af:panelLabelAndMessage>
+                    
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.ID}" id="place1-id">
+                        <af:outputText value="#{pageFlowScope.PlaceCopyBean.entityObject.id}" id="ot4"/>
+                    </af:panelLabelAndMessage>
+             
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.SPECIFICATION}" id="place1-specification">
+                        <af:outputText value="#{pageFlowScope.PlaceCopyBean.placeSpecification}" id="sid" />
+                    </af:panelLabelAndMessage>
+                    
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.NAME}" id="place1-name">
+                        <af:outputText value="#{pageFlowScope.PlaceCopyBean.entityObject.name}" id="ot11"/>
+                    </af:panelLabelAndMessage>
+                    </af:panelFormLayout>
+                    </af:panelGroupLayout>
+                </af:group>
+            </af:showDetailHeader>
+              
+              <af:spacer width="10" height="10" id="s5"/>
+              
+              <af:showDetailHeader text="#{inventoryUIBundle.CLONING_INFO}"
+                                   disclosed="true" id="Clone_inf">
+                 <af:group id="g3">
+                  <af:spacer height="10" id="spacer3"/>
+                  <af:panelGroupLayout id="pgl13">
+                        <!-- Fields start here -->
+                    <af:panelFormLayout id="place2" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%">
+                      <af:inputText value="#{pageFlowScope.PlaceCopyBean.name}"
+                                      label="#{inventoryUIBundle.NAME}"
+                                      maximumLength="255" columns="53"
+                                      id="place2-ot7">
+                        </af:inputText>
+                        <af:inputText value="#{pageFlowScope.PlaceCopyBean.desc}" id="place2-ot2"
+                                      label="#{inventoryUIBundle.DESCRIPTION}"
+                                      maximumLength="255" rows="5" columns="50">
+                        </af:inputText>
+                        <af:inputText value="#{pageFlowScope.PlaceCopyBean.latitude}" id="place2-ot8"
+                                      label="#{inventoryUIBundle.LATITUDE}"
+                                      maximumLength="25" partialTriggers="place2-ot6 place2-ot1"
+                                      autoSubmit="true" shortDesc="#{inventoryUIBundle.LATITUDE_DESC}"
+                                      binding="#{backingBeanScope.latBinding}"
+                                      valueChangeListener="#{pageFlowScope.PlaceCopyBean.onChangeLatLon}">
+                        </af:inputText>
+                        <af:inputText value="#{pageFlowScope.PlaceCopyBean.longitude}" id="place2-ot3"
+                                      label="#{inventoryUIBundle.LONGITUDE}"
+                                      maximumLength="25" partialTriggers="place2-ot6 place2-ot1"
+                                      autoSubmit="true" shortDesc="#{inventoryUIBundle.LONGITUDE_DESC}"
+                                      binding="#{backingBeanScope.lonBinding}"
+                                      valueChangeListener="#{pageFlowScope.PlaceCopyBean.onChangeLatLon}">
+                        </af:inputText>                            
+                        <af:inputText value="#{pageFlowScope.PlaceCopyBean.vertical}" id="place2-ot6"
+                                      label="#{inventoryUIBundle.VERTICAL}"
+                                      maximumLength="25" autoSubmit="true"
+                                      partialTriggers="place2-ot8 place2-ot3"
+                                      binding="#{backingBeanScope.verBinding}"
+                                      valueChangeListener="#{pageFlowScope.PlaceCopyBean.onChangeVnH}"
+                                      validator="#{pageFlowScope.PlaceCopyBean.validate}">                              
+                        </af:inputText>
+                        <af:inputText value="#{pageFlowScope.PlaceCopyBean.horizontal}" id="place2-ot1"
+                                      label="#{inventoryUIBundle.HORIZONTAL}"
+                                      maximumLength="25" autoSubmit="true"
+                                      partialTriggers="place2-ot8 place2-ot3" 
+                                      binding="#{backingBeanScope.horBinding}"
+                                      valueChangeListener="#{pageFlowScope.PlaceCopyBean.onChangeVnH}"
+                                      validator="#{pageFlowScope.PlaceCopyBean.validate}">                              
+                        </af:inputText>
+                      <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="place2-lmd" rendered="false">
+                        <af:outputText value="#{pageFlowScope.PlaceCopyBean.entityObject.lastModifiedDate}" id="ot9">
+                          <af:convertDateTime pattern="#{pageFlowScope.PlaceCopyBean.dateTimeFormat}"/>
+                        </af:outputText>
+                      </af:panelLabelAndMessage>
+                      <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="place2-lmu" rendered="false">
+                        <af:outputText value="#{pageFlowScope.PlaceCopyBean.entityObject.lastModifiedUser}" id="ot10"/>
+                      </af:panelLabelAndMessage>              
+                      <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_DATE}" id="place2-crd" rendered="false">
+                        <af:outputText value="#{pageFlowScope.PlaceCopyBean.entityObject.createdDate}" id="ot13">
+                          <af:convertDateTime pattern="#{pageFlowScope.PlaceCopyBean.dateTimeFormat}"/>
+                        </af:outputText>
+                      </af:panelLabelAndMessage>
+                      <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_USER}" id="place2-cru" rendered="false">
+                        <af:outputText value="#{pageFlowScope.PlaceCopyBean.entityObject.createdUser}" id="ot14"/>
+                      </af:panelLabelAndMessage>
+            </af:panelFormLayout>       
+                        <!-- Fields end here -->
+                  </af:panelGroupLayout>
+                 </af:group>
+            </af:showDetailHeader>
+            <af:spacer width="10" height="10" id="s4"/>
+          </af:panelGroupLayout>
+          
+      </af:panelHeader>
+      
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

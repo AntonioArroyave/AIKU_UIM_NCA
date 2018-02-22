@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:pf="/platform/functions">
+		  
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+<c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>           
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+    <af:panelGroupLayout id="pgl1" binding="#{backingBeanScope.edit_panelGroupLayout}">
+        <af:panelGroupLayout id="pgl48" layout="horizontal" halign="left" rendered ="#{!pageFlowScope.LogicalDeviceAccountRangeEditBean.previewLayout}">
+            <af:outputText id="otbi" styleClass="invCommonText" noWrap="true"
+                           rendered="#{!(pageFlowScope.LogicalDeviceAccountRangeEditBean.popupMode)}"
+                           value="#{pageFlowScope.LogicalDeviceAccountRangeEditBean.renderBILabel ? inventoryUIBundle.BUSINESS_INTERACTION_LABEL : null}"/>
+            <af:menuBar id="menuBar1">
+                  <af:menu id="BIContextMenu" binding="#{backingBeanScope.InventoryMenuBean.biContextMenu}" styleClass="invEditMenu"
+                           rendered="#{!(pageFlowScope.LogicalDeviceAccountRangeEditBean.popupMode)}"   />
+            </af:menuBar>
+            <af:popup id="BISearchPopup" binding="#{backingBeanScope.businessInteractionSearch3}" contentDelivery="lazyUncached">
+                <af:dialog id="BISearchPopup_d1" type="none"
+                           title="#{inventoryUIBundle.BUSINESS_INTERACTION_SEARCH}">
+                    <af:panelStretchLayout id="psl_9" styleClass="invCommonPanelStretchLayout">
+                        <f:facet name="center">
+                           <af:region value="#{bindings.BusinessInteractionSearchResultsFlow1.regionModel}" id="BISP_r2"/>
+                        </f:facet>
+                    </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity" method="#{pageFlowScope.LogicalDeviceAccountRangeEditBean.afterBusinessInteractionSelectionChange}"/>
+            </af:popup>
+        </af:panelGroupLayout>
+      
+       
+       
+        <af:panelHeader text="#{inventoryUIBundle.LOGICAL_DEVICE_ACCOUNT_RANGE} - #{pageFlowScope.LogicalDeviceAccountRangeEditBean.displayInfo}"
+                      id="ph1" helpTopicId="OHW_ldAcctRangeNew">
+        <f:facet name="toolbar">
+         <af:panelGroupLayout layout="horizontal" rendered ="#{!pageFlowScope.LogicalDeviceAccountRangeEditBean.previewLayout}">
+            <!--CRUD Buttons Starts -->
+            <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CLOSE}" id="cb1"
+                              actionListener="#{pageFlowScope.LogicalDeviceAccountRangeEditBean.saveAction}"
+                              action="#{pageFlowScope.LogicalDeviceAccountRangeEditBean.saveOutcome}"
+                              accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}">
+                <af:setActionListener from="saveAndClose" to="#{pageFlowScope.saveActionOutcome}"/>
+            </af:commandButton>
+            <af:spacer width="10" height="10" id="s4"/>
+            <af:commandButton text="#{inventoryUIBundle.CANCEL}" id="cb2" action="cancel" immediate="true"
+                              accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+            <!--CRUD Buttons Ends -->
+         </af:panelGroupLayout>
+        </f:facet>
+         <af:panelGroupLayout layout="scroll" id="pgl23">
+        <af:showDetailHeader text="#{inventoryUIBundle.LOGICAL_DEVICE_ACCOUNT_INFO}" disclosed="true" id="sdh1">
+          <af:group id="g11">
+            <af:spacer width="10" height="10" id="s51"/>
+            <af:panelGroupLayout id="pg3l1" binding="#{backingBeanScope.ldaredit_panelGroupLayout}">
+              <af:panelFormLayout id="ldar" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%" binding="#{backingBeanScope.uiHintsPanel}">
+
+                <af:selectOneChoice id="ldar-specification"
+                                    label="#{inventoryUIBundle.SPECIFICATION}"
+                                    autoSubmit="true" valueChangeListener="#{pageFlowScope.LogicalDeviceAccountRangeEditBean.specChanged}"
+                                    value="#{pageFlowScope.LogicalDeviceAccountRangeEditBean.selectedSpec}"
+                                    showRequired="true">
+                     <f:selectItems binding="#{pageFlowScope.LogicalDeviceAccountRangeEditBean.specifications}" id="si22"/>
+                </af:selectOneChoice>
+                
+                <af:inputText label="#{inventoryUIBundle.STARTING_ID}" id="ldar-startingid" value="#{pageFlowScope.LogicalDeviceAccountRangeEditBean.startRange}" partialTriggers="ldar-specification"
+                              rendered="#{(pageFlowScope.LogicalDeviceAccountRangeEditBean.specificationCount > 0) &amp;&amp; ((pageFlowScope.LogicalDeviceAccountRangeEditBean.enterIdManually))}"
+                              showRequired="true" binding="#{backingBeanScope.idBinding}"/>
+                
+                <af:inputText label="#{inventoryUIBundle.QUANTITY}" id="ldar-quantity" maximumLength="7"
+                              value="#{pageFlowScope.LogicalDeviceAccountRangeEditBean.quantity}" showRequired="true">
+                </af:inputText>
+                
+                <af:panelLabelAndMessage id="ldar-ldaigid" label="#{inventoryUIBundle.INVENTORY_GROUP}">
+                    <af:inputText value="#{pageFlowScope.LogicalDeviceAccountRangeEditBean.inventoryGroupName}" simple="true"
+                                  id="ldar-ig" disabled="false"  binding="#{backingBeanScope.igIdBinding}"
+                                  label="#{inventoryUIBundle.INVENTORY_GROUP}"/>
+                    <af:commandImageLink id="ldar-searchIG" icon="/images/search_ena.png" shortDesc="#{inventoryUIBundle.BROWSE}">
+                            <af:showPopupBehavior popupId="searchIGPopup" triggerType="click"/>
+                            <af:setActionListener from="true" to="#{pageFlowScope.invokeIGSearch}"/>
+                    </af:commandImageLink>
+                </af:panelLabelAndMessage>
+                
+                <af:panelLabelAndMessage id="ldar-ldaldid" label="#{inventoryUIBundle.LOGICAL_DEVICE_ID}">
+                    <af:inputText value="#{pageFlowScope.LogicalDeviceAccountRangeEditBean.logicalDeviceId}" simple="true"
+                                  id="ldar-ldid" disabled="false" binding="#{backingBeanScope.ldIdBinding}"
+                                  label="#{inventoryUIBundle.LOGICAL_DEVICE_ID}"/>
+                    <af:commandImageLink id="ldar-searchLD" icon="/images/search_ena.png" shortDesc="#{inventoryUIBundle.BROWSE}">
+                            <af:showPopupBehavior popupId="searchLDPopup" triggerType="click"/>
+                            <af:setActionListener from="true" to="#{pageFlowScope.invokeLDSearch}"/>
+                    </af:commandImageLink>
+                </af:panelLabelAndMessage>
+                
+                <af:inputText value="#{pageFlowScope.LogicalDeviceAccountRangeEditBean.logicalDeviceName}" label="#{inventoryUIBundle.LOGICAL_DEVICE_NAME}"
+                              id="ldar-ldname" disabled="true" binding="#{backingBeanScope.ldNameBinding}"/>
+              </af:panelFormLayout>
+              
+              <af:popup id="searchLDPopup" binding="#{backingBeanScope.searchLD}"
+                        contentDelivery="lazyUncached">
+                <af:dialog id="d1" type="none"
+                           title="#{inventoryUIBundle.LOGICAL_DEVICE_SEARCH}">
+                <af:panelStretchLayout id="psl_1" styleClass="invCommonPanelStretchLayout">
+                  <f:facet name="center">                 
+                  <af:region value="#{bindings.LogicalDeviceSearchResultsFlow1.regionModel}"
+                             id="r11"/>
+                   </f:facet>
+                   </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity"
+                                   method="#{pageFlowScope.LogicalDeviceAccountRangeEditBean.refresh}"/>
+              </af:popup>
+              
+              <!--IG popup -->
+               <af:popup id="searchIGPopup" binding="#{backingBeanScope.searchIG}" contentDelivery="lazyUncached">
+                <af:dialog id="ig" type="none"
+                           title="#{inventoryUIBundle.INVENTORY_GROUP_SEARCH}">
+                <af:panelStretchLayout id="psl_2" styleClass="invCommonPanelStretchLayout">
+                  <f:facet name="center">
+                        <af:region value="#{bindings.InventoryGroupSearchResultsFlow1.regionModel}"
+                                   id="r2"/>
+                      </f:facet>
+                   </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity" method="#{pageFlowScope.LogicalDeviceAccountRangeEditBean.refreshIG}"/>
+              </af:popup>
+            </af:panelGroupLayout>
+          </af:group>
+        </af:showDetailHeader>
+        </af:panelGroupLayout>
+        </af:panelHeader>
+      
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

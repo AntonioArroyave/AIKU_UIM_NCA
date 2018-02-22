@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: BA_RFS
+Bundle-Name: BA_RFS
+Bundle-Version: 1.0.0.0.0
+Bundle-BuildTime: 2018-02-22 08:40:02
+Bundle-BuildNumber: 21
+Bundle-Category: Inventory
+Bundle-Vendor: InventoryCartridge
+Bundle-RequiredExecutionEnvironment: Oracle-Communications/Inventory-7.3.5,
+ JavaSE-1.8
+Bundle-RequiredTargetVersion: 7.3.5
+Require-Bundle: Inventario;bundle-version="1.0.0.0.0";bundle-category=Inventory;dependency-type=runtime

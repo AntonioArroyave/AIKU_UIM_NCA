@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="DataElementView">
+		<item value="1" key="StudioView.LAYOUT"/>
+		<item value="true" key="DataElementView.LINK_DATA_ELEMENT_VIEW_TO_EDITOR"/>
+	</section>
+	<section name="SolutionView">
+		<item value="" key="StudioViewWorkingSetFilter.STORE_WORKING_SET"/>
+	</section>
+	<section name="StudioView">
+		<item value="Exclude base projects" key="StudioViewWorkingSetFilter.STORE_WORKING_SET"/>
+		<item value="1" key="StudioView.LAYOUT"/>
+		<item value="true" key="StudioView.LINK_STUDIO_VIEW_TO_EDITOR"/>
+	</section>
+</section>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.1" xmlns="urn:oasis:names:tc:xliff:document:1.1"><file source-language="en" original="oracle.communications.inventory.ui.common.bundle.ServiceACC_RFS_HFCMsgBundle" datatype="xml">
+<body>
+<trans-unit id="ELEMENT_LABEL">
+<source>ACC_RFS_HFC</source><target/></trans-unit>
+<trans-unit id="ELEMENT_TOOLTIP">
+<source>ACC_RFS_HFC</source><target/></trans-unit></body></file></xliff>

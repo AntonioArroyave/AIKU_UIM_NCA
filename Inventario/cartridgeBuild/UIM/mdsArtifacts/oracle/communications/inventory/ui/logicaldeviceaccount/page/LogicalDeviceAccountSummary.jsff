@@ -1,0 +1,199 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:f="http://java.sun.com/jsf/core">
+		  
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+<c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>          
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+        <af:panelStretchLayout id="pgl1" binding="#{backingBeanScope.LDA_summary_panelGroupLayout}" topHeight="#{pageFlowScope.LogicalDeviceAccountSummaryBean.topHeight}">
+          <f:facet name="top">
+              <af:panelGroupLayout id="pgsl23" layout="scroll">
+                <af:panelGroupLayout id="pgl42" layout="horizontal" halign="left" rendered="#{!pageFlowScope.LogicalDeviceAccountSummaryBean.previewLayout}">
+                    <af:outputText id="otbi" styleClass="invCommonText" noWrap="true"
+                                   value="#{pageFlowScope.LogicalDeviceAccountSummaryBean.renderBILabel ? inventoryUIBundle.BUSINESS_INTERACTION_LABEL : null}"/>
+                    <af:menuBar id="menuBar1">
+                          <af:menu id="BIContextMenu" binding="#{backingBeanScope.InventoryMenuBean.biContextMenu}" styleClass="invSummaryMenu"
+                                   rendered="#{!(pageFlowScope.LogicalDeviceAccountSummaryBean.popupMode)}"   />
+                    </af:menuBar>
+                    <af:popup id="BISearchPopup" binding="#{backingBeanScope.ldaSummary_businessInteractionSearchPopup}" contentDelivery="lazyUncached">
+                        <af:dialog id="BISearchPopup_d1" type="none"
+                                   title="#{inventoryUIBundle.BUSINESS_INTERACTION_SEARCH}">
+                            <af:panelStretchLayout id="psl_1" styleClass="invCommonPanelStretchLayout">
+                                <f:facet name="center">
+                                   <af:region value="#{bindings.BusinessInteractionSearchResultsFlow1.regionModel}" id="BISP_r2"/>
+                                </f:facet>
+                            </af:panelStretchLayout>
+                        </af:dialog>
+                        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                        <af:serverListener type="refreshEntity" method="#{pageFlowScope.LogicalDeviceAccountSummaryBean.afterBusinessInteractionSelectionChange}"/>
+                    </af:popup>
+                </af:panelGroupLayout>
+                  <!-- Display Info Starts-->
+                  
+                    
+            </af:panelGroupLayout>
+            </f:facet>
+            <f:facet name="center">
+            
+            <af:panelHeader text="#{inventoryUIBundle.LOGICAL_DEVICE_ACCOUNT_SUMMARY} - #{pageFlowScope.LogicalDeviceAccountSummaryBean.displayInfo}"
+                                  id="sdh1" styleClass="invSummaryPanelHeader" helpTopicId="OHW_ldAcctSummary">
+                    <!-- Display Info Ends-->
+                    <f:facet name="context"/>
+                    <f:facet name="menuBar">
+                      <af:group id="g2" rendered="#{!pageFlowScope.LogicalDeviceAccountSummaryBean.previewLayout}">
+                        <af:menuBar id="menuBar2">
+                              <!-- Menus Start-->
+                              <af:menu id="menu5" binding="#{backingBeanScope.InventoryMenuBean.relatedPagesMenu}" styleClass="invSummaryMenu"/>
+                              <af:menu id="menu6" binding="#{backingBeanScope.InventoryMenuBean.actionsMenu}" styleClass="invSummaryMenu"/>
+                        </af:menuBar>
+                        <!-- Menus Ends-->
+                      </af:group>
+                    </f:facet>
+            <!--Logical Device Account Informations Starts -->
+            <af:panelGroupLayout layout="scroll" id="pgl23">
+            <af:showDetailHeader text="#{inventoryUIBundle.LOGICAL_DEVICE_ACCOUNT_INFO}" disclosed="true" id="sdh2">
+              <f:facet name="context"/>
+              <f:facet name="menuBar"/>
+              <f:facet name="toolbar">
+                <af:toolbar id="t1">
+                  <af:commandButton text="#{inventoryUIBundle.EDIT}" rendered="#{!pageFlowScope.LogicalDeviceAccountSummaryBean.previewLayout}"
+                                    action="edit" disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/logicaldeviceaccount/flow/LogicalDeviceAccountEditFlow.xml#LogicalDeviceAccountEditFlow']}"
+                                    id="cb1" actionListener="#{bindings.openSubTaskForEdit.execute}"
+                                    accessKey="#{inventoryUIBundle.EDIT_ACCESS_KEY}">
+                        <af:setActionListener from="false" to="#{addMode}"/>
+                   </af:commandButton>
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="legend"/>
+              <f:facet name="info"/>
+              <af:panelFormLayout  id="ldacc" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%">
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.ID}"
+                                         id="ldacc-id">
+                  <af:outputText value="#{pageFlowScope.LogicalDeviceAccountSummaryBean.entityObject.id}" id="ot3"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.NAME}"
+                                         id="ldacc-name">
+                  <af:outputText value="#{pageFlowScope.LogicalDeviceAccountSummaryBean.entityObject.name}" id="ot1"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.DESCRIPTION}"
+                                         id="ldacc-description">
+                  <af:outputText value="#{pageFlowScope.LogicalDeviceAccountSummaryBean.entityObject.description}"
+                                 id="ot2"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.SPECIFICATION}"
+                                         id="ldacc-specification">
+                  <af:commandImageLink action="SpecificationSummary" id="clSpec" actionListener="#{bindings.openSubTaskForSpec.execute}"
+                                       text="#{pageFlowScope.LogicalDeviceAccountSummaryBean.entityObject.specification.name}"
+                                       shortDesc="#{inventoryUIBundle.LINK_FOR_SPECIFICATION_SUMMARY}">
+                   
+                    <af:setActionListener from="#{pageFlowScope.LogicalDeviceAccountSummaryBean.entityObject.specification.oid}" to="#{specObjectId}"/>
+                  </af:commandImageLink>
+                </af:panelLabelAndMessage>
+                
+                <af:panelLabelAndMessage id="ldacc-adminstate" label="#{inventoryUIBundle.INVENTORY_STATUS}">
+                  <af:outputText id="ot6" value="#{pageFlowScope.LogicalDeviceAccountSummaryBean.inventoryStatus}"/>
+                <!--RMI 618 Start--><af:switcher defaultFacet="false" facetName="#{pageFlowScope.LogicalDeviceAccountSummaryBean.popupMode}" id="swis618">
+		<f:facet name="false">
+                        <af:commandImageLink action="#{pageFlowScope.LogicalDeviceAccountSummaryBean.getSummaryAction}"
+                                             actionListener="#{pageFlowScope.LogicalDeviceAccountSummaryBean.registerRecentItem}"
+                                             disabled="#{pageFlowScope.LogicalDeviceAccountSummaryBean.installingBIDisabled}"
+                                             id="bid3"
+                                             shortDesc="#{pageFlowScope.LogicalDeviceAccountSummaryBean.installingBIShortDesc}"
+                                             text="#{pageFlowScope.LogicalDeviceAccountSummaryBean.installingBILabel}">
+                          <af:setActionListener from="#{pageFlowScope.LogicalDeviceAccountSummaryBean.inventoryStatusBI.oid}"
+                                                to="#{objectId}"/>
+                        </af:commandImageLink>
+                      </f:facet>
+		<f:facet name="true">
+		<af:outputText id="swftis618" value="#{pageFlowScope.LogicalDeviceAccountSummaryBean.installingBILabel}"/>
+		</f:facet>
+		</af:switcher>
+		<af:outputText id="installingBIDueDate" value="#{pageFlowScope.LogicalDeviceAccountSummaryBean.installingBIEffectiveDate}"/>
+		<!--RMI 618 End-->
+                </af:panelLabelAndMessage>
+                
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}"
+                                         id="ldacc-ras">
+                  <af:outputText value="#{pageFlowScope.LogicalDeviceAccountSummaryBean.resourceAssignmentStatus}" id="ot11"/>
+                <!--RMI 618 Start--><af:switcher defaultFacet="false" facetName="#{pageFlowScope.LogicalDeviceAccountSummaryBean.popupMode}" id="swas618">
+		<f:facet name="false">
+                        <af:commandImageLink action="#{pageFlowScope.LogicalDeviceAccountSummaryBean.getSummaryAction}"
+                                             actionListener="#{pageFlowScope.LogicalDeviceAccountSummaryBean.registerRecentItem}"
+                                             disabled="#(pageFlowScope.LogicalDeviceAccountSummaryBean.consumerBIDisabled}"
+                                             id="bid4"
+                                             shortDesc="#{pageFlowScope.LogicalDeviceAccountSummaryBean.consumerBIShortDesc}"
+                                             text="#{pageFlowScope.LogicalDeviceAccountSummaryBean.consumerBILabel}">
+                          <af:setActionListener from="#{pageFlowScope.LogicalDeviceAccountSummaryBean.assignmentBI.oid}"
+                                                to="#{objectId}"/>
+                        </af:commandImageLink>
+                      </f:facet>
+		<f:facet name="true">
+		<af:outputText id="swftas618" value="#{pageFlowScope.LogicalDeviceAccountSummaryBean.consumerBILabel}"/>
+		</f:facet>
+		</af:switcher>
+		<af:outputText id="consumerBIDueDate" value="#{pageFlowScope.LogicalDeviceAccountSummaryBean.consumerBIEffectiveDate}"/>
+		<!--RMI 618 End-->
+                </af:panelLabelAndMessage>
+                
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LOGICAL_DEVICE_ID}"
+                                         id="ldacc-ldid">
+                    <af:commandImageLink action="LogicalDeviceSummary" id="ldSummary"
+                                         text="#{pageFlowScope.LogicalDeviceAccountSummaryBean.entityObject.logicalDevice.id}"
+                                         shortDesc="#{pageFlowScope.LogicalDeviceAccountSummaryBean.entityObject.logicalDevice.id!=null ? inventoryUIBundle.LOGICAL_DEVICE_SUMMARY_LINK : '&#160;'}"
+                                         disabled="#{pageFlowScope.LogicalDeviceAccountSummaryBean.entityObject.logicalDevice.id==null}">
+                        
+                        <af:setActionListener from="#{pageFlowScope.LogicalDeviceAccountSummaryBean.entityObject.logicalDevice.oid}" to="#{requestScope.oid}"/>
+                    </af:commandImageLink>
+                </af:panelLabelAndMessage>
+                
+                   <af:panelLabelAndMessage label="#{inventoryUIBundle.LOGICAL_DEVICE_NAME}"
+                                         id="ldacc-ldname">
+                  <af:outputText value="#{pageFlowScope.LogicalDeviceAccountSummaryBean.entityObject.logicalDevice.name}" id="ot7"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="ldacc-lmd" rendered="false">
+                    <af:outputText value="#{pageFlowScope.LogicalDeviceAccountSummaryBean.entityObject.lastModifiedDate}" id="ot9">
+                       <af:convertDateTime pattern="#{pageFlowScope.LogicalDeviceAccountSummaryBean.dateTimeFormat}"/>
+                    </af:outputText>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="ldacc-lmu" rendered="false">
+                    <af:outputText value="#{pageFlowScope.LogicalDeviceAccountSummaryBean.entityObject.lastModifiedUser}" id="ot4"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_DATE}" id="ldacc-crd" rendered="false">
+                       <af:outputText value="#{pageFlowScope.LogicalDeviceAccountSummaryBean.entityObject.createdDate}" id="ot12">
+                           <af:convertDateTime pattern="#{pageFlowScope.LogicalDeviceAccountSummaryBean.dateTimeFormat}"/>
+                       </af:outputText>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_USER}" id="ldacc-cru" rendered="false">
+                       <af:outputText value="#{pageFlowScope.LogicalDeviceAccountSummaryBean.entityObject.createdUser}" id="ot13"/>
+                </af:panelLabelAndMessage>
+              </af:panelFormLayout>
+            </af:showDetailHeader>
+            <!--Logical Device Account Informations Ends -->
+            <af:spacer width="10" height="10" id="s1"/>
+            <af:group rendered="#{!pageFlowScope.LogicalDeviceAccountSummaryBean.previewLayout}" id ="group2">
+                  <af:spacer width="10" height="10"/>
+                    <!--CONFIGURATIONS-->
+                  <af:region value="#{bindings.ConfigurationListFlow1.regionModel}" id="r0"
+                       rendered="#{pageFlowScope.LogicalDeviceAccountSummaryBean.renderConfigPortlet}"/>
+                  <af:spacer width="10" height="10"/>
+                  
+                  <af:region value="#{bindings.CustomInvolvementListFlow1.regionModel}" id="r4"/>
+                  <af:spacer width="10" height="10"/>
+                  <af:region value="#{bindings.BusinessInteractionListFlow1.regionModel}" id="r1"/>
+                  <af:spacer width="10" height="10"/>
+                  <af:region value="#{bindings.PlaceListFlow1.regionModel}" id="r2"/>
+                  <af:spacer width="10" height="10"/>
+                  <af:region value="#{bindings.InventoryGroupListFlow1.regionModel}" id="r3"/>
+            </af:group>
+            </af:panelGroupLayout>
+          </af:panelHeader>
+        
+        </f:facet>
+        </af:panelStretchLayout>
+    </f:facet>
+    <f:facet name="contextualArea"/>
+  </af:pageTemplate>
+</jsp:root>

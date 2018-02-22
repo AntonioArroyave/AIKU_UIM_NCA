@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<extent>
+  <object class="oracle.communications.platform.entity.impl.SpecInventoryConfigSpecOptionDAO" oid="oracle.communications.platform.entity.impl.InventoryConfigSpecOptionDAO-0" version="0">
+    <field name="sequence">1</field>
+    <field name="configSpec">oracle.communications.platform.ies.xfile.OID:oracle.communications.platform.entity.impl.SpecificationDAO-1</field>
+    <field name="specification">oracle.communications.platform.ies.xfile.GUID:http://xmlns.oracle.com/cgbu/inventory/nowhere/BA_RFS/model/ACC_RFS_HFC.service#1.0.0.0.0_b0</field>
+    <field name="defaultOption">false</field>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.SpecInventoryConfigSpecOptionDAO" oid="oracle.communications.platform.entity.impl.InventoryConfigSpecOptionDAO-1" version="0">
+    <field name="sequence">1</field>
+    <field name="configSpec">oracle.communications.platform.ies.xfile.OID:oracle.communications.platform.entity.impl.SpecificationDAO-2</field>
+    <field name="specification">oracle.communications.platform.ies.xfile.GUID:http://xmlns.oracle.com/cgbu/inventory/nowhere/BA_RFS/model/EQ_RFS.service#1.0.0.0.0_b0</field>
+    <field name="defaultOption">false</field>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.SpecInventoryConfigSpecOptionDAO" oid="oracle.communications.platform.entity.impl.InventoryConfigSpecOptionDAO-2" version="0">
+    <field name="sequence">1</field>
+    <field name="configSpec">oracle.communications.platform.ies.xfile.OID:oracle.communications.platform.entity.impl.SpecificationDAO-3</field>
+    <field name="specification">oracle.communications.platform.ies.xfile.GUID:http://xmlns.oracle.com/cgbu/inventory/nowhere/BA_RFS/model/BA_RFS_HFC.service#1.0.0.0.0_b0</field>
+    <field name="defaultOption">false</field>
+  </object>
+</extent>

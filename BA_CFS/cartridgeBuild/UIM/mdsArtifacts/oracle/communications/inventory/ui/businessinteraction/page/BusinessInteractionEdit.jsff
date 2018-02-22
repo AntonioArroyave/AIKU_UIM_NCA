@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+/* Copyright (c) 2009, 2015, Oracle and/or its affiliates. 
+All rights reserved.*/
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+       avsubram  05/13/15 - Effective Date not editable - 21039012
+    raattulu    4/02/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:pf="/platform/functions"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+<c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>           
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+     <af:panelGroupLayout id="pgl1" layout="scroll">
+      
+        
+        <af:panelHeader text="#{pageFlowScope.BusinessInteractionEditBean.message}" id="ph45" messageType="confirmation" rendered="#{pageFlowScope.BusinessInteractionEditBean.addAnotherMode}"/>
+        
+        <af:panelHeader text="#{pageFlowScope.BusinessInteractionEditBean.biLabel} - #{pageFlowScope.BusinessInteractionEditBean.displayInfo}" id="ph1" 
+                      helpTopicId="#{pageFlowScope.BusinessInteractionEditBean.helpTopic}">
+        <f:facet name="context"/>
+        <f:facet name="menuBar"/>
+        <f:facet name="toolbar">
+          <af:panelGroupLayout id="pgl3" layout="horizontal" rendered ="#{!pageFlowScope.BusinessInteractionEditBean.previewLayout}">
+            <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CLOSE}" id="cb1"
+                              actionListener="#{pageFlowScope.BusinessInteractionEditBean.save}"
+                              action="#{pageFlowScope.BusinessInteractionEditBean.saveOutcome}" disabled="#{pageFlowScope.BusinessInteractionEditBean.saveAndCloseDisabled}"
+                              rendered="#{!pageFlowScope.BusinessInteractionEditBean.addMode || pageFlowScope.BusinessInteractionEditBean.popupMode}"
+                              accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}">
+                <af:setActionListener from="saveAndClose" to="#{pageFlowScope.saveActionOutcome}"/>
+            </af:commandButton>
+            <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CONTINUE}" id="cb2"
+                              actionListener="#{pageFlowScope.BusinessInteractionEditBean.save}"
+                              rendered="#{pageFlowScope.BusinessInteractionEditBean.addMode and !pageFlowScope.BusinessInteractionEditBean.popupMode}"
+                              action="#{pageFlowScope.BusinessInteractionEditBean.saveOutcome}"
+                              accessKey="#{inventoryUIBundle.SAVE_AND_CONTINUE_ACCESS_KEY}">
+                <af:setActionListener from="summary" to="#{pageFlowScope.saveActionOutcome}"/>
+            </af:commandButton>
+              <af:spacer width="10" height="10" id="s12"/>
+              <af:commandButton text="#{inventoryUIBundle.SAVE_AND_ADD_ANOTHER}"
+                                actionListener="#{pageFlowScope.BusinessInteractionEditBean.save}"
+                                action="#{pageFlowScope.BusinessInteractionEditBean.saveOutcome}" id="cb3"
+                                rendered="#{pageFlowScope.BusinessInteractionEditBean.addMode and !pageFlowScope.BusinessInteractionEditBean.popupMode}"
+                                accessKey="#{inventoryUIBundle.SAVE_AND_ADD_ANOTHER_ACCESS_KEY}">
+                    <af:setActionListener from="init" to="#{pageFlowScope.saveActionOutcome}"/>
+              </af:commandButton>
+              <af:spacer width="10" height="10" id="s13" rendered="#{pageFlowScope.BusinessInteractionEditBean.addMode and !pageFlowScope.BusinessInteractionEditBean.popupMode}"/>
+              <af:commandButton text="#{inventoryUIBundle.CANCEL}" id="cb4" action="cancel" actionListener="#{bindings.closeSubTask.execute}" immediate="true"
+                                accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <af:panelGroupLayout layout="scroll" id="pgl23">
+        <af:showDetailHeader text="#{pageFlowScope.BusinessInteractionEditBean.biLabel} #{inventoryUIBundle.SUFFIX_INFO}" disclosed="true" id="PAGE_TITLE">
+          <f:facet name="context"/>
+          <f:facet name="menuBar"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="legend"/>
+          <f:facet name="info"/>
+          <af:group id="g2">
+            <af:spacer height="10" id="s2"/>
+            <af:panelGroupLayout id="pgl2">
+              <af:panelFormLayout id="bi" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%" binding="#{backingBeanScope.uiHintsPanel}">
+                <af:selectOneChoice id="bi-specification"
+                                    label="#{inventoryUIBundle.SPECIFICATION}"
+                                    autoSubmit="true"
+                                    disabled="#{!(pageFlowScope.BusinessInteractionEditBean.addMode)}"
+                                    value="#{pageFlowScope.BusinessInteractionEditBean.selectedSpec}"
+                                    rendered="#{!pageFlowScope.BusinessInteractionEditBean.workOrder}"
+                                    valueChangeListener="#{pageFlowScope.BusinessInteractionEditBean.specChanged}"
+                                    required="true">
+                  <f:selectItems binding="#{pageFlowScope.BusinessInteractionEditBean.specifications}" id="si1"/>
+                </af:selectOneChoice>
+                <af:inputText value="#{(pageFlowScope.BusinessInteractionEditBean.addMode &amp;&amp; pageFlowScope.BusinessInteractionEditBean.specificationCount > 0)  ? (pageFlowScope.BusinessInteractionEditBean.enterIdManually ? pageFlowScope.BusinessInteractionEditBean.entityObject.id : inventoryUIBundle.AUTO_GENERATE) : (pageFlowScope.BusinessInteractionEditBean.entityObject.id)}" 
+                              label="#{inventoryUIBundle.ID}" required="true"
+                              maximumLength="50" columns="53"
+                              disabled="#{(pageFlowScope.BusinessInteractionEditBean.specificationCount > 0) &amp;&amp; (!(pageFlowScope.BusinessInteractionEditBean.addMode &amp;&amp; pageFlowScope.BusinessInteractionEditBean.enterIdManually))}"
+                              binding="#{backingBeanScope.idBinding}"
+                              id="bi-id">
+                </af:inputText>
+                <af:inputText value="#{pageFlowScope.BusinessInteractionEditBean.entityObject.name}"
+                              label="#{inventoryUIBundle.NAME}" required="true"
+                              maximumLength="50" columns="53"
+                              id="bi-name">
+                </af:inputText>
+                <af:inputDate value="#{pageFlowScope.BusinessInteractionEditBean.entityObject.effDate}"
+                              label="#{inventoryUIBundle.EFFECTIVE_DATE}"
+                              required="true"
+                              disabled="#{(pageFlowScope.BusinessInteractionEditBean.effDateDisabled)}"
+                              id="bi-effdate"
+                              binding="#{backingBeanScope.effDateBinding}">
+                  <af:convertDateTime pattern="#{pageFlowScope.BusinessInteractionEditBean.dateTimeFormat}"/>
+                </af:inputDate>
+                 <af:selectOneChoice id="bi-workflowTemplate"
+                                    label="#{inventoryUIBundle.WORKFLOW_TEMPLATE}"
+                                    autoSubmit="true"
+                                    disabled="#{pageFlowScope.BusinessInteractionEditBean.workflowTemplateDisabled}"
+                                    value="#{pageFlowScope.BusinessInteractionEditBean.entityObject.workflowTemplate}"
+                                    valueChangeListener="#{pageFlowScope.BusinessInteractionEditBean.workflowTemplateChanged}">
+                  <f:selectItems binding="#{pageFlowScope.BusinessInteractionEditBean.workflowSpecifcations}" id="si2"/>
+                </af:selectOneChoice>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.STATUS}" id="bi-adminstate">
+                    <af:outputText value="#{pageFlowScope.BusinessInteractionEditBean.inventoryStatus}" id="ot7"/>
+                </af:panelLabelAndMessage>
+                <af:inputText value="#{pageFlowScope.BusinessInteractionEditBean.entityObject.description}"
+                              label="#{inventoryUIBundle.DESCRIPTION}"
+                              maximumLength="255" rows="5" columns="50"
+                              id="bi-description">
+                </af:inputText>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="bi-lmd" rendered="false" visible="#{pageFlowScope.BusinessInteractionEditBean.lastModifiedDate != null}">
+                    <af:outputText value="#{pageFlowScope.BusinessInteractionEditBean.lastModifiedDate}" id="ot9">
+                        <af:convertDateTime pattern="#{pageFlowScope.BusinessInteractionEditBean.dateTimeFormat}"/>
+                    </af:outputText>    
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="bi-lmu" rendered="false" visible="#{pageFlowScope.BusinessInteractionEditBean.entityObject.lastModifiedUser != null}">
+                    <af:outputText value="#{pageFlowScope.BusinessInteractionEditBean.entityObject.lastModifiedUser}" id="ot10"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_DATE}" id="bi-crd" rendered="false" visible="#{pageFlowScope.BusinessInteractionEditBean.createdDate != null}">
+                    <af:outputText value="#{pageFlowScope.BusinessInteractionEditBean.createdDate}" id="ot11">
+                        <af:convertDateTime pattern="#{pageFlowScope.BusinessInteractionEditBean.dateTimeFormat}"/>
+                    </af:outputText>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_USER}" id="bi-cru" rendered="false" visible="#{pageFlowScope.BusinessInteractionEditBean.entityObject.createdUser != null}">
+                    <af:outputText value="#{pageFlowScope.BusinessInteractionEditBean.entityObject.createdUser}" id="ot12"/>
+                </af:panelLabelAndMessage>
+              </af:panelFormLayout>
+              
+              <!-- additional input fields for External Identity -->
+              <af:showDetail disclosed="#{pageFlowScope.BusinessInteractionEditBean.externalIdentityPopulated}" id="sd1"
+                             disclosedText="#{inventoryUIBundle.EXTERNAL_SYSTEM}" undisclosedText="#{inventoryUIBundle.EXTERNAL_SYSTEM}"
+                             inlineStyle="width:50%;">
+                <af:panelFormLayout id="pfl101" maxColumns="1" rows="2" fieldWidth="69%" labelWidth="31%">
+                    <af:inputText value="#{pageFlowScope.BusinessInteractionEditBean.entityObject.externalManagementDomain}"
+                                  label="#{inventoryUIBundle.EXTERNAL_MANAGEMENT_DOMAIN}"
+                                  maximumLength="50" columns="50" id="it103" />
+                    <af:inputText value="#{pageFlowScope.BusinessInteractionEditBean.entityObject.externalName}"
+                                  label="#{inventoryUIBundle.EXTERNAL_NAME}"
+                                  maximumLength="50" columns="50" id="it102" />
+                    <af:inputText value="#{pageFlowScope.BusinessInteractionEditBean.entityObject.externalObjectId}"
+                                  label="#{inventoryUIBundle.EXTERNAL_OBJECT_ID}"
+                                  maximumLength="50" columns="50" id="it101" />
+                </af:panelFormLayout>
+              </af:showDetail>
+              <af:spacer width="10" height="10" id="s14"/>
+            </af:panelGroupLayout>
+          </af:group>
+        </af:showDetailHeader>
+      </af:panelGroupLayout>
+        </af:panelHeader>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

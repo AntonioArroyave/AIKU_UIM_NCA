@@ -1,0 +1,168 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:pf="/platform/functions"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:f="http://java.sun.com/jsf/core">
+		  
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+<c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>          
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+     <af:panelGroupLayout id="pgl11" binding="#{backingBeanScope.edit_panelGroupLayout}"
+                          layout="scroll">
+        <af:panelGroupLayout id="pgl42" layout="horizontal" halign="left" rendered ="#{!pageFlowScope.CustomNetworkAddressEditBean.previewLayout}">
+            <af:outputText id="otbi" styleClass="invCommonText" noWrap="true"
+                           rendered="#{!(pageFlowScope.CustomNetworkAddressEditBean.popupMode)}"
+                           value="#{pageFlowScope.CustomNetworkAddressEditBean.renderBILabel ? inventoryUIBundle.BUSINESS_INTERACTION_LABEL : null}"/>
+                <af:menuBar id="menuBar1">
+                      <af:menu id="BIContextMenu" binding="#{backingBeanScope.InventoryMenuBean.biContextMenu}" styleClass="invEditMenu"
+                               rendered="#{!(pageFlowScope.CustomNetworkAddressEditBean.popupMode)}"   />
+                </af:menuBar>
+                <af:popup id="BISearchPopup" binding="#{backingBeanScope.businessInteractionSearch2}" contentDelivery="lazyUncached">
+                    <af:dialog id="BISearchPopup_d1" type="none"
+                               title="#{inventoryUIBundle.BUSINESS_INTERACTION_SEARCH}">
+                        <af:panelStretchLayout id="psl_1" styleClass="invCommonPanelStretchLayout">
+                            <f:facet name="center">
+                               <af:region value="#{bindings.BusinessInteractionSearchResultsFlow1.regionModel}" id="BISP_r2"/>
+                            </f:facet>
+                        </af:panelStretchLayout>
+                    </af:dialog>
+                    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                    <af:serverListener type="refreshEntity" method="#{pageFlowScope.CustomNetworkAddressEditBean.afterBusinessInteractionSelectionChange}"/>
+                </af:popup>
+        </af:panelGroupLayout>
+        
+       
+        
+        
+        
+        <af:panelHeader text="#{pageFlowScope.CustomNetworkAddressEditBean.message}" id="ph45" messageType="confirmation" rendered="#{pageFlowScope.CustomNetworkAddressEditBean.addAnotherMode}"/>
+         <af:panelHeader id="ph1" helpTopicId="#{pageFlowScope.CustomNetworkAddressEditBean.helpTopic}" 
+                        text="#{inventoryUIBundle.CUSTOM_NETWORK_ADDRESS} - #{pageFlowScope.CustomNetworkAddressEditBean.displayInfo}">
+        <f:facet name="toolbar">
+          <!-- Buttons on edit page Save And Continue/Save And Add Another/Cancel -->
+           <af:panelGroupLayout id="pgl3" layout="horizontal" rendered ="#{!pageFlowScope.CustomNetworkAddressEditBean.previewLayout}">                 
+            <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CONTINUE}"
+                              id="cb3" action="#{pageFlowScope.CustomNetworkAddressEditBean.saveOutcome}"
+                              rendered="#{pageFlowScope.CustomNetworkAddressEditBean.addMode and !pageFlowScope.CustomNetworkAddressEditBean.popupMode}"
+                              actionListener="#{pageFlowScope.CustomNetworkAddressEditBean.save}"
+                              accessKey="#{inventoryUIBundle.SAVE_AND_CONTINUE_ACCESS_KEY}">
+                <af:setActionListener from="summary" to="#{pageFlowScope.saveActionOutcome}"/>
+            </af:commandButton>
+            <af:spacer width="10" height="10" id="s11"/>    
+            <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CLOSE}"
+                              id="cb1"
+                              actionListener="#{pageFlowScope.CustomNetworkAddressEditBean.save}"
+                              action="#{pageFlowScope.CustomNetworkAddressEditBean.saveOutcome}"
+                              rendered="#{!pageFlowScope.CustomNetworkAddressEditBean.addMode || pageFlowScope.CustomNetworkAddressEditBean.popupMode}"
+                              accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}">
+                <af:setActionListener from="saveAndClose" to="#{pageFlowScope.saveActionOutcome}"/>
+            </af:commandButton>            
+            <af:commandButton text="#{inventoryUIBundle.SAVE_AND_ADD_ANOTHER}"
+                              id="cb2"
+                              actionListener="#{pageFlowScope.CustomNetworkAddressEditBean.save}"
+                              action="#{pageFlowScope.CustomNetworkAddressEditBean.saveOutcome}"
+                              rendered="#{pageFlowScope.CustomNetworkAddressEditBean.addMode and !pageFlowScope.CustomNetworkAddressEditBean.popupMode}"
+                              accessKey="#{inventoryUIBundle.SAVE_AND_ADD_ANOTHER_ACCESS_KEY}">
+                <af:setActionListener from="init" to="#{pageFlowScope.saveActionOutcome}"/>
+            </af:commandButton>
+            <af:spacer width="10" height="10" id="s111"/>
+            <af:commandButton text="#{inventoryUIBundle.CANCEL}" id="cb4"
+                              action="cancel" actionListener="#{bindings.closeSubTask.execute}"
+                              immediate="true" accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+         </af:panelGroupLayout>
+        </f:facet>
+        <!-- Entity Details -->
+        <af:panelGroupLayout layout="scroll" id="pgl23">
+        <af:showDetailHeader text="#{inventoryUIBundle.CUSTOM_NETWORK_ADDRESS_INFORMATION}"
+                             disclosed="true" id="sdh1">
+          <f:facet name="context"/>
+          <f:facet name="menuBar"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="legend"/>
+          <f:facet name="info"/>
+          <af:group id="g1">
+            <af:spacer width="10" height="10" id="s2"/>
+            <af:panelGroupLayout id="pgl1">
+              <af:panelFormLayout id="cna" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%" binding="#{backingBeanScope.uiHintsPanel}">
+                <af:selectOneChoice id="cna-specification"
+                                    label="#{inventoryUIBundle.SPECIFICATION}"
+                                    autoSubmit="true"
+                                    value="#{pageFlowScope.CustomNetworkAddressEditBean.selectedSpec}"
+                                    disabled="#{!(pageFlowScope.CustomNetworkAddressEditBean.addMode)}"
+                                    valueChangeListener="#{pageFlowScope.CustomNetworkAddressEditBean.specChanged}">                                                                                                    
+                  <f:selectItems binding="#{pageFlowScope.CustomNetworkAddressEditBean.specifications}" id="si1"/>
+                </af:selectOneChoice>
+                 <af:inputText value="#{(pageFlowScope.CustomNetworkAddressEditBean.addMode ) ? ( (pageFlowScope.CustomNetworkAddressEditBean.enterIdManually) ? pageFlowScope.CustomNetworkAddressEditBean.entityObject.id : inventoryUIBundle.AUTO_GENERATE) : (pageFlowScope.CustomNetworkAddressEditBean.entityObject.id)}"
+                                label="#{inventoryUIBundle.ID}" maximumLength="50" columns="53"
+                                showRequired="true"
+                                disabled="#{ !(pageFlowScope.CustomNetworkAddressEditBean.addMode &amp;&amp; pageFlowScope.CustomNetworkAddressEditBean.enterIdManually)}"
+                                id="cna-id"
+                                binding="#{backingBeanScope.idBinding}">
+                  </af:inputText>
+                <af:inputText value="#{pageFlowScope.CustomNetworkAddressEditBean.entityObject.name}"
+                              label="#{inventoryUIBundle.NAME}" maximumLength="50" columns="53"
+                              id="cna-name">
+                </af:inputText>
+                <af:inputText value="#{pageFlowScope.CustomNetworkAddressEditBean.entityObject.description}"
+                              label="#{inventoryUIBundle.DESCRIPTION}" maximumLength="255" rows="5" columns="50"
+                              id="cna-description">
+                </af:inputText>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.INVENTORY_STATUS}" id="cna-adminstate">
+                    <af:outputText value="#{pageFlowScope.CustomNetworkAddressEditBean.inventoryStatus}" id="ot7"/>
+                <!--RMI 618 Start--><af:switcher defaultFacet="false" facetName="#{pageFlowScope.CustomNetworkAddressEditBean.popupMode}" id="swis618">
+<f:facet name="false">
+<af:commandImageLink action="#{pageFlowScope.CustomNetworkAddressEditBean.getSummaryAction}" actionListener="#{pageFlowScope.CustomNetworkAddressEditBean.registerRecentItem}" disabled="#{(pageFlowScope.CustomNetworkAddressEditBean.installingBI_OID eq null) ? true : false}" id="bid3" shortDesc="#{(pageFlowScope.CustomNetworkAddressEditBean.installingBI_OID eq null) ? '&amp;#160;' : inventoryUIBundle.BUSINESS_INTERACTION}" text="#{pageFlowScope.CustomNetworkAddressEditBean.installingBILabel}">
+<af:setActionListener from="#{pageFlowScope.CustomNetworkAddressEditBean.inventoryStatusBI.oid}" to="#{objectId}"/>
+</af:commandImageLink>
+</f:facet>
+<f:facet name="true">
+<af:outputText id="swftis618" value="#{pageFlowScope.CustomNetworkAddressEditBean.installingBILabel}"/>
+</f:facet>
+</af:switcher>
+<af:outputText id="installingBIDueDate" value="#{pageFlowScope.CustomNetworkAddressEditBean.installingBIEffectiveDate}"/>
+<!--RMI 618 End-->
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}" id="cna-ras">
+                    <af:outputText value="#{pageFlowScope.CustomNetworkAddressEditBean.resourceAssignmentStatus}" id="ot8"/>
+                <!--RMI 618 Start--><af:switcher defaultFacet="false" facetName="#{pageFlowScope.CustomNetworkAddressEditBean.popupMode}" id="swas618">
+<f:facet name="false">
+<af:commandImageLink action="#{pageFlowScope.CustomNetworkAddressEditBean.getSummaryAction}" actionListener="#{pageFlowScope.CustomNetworkAddressEditBean.registerRecentItem}" disabled="#{(pageFlowScope.CustomNetworkAddressEditBean.consumerBI_OID eq null) ? true : false}" id="bid4" shortDesc="#{(pageFlowScope.CustomNetworkAddressEditBean.consumerBI_OID eq null) ? '&amp;#160;' : inventoryUIBundle.BUSINESS_INTERACTION}" text="#{pageFlowScope.CustomNetworkAddressEditBean.consumerBILabel}">
+<af:setActionListener from="#{pageFlowScope.CustomNetworkAddressEditBean.assignmentBI.oid}" to="#{objectId}"/>
+</af:commandImageLink>
+</f:facet>
+<f:facet name="true">
+<af:outputText id="swftas618" value="#{pageFlowScope.CustomNetworkAddressEditBean.consumerBILabel}"/>
+</f:facet>
+</af:switcher>
+<af:outputText id="consumerBIDueDate" value="#{pageFlowScope.CustomNetworkAddressEditBean.consumerBIEffectiveDate}"/>
+<!--RMI 618 End-->
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="cna-lmd" rendered="false" visible="#{pageFlowScope.CustomNetworkAddressEditBean.lastModifiedDate != null}">
+                    <af:outputText value="#{pageFlowScope.CustomNetworkAddressEditBean.lastModifiedDate}" id="ot9">
+                        <af:convertDateTime pattern="#{pageFlowScope.CustomNetworkAddressEditBean.dateTimeFormat}"/>
+                    </af:outputText>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="cna-lmu" rendered="false" visible="#{pageFlowScope.CustomNetworkAddressEditBean.entityObject.lastModifiedUser != null}">
+                    <af:outputText value="#{pageFlowScope.CustomNetworkAddressEditBean.entityObject.lastModifiedUser}" id="ot10"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_DATE}" id="cna-crd" rendered="false" visible="#{pageFlowScope.CustomNetworkAddressEditBean.createdDate != null}">
+                    <af:outputText value="#{pageFlowScope.CustomNetworkAddressEditBean.createdDate}" id="ot11">
+                        <af:convertDateTime pattern="#{pageFlowScope.CustomNetworkAddressEditBean.dateTimeFormat}"/>
+                    </af:outputText>
+                </af:panelLabelAndMessage>
+		<af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_USER}" id="cna-cru" rendered="false" visible="#{pageFlowScope.CustomNetworkAddressEditBean.entityObject.createdUser != null}">
+                    <af:outputText value="#{pageFlowScope.CustomNetworkAddressEditBean.entityObject.createdUser}" id="ot12"/>
+                </af:panelLabelAndMessage>
+              </af:panelFormLayout>
+            </af:panelGroupLayout>
+          </af:group>
+        </af:showDetailHeader>
+        </af:panelGroupLayout>
+      </af:panelHeader>
+     
+     </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

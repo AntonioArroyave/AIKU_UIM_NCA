@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<extent>
+  <object class="oracle.communications.platform.entity.impl.RuleSetEntityDAO" guid="http://xmlns.oracle.com/cgbu/inventory/nowhere/BA_CFS/model/Autoconfigurar_BA_CFS.ruleset#1.0.0.0.0_b0" oid="oracle.communications.platform.entity.impl.RuleSetEntityDAO-0" version="0">
+    <field name="name">"Autoconfigurar_BA_CFS"</field>
+    <field mode="skip" name="extensionPointRuleSets"/>
+    <field name="description">null</field>
+    <field name="type">null</field>
+    <field name="active">true</field>
+    <field name="xml">"package oracle.communications.inventory.rules.custom&#13;
+&#13;
+import oracle.communications.inventory.extensibility.extension.util.ExtensionPointContext;&#13;
+import oracle.communications.inventory.api.entity.ServiceConfigurationVersion;&#13;
+import oracle.communications.inventory.api.framework.logging.Log;&#13;
+import aiku.provision.cfs.manager.AikuCfsManager;&#13;
+&#13;
+global Log log;&#13;
+&#13;
+rule "Autoconfigurar BA_CFS"&#13;
+    salience 0&#13;
+    when&#13;
+        svcConVers : ServiceConfigurationVersion()&#13;
+        context : ExtensionPointContext()&#13;
+    then    &#13;
+    	log.debug ("", "Automatizando la configuracion de BA_CFS");&#13;
+    	AikuCfsManager manager = new AikuCfsManager(context, log);&#13;
+		manager.processCfsServiceConfiguration(svcConVers);&#13;
+	end"</field>
+    <field format="enum_name" name="runExtensionLanguage">DROOLS</field>
+    <field name="extensionContent">""</field>
+  </object>
+</extent>

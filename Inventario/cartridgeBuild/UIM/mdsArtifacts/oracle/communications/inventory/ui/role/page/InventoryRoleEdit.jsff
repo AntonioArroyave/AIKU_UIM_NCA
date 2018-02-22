@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:pf="/platform/functions">
+  <c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>  
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx"
+                   id="pt1">
+    <f:facet name="localArea">
+     <af:panelGroupLayout id="pgl1" layout="scroll">
+      <af:panelHeader text="#{pageFlowScope.InventoryRoleEditBean.displayInfo}" helpTopicId="OHW_assignRoles"
+                      id="ph1">
+        <f:facet name="context"/>
+        <f:facet name="menuBar"/>
+        <f:facet name="toolbar">
+        
+           <af:panelGroupLayout id="pgl3" layout="horizontal" rendered="#{!pageFlowScope.InventoryRoleEditBean.previewLayout}">
+            <!--CRUD Buttons Starts roleDeleteAction -->
+            <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CLOSE}"
+                              id="cb1"
+                              actionListener="#{pageFlowScope.InventoryRoleEditBean.saveAction}"
+                              accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}"
+                              rendered="#{!pageFlowScope.InventoryRoleEditBean.createAndAssociateMode}" />
+            <af:spacer width="10" height="10" id="s4"/>
+            <af:commandButton text="#{inventoryUIBundle.SAVE_AND_ADD_ANOTHER}"
+                              actionListener="#{pageFlowScope.InventoryRoleEditBean.save}"
+                              action="#{pageFlowScope.InventoryRoleEditBean.saveOutcome}"
+                              id="cb3"
+                              accessKey="#{inventoryUIBundle.SAVE_AND_ADD_ANOTHER_ACCESS_KEY}"
+                              rendered="#{pageFlowScope.InventoryRoleEditBean.addMode and !pageFlowScope.InventoryRoleEditBean.createAndAssociateMode}">
+            <af:setActionListener from="init" to="#{pageFlowScope.saveActionOutcome}" />
+            </af:commandButton>
+            <af:spacer width="10" height="10" id="s5" rendered="#{pageFlowScope.InventoryRoleEditBean.addMode}"/>
+            <af:commandButton text="#{inventoryUIBundle.CANCEL}" id="cb2"
+                              actionListener="#{pageFlowScope.InventoryRoleEditBean.cancel}"
+                              immediate="true" accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"
+                              rendered="#{!pageFlowScope.InventoryRoleEditBean.createAndAssociateMode}" />
+            <af:commandButton text="#{inventoryUIBundle.CREATE_ROLE}" id="cb4"
+                              rendered="#{pageFlowScope.InventoryRoleEditBean.createAndAssociateMode}"
+                              actionListener="#{pageFlowScope.InventoryRoleEditBean.createRoleAction}"
+                              accessKey="#{inventoryUIBundle.CREATE_ROLE_ACCESS_KEY}"/>
+            <af:spacer width="10" height="10" id="s6" rendered="#{pageFlowScope.InventoryRoleEditBean.addMode}"/>
+              <af:commandButton text="#{inventoryUIBundle.CANCEL_CREATE_ROLE}" id="cb5"
+                              rendered="#{pageFlowScope.InventoryRoleEditBean.createAndAssociateMode}"
+                              actionListener="#{pageFlowScope.InventoryRoleEditBean.closeRoleWindow}"
+                              accessKey="#{inventoryUIBundle.CANCEL_CREATE_ROLE_ACCESS_KEY}" />
+              <!--CRUD Buttons Ends -->
+          </af:panelGroupLayout>
+        </f:facet>
+        <af:spacer width="10" height="10" id="s1"/>
+        <af:spacer width="10" height="10" id="s2"/>
+        <af:showDetailHeader text="#{pageFlowScope.InventoryRoleEditBean.informationType}"
+                             disclosed="true" id="sdh1">
+          <af:group id="g1">
+            <af:spacer width="10" height="10" id="s51"/>
+            <af:panelGroupLayout id="pgl2">
+              <af:panelFormLayout id="invrol" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%" binding="#{backingBeanScope.uiHintsPanel}">
+                <af:selectOneChoice   id="invrol-specification" 
+                                    label="#{inventoryUIBundle.SPECIFICATION}"
+                                    autoSubmit="true"
+                                    value="#{pageFlowScope.InventoryRoleEditBean.selectedSpec}"
+                                    showRequired="true">
+                  <f:selectItems binding="#{pageFlowScope.InventoryRoleEditBean.roleSpecifications}"
+                                 id="si2"/>
+                </af:selectOneChoice>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="role-lmd" rendered="false">
+                    <af:outputText value="#{pageFlowScope.InventoryRoleEditBean.lastModifiedDate}" id="ot9">
+                        <af:convertDateTime pattern="#{pageFlowScope.InventoryRoleEditBean.dateTimeFormat}"/>
+                    </af:outputText>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="role-lmu" rendered="false">
+                    <af:outputText value="#{pageFlowScope.InventoryRoleEditBean.entityObject.lastModifiedUser}" id="ot10"/>
+                </af:panelLabelAndMessage>                
+              </af:panelFormLayout>
+            </af:panelGroupLayout>
+          </af:group>
+          <af:spacer width="10" height="10" id="s41"/>
+        </af:showDetailHeader>
+        <af:spacer width="10" height="10" id="s31"/>
+        </af:panelHeader>
+      </af:panelGroupLayout>
+    </f:facet>
+    <f:facet name="contextualArea"/>
+  </af:pageTemplate>
+</jsp:root>

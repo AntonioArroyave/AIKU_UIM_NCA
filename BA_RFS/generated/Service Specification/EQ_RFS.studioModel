@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:inventory="http://xmlns.oracle.com/communications/studio/model/inventory" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="inventory:ServiceSpecification" id="ss=EQ_RFS" type="ss" typeName="Service Specification" name="EQ_RFS" resource="\BA_RFS\model\EQ_RFS.service">
+    <note lang="default"/>
+    <extends>
+      <relation ref="ie=Service" type="Inventory Entity" name="Dependency" kind="Entity">
+        <target name="Service" typeName="Inventory Entity"/>
+      </relation>
+    </extends>
+    <project>
+      <relation ref="ivprj=BA_RFS" type="Inventory Project" name="Dependency">
+        <target name="BA_RFS" typeName="Inventory Project"/>
+      </relation>
+    </project>
+    <dataElements>
+      <element id="ss=EQ_RFS+dataElement=TeS6zugBRLuSGCZOAWZcEg~description" type="dataElement" typeName="Data Element" kind="Element" name="description" path="/description" inherited="true">
+        <displayName lang="default">description</displayName>
+        <displayName lang="default">description</displayName>
+        <note lang="default">The description of the service.</note>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">255</maxLength>
+        <base>
+          <relation ref="ie=Service+dataElement=description" type="Data Element" name="Type" kind="Element">
+            <target name="description" typeName="Data Element"/>
+            <inEntity name="Service" typeName="Inventory Entity"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ss=EQ_RFS+dataElement=TeS6zugBRLuSGCZOAWZcEg~id" type="dataElement" typeName="Data Element" kind="Element" name="id" path="/id" inherited="true">
+        <displayName lang="default">id</displayName>
+        <displayName lang="default">id</displayName>
+        <note lang="default">The id of the service.</note>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">255</maxLength>
+        <base>
+          <relation ref="ie=Service+dataElement=id" type="Data Element" name="Type" kind="Element">
+            <target name="id" typeName="Data Element"/>
+            <inEntity name="Service" typeName="Inventory Entity"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="ss=EQ_RFS+dataElement=TeS6zugBRLuSGCZOAWZcEg~name" type="dataElement" typeName="Data Element" kind="Element" name="name" path="/name" inherited="true">
+        <displayName lang="default">name</displayName>
+        <displayName lang="default">name</displayName>
+        <note lang="default">The name of the service.</note>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">50</maxLength>
+        <base>
+          <relation ref="ie=Service+dataElement=name" type="Data Element" name="Type" kind="Element">
+            <target name="name" typeName="Data Element"/>
+            <inEntity name="Service" typeName="Inventory Entity"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+    </dataElements>
+    <relatedSpecificationList/>
+    <serviceConfigurations>
+      <relation ref="sc=CO_RFS_EQ" type="Service Configuration Specification" name="Configuration" kind="Entity">
+        <target name="CO_RFS_EQ" typeName="Service Configuration Specification"/>
+      </relation>
+    </serviceConfigurations>
+  </entity>
+</model:Model>

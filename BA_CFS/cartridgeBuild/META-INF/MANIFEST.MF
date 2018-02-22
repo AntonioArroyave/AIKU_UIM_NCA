@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: BA_CFS
+Bundle-Name: BA_CFS
+Bundle-Version: 1.0.0.0.0
+Bundle-BuildTime: 2018-02-22 08:40:05
+Bundle-BuildNumber: 28
+Bundle-Category: Inventory
+Bundle-Vendor: InventoryCartridge
+Bundle-RequiredExecutionEnvironment: Oracle-Communications/Inventory-7.3.5,
+ JavaSE-1.8
+Bundle-RequiredTargetVersion: 7.3.5
+Require-Bundle: BA_RFS;bundle-version="1.0.0.0.0";bundle-category=Inventory;dependency-type=runtime,
+ ora_uim_baseextpts;bundle-version="7.3.5.0.0";bundle-category=Inventory;dependency-type=runtime

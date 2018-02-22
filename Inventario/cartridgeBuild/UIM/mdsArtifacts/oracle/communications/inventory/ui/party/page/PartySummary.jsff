@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:pf="/platform/functions">
+		  
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+      <af:panelStretchLayout id="pgl1">
+        
+        <f:facet name="center">
+          
+          <af:panelHeader id="ph1" helpTopicId="OHW_partySummary"
+                        text="#{inventoryUIBundle.PARTY_SUMMARY} - #{pageFlowScope.PartySummaryBean.displayInfo}"
+                        styleClass="invSummaryPanelHeader">                        
+          <!-- Entity Details -->
+          <af:panelGroupLayout layout="scroll" id="pgl23">
+          <af:showDetailHeader text="#{inventoryUIBundle.PARTY_INFORMATION}" 
+                               disclosed="true" id="sdh2" styleClass="invSummaryShowDetailHeader">
+            <f:facet name="toolbar">
+              <af:commandButton text="#{inventoryUIBundle.EDIT}" id="cb1" actionListener="#{bindings.openSubTaskForEdit.execute}"
+                                action="edit" rendered="#{!pageFlowScope.PartySummaryBean.previewLayout}"
+                                disabled="#{!securityContext.taskflowViewable['/WEB-INF/oracle/communications/inventory/ui/party/flow/PartyEditFlow.xml#PartyEditFlow']}"
+                                accessKey="#{inventoryUIBundle.EDIT_ACCESS_KEY}">
+                    <af:setActionListener from="#{pageFlowScope.PartySummaryBean.entityObject.oid}" to="#{objectId}"/>
+                    <af:setActionListener from="false" to="#{addMode}"/>
+              </af:commandButton>
+            </f:facet>
+            <af:panelFormLayout id="prty" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%">
+              <f:facet name="footer"/>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.ID}" id="prty-id">                
+                <af:outputText value="#{pageFlowScope.PartySummaryBean.entityObject.id}" id="ot3"/>                
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.NAME}" id="prty-name">
+                <af:outputText value="#{pageFlowScope.PartySummaryBean.entityObject.name}" id="ot5"/>
+              </af:panelLabelAndMessage>           
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.SPECIFICATION}" id="prty-specification">
+                <af:commandImageLink action="specificationSummary" actionListener="#{bindings.openSubTaskForSpec.execute}" id="cl1"
+                                     text="#{pageFlowScope.PartySummaryBean.entityObject.specification.name}"
+                                     shortDesc="#{inventoryUIBundle.LINK_FOR_SPECIFICATION_SUMMARY}">
+                  
+                  <af:setActionListener from="#{pageFlowScope.PartySummaryBean.entityObject.specification.oid}"
+                                        to="#{specObjectId}"/>
+                </af:commandImageLink>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.DESCRIPTION}" id="prty-description">
+                <af:outputText value="#{pageFlowScope.PartySummaryBean.entityObject.description}" id="ot1"/>
+              </af:panelLabelAndMessage>   
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="prty-lmd" rendered="false">
+                    <af:outputText value="#{pageFlowScope.PartySummaryBean.entityObject.lastModifiedDate}" id="ot9">
+                      <af:convertDateTime pattern="#{pageFlowScope.PartySummaryBean.dateTimeFormat}"/>
+                    </af:outputText>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="prty-lmu" rendered="false">
+                    <af:outputText value="#{pageFlowScope.PartySummaryBean.entityObject.lastModifiedUser}" id="ot10"/>
+              </af:panelLabelAndMessage>              
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_DATE}" id="prty-crd" rendered="false">
+                    <af:outputText value="#{pageFlowScope.PartySummaryBean.entityObject.createdDate}" id="ot12">
+                      <af:convertDateTime pattern="#{pageFlowScope.PartySummaryBean.dateTimeFormat}"/>
+                    </af:outputText>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_USER}" id="prty-cru" rendered="false">
+                    <af:outputText value="#{pageFlowScope.PartySummaryBean.entityObject.createdUser}" id="ot13"/>
+              </af:panelLabelAndMessage>
+            </af:panelFormLayout>
+          </af:showDetailHeader>
+          <af:group rendered="#{!pageFlowScope.PartySummaryBean.previewLayout}" id ="group2">
+            <af:spacer width="10" height="10" id="s2"/>
+            <!-- Portlets start from here -->
+            <!-- Places portlet -->
+            <af:region value="#{bindings.PlaceListFlow1.regionModel}" id="r1"/>
+            <af:spacer width="10" height="10" id="s1"/>
+            <!-- Places portlet -->
+            <!-- IG Portlet -->
+            <af:region value="#{bindings.InventoryGroupListFlow1.regionModel}" id="r2"/>
+            <af:spacer width="10" height="10" id="s4"/>           
+            <!-- IG Portlet -->
+            <!-- Roles Portlet-->
+            <af:region value="#{bindings.InventoryRoleListFlow1.regionModel}" id="r3"/>
+            <af:spacer width="10" height="10" id="s5"/>          
+            <!-- Roles Portlet-->
+            <!-- Network Portlet -->
+                <af:region value="#{bindings.NetworkListFlow1.regionModel}"
+                           id="r4"/>
+              </af:group>
+               </af:panelGroupLayout>
+        </af:panelHeader>
+     
+      </f:facet>
+      </af:panelStretchLayout>
+    </f:facet>
+    <f:facet name="contextualArea"/>
+  </af:pageTemplate>
+</jsp:root>

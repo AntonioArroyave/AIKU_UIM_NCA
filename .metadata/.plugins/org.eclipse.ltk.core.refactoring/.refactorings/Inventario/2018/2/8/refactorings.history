@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;CNI.device&apos;" description="Rename resource &apos;CNI.device&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="model/CNI.device" name="CDI.device" stamp="1519067554467" updateReferences="true"/>
+</session>

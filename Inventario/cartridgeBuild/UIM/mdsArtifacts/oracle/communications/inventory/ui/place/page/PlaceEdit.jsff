@@ -1,0 +1,160 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+/* Copyright (c) 2009, 2013, Oracle and/or its affiliates. 
+All rights reserved.*/
+
+/*
+    DESCRIPTION
+
+    NOTES
+     <other useful comments, qualifications, etc.>
+
+    MODIFIED    (MM/DD/YY)
+    raattulu    4/08/13 - Accessibility changes completed
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:pf="/platform/functions">
+		  
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>               
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+      <af:panelGroupLayout id="pg1" layout="scroll">
+     
+      
+        <af:panelHeader text="#{pageFlowScope.PlaceEditBean.message}" id="ph45" messageType="confirmation" rendered="#{pageFlowScope.PlaceEditBean.addAnotherMode}"/>
+        
+        <af:panelHeader text="#{inventoryUIBundle.PLACE} - #{pageFlowScope.PlaceEditBean.displayInfo}" id="ph1" helpTopicId="#{pageFlowScope.PlaceEditBean.helpTopic}">
+        <f:facet name="context"/>
+        <f:facet name="menuBar"/>
+        <f:facet name="toolbar">
+          <af:panelGroupLayout layout="horizontal" id="pg3" rendered ="#{!pageFlowScope.PlaceEditBean.previewLayout}">
+              <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CONTINUE}" id="cb1" actionListener="#{pageFlowScope.PlaceEditBean.save}"
+                                action="#{pageFlowScope.PlaceEditBean.saveOutcome}" rendered="#{pageFlowScope.PlaceEditBean.addMode and !pageFlowScope.PlaceEditBean.popupMode }"
+                                accessKey="#{inventoryUIBundle.SAVE_AND_CONTINUE_ACCESS_KEY}">
+                                <af:setActionListener from="summary" to="#{pageFlowScope.saveActionOutcome}"/>
+              </af:commandButton>
+              <af:spacer width="10" height="10" id="s11"/>
+              <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CLOSE}" id="cb4" actionListener="#{pageFlowScope.PlaceEditBean.save}"
+                                action="#{pageFlowScope.PlaceEditBean.saveOutcome}" rendered="#{!pageFlowScope.PlaceEditBean.addMode || pageFlowScope.PlaceEditBean.popupMode}"
+                                accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}">
+                                <af:setActionListener from="saveAndClose" to="#{pageFlowScope.saveActionOutcome}"/>
+              </af:commandButton>
+              <af:commandButton text="#{inventoryUIBundle.SAVE_AND_ADD_ANOTHER}" actionListener="#{pageFlowScope.PlaceEditBean.save}" id="cb3"
+                                action="#{pageFlowScope.PlaceEditBean.saveOutcome}" rendered="#{pageFlowScope.PlaceEditBean.addMode and !pageFlowScope.PlaceEditBean.popupMode}"
+                                accessKey="#{inventoryUIBundle.SAVE_AND_ADD_ANOTHER_ACCESS_KEY}">
+                                <af:setActionListener from="init" to="#{pageFlowScope.saveActionOutcome}"/>
+              </af:commandButton>
+              <af:spacer width="10" height="10" id="s12"/>
+              <af:commandButton text="#{inventoryUIBundle.CANCEL}" id="cb2" action="cancel" immediate="true" actionListener="#{bindings.closeSubTask.execute}"
+                                accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <af:panelGroupLayout layout="scroll" id="pgl23">
+        <af:showDetailHeader text="#{inventoryUIBundle.PLACE_LOCATION}" disclosed="true" id="PAGE_TITLE">
+          <f:facet name="context"/>
+          <f:facet name="menuBar"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="legend"/>
+          <f:facet name="info"/>
+          <af:group id="g2">
+            <af:panelGroupLayout id="pgl1">
+              <af:panelFormLayout id="place1" maxColumns="2" rows="2" labelWidth="33%" fieldWidth="67%" binding="#{backingBeanScope.uiHintsPanel}">
+                <af:selectOneChoice id="place1-placeType"
+                                    label="#{inventoryUIBundle.PLACE_TYPE}"
+                                    disabled="#{!(pageFlowScope.PlaceEditBean.addMode)}"
+                                    valueChangeListener="#{pageFlowScope.PlaceEditBean.placeChanged}"
+                                    autoSubmit="true" required="true"
+                                    value="#{pageFlowScope.PlaceEditBean.placeType}">
+                       <f:selectItems binding="#{pageFlowScope.PlaceEditBean.placeTypes}"/>
+                  </af:selectOneChoice>
+                  <!-- The specDropDown has partial trigger from placeTypeDropDown. When Place type changes, 
+                  specification dropdown gets filtered with specifications of related place type.-->
+                  <af:selectOneChoice id="place1-specification"
+                                    label="#{inventoryUIBundle.SPECIFICATION}" showRequired="true"
+                                    autoSubmit="true" partialTriggers="place1-placeType" 
+                                    disabled="#{!(pageFlowScope.PlaceEditBean.addMode)}"
+                                    valueChangeListener="#{pageFlowScope.PlaceEditBean.specChanged}"
+                                    value="#{pageFlowScope.PlaceEditBean.selectedSpec}">
+                   <f:selectItems binding="#{pageFlowScope.PlaceEditBean.specifications}"/>
+                </af:selectOneChoice>
+                <!-- The id field has partial trigger from specDropDown. When specification changes, 
+                  id field gets disabled / enabled based on enterIdManually setting of specification.-->
+                <af:inputText value="#{(pageFlowScope.PlaceEditBean.addMode &amp;&amp; pageFlowScope.PlaceEditBean.specificationCount > 0)  ? 
+                                    (pageFlowScope.PlaceEditBean.enterIdManually ? pageFlowScope.PlaceEditBean.entityObject.id : inventoryUIBundle.AUTO_GENERATE) : (pageFlowScope.PlaceEditBean.entityObject.id)}" 
+                        label="#{inventoryUIBundle.ID}" 
+                        required="true"
+                    disabled="#{(pageFlowScope.PlaceEditBean.specificationCount > 0) &amp;&amp; (!(pageFlowScope.PlaceEditBean.addMode &amp;&amp; pageFlowScope.PlaceEditBean.enterIdManually))}"
+                        maximumLength="50" columns="53"
+                        binding="#{backingBeanScope.idBinding}" id="place1-id">
+                </af:inputText>
+                <af:inputText value="#{pageFlowScope.PlaceEditBean.entityObject.name}"
+                              label="#{inventoryUIBundle.NAME}"
+                              maximumLength="50" columns="53"
+                              id="place1-name">
+                </af:inputText>
+                <af:inputText value="#{pageFlowScope.PlaceEditBean.entityObject.description}"
+                              label="#{inventoryUIBundle.DESCRIPTION}"
+                              maximumLength="255" rows="5" columns="50"
+                              id="place1-description">
+                </af:inputText>
+                <af:inputText value="#{pageFlowScope.PlaceEditBean.entityObject.latitude}"
+                              label="#{inventoryUIBundle.LATITUDE}"
+                              maximumLength="25" partialTriggers="place1-vertical place1-horizontal"
+                              id="place1-latitude" autoSubmit="true" shortDesc="#{inventoryUIBundle.LATITUDE_DESC}"
+                              binding="#{backingBeanScope.latBinding}"
+                              valueChangeListener="#{pageFlowScope.PlaceEditBean.onChangeLatLon}">
+                </af:inputText>
+                <af:inputText value="#{pageFlowScope.PlaceEditBean.entityObject.longitude}"
+                              label="#{inventoryUIBundle.LONGITUDE}"
+                              maximumLength="25" partialTriggers="place1-vertical place1-horizontal"
+                              id="place1-longitude" autoSubmit="true" shortDesc="#{inventoryUIBundle.LONGITUDE_DESC}"
+                              binding="#{backingBeanScope.lonBinding}"
+                              valueChangeListener="#{pageFlowScope.PlaceEditBean.onChangeLatLon}">
+                </af:inputText>                            
+                <af:inputText value="#{pageFlowScope.PlaceEditBean.entityObject.vertical}"
+                              label="#{inventoryUIBundle.VERTICAL}"
+                              maximumLength="25" autoSubmit="true"
+                              id="place1-vertical" partialTriggers="place1-latitude place1-longitude"
+                              binding="#{backingBeanScope.verBinding}"
+                              valueChangeListener="#{pageFlowScope.PlaceEditBean.onChangeVnH}"
+                              validator="#{pageFlowScope.PlaceEditBean.validate}">                              
+                </af:inputText>
+                <af:inputText value="#{pageFlowScope.PlaceEditBean.entityObject.horizontal}"
+                              label="#{inventoryUIBundle.HORIZONTAL}"
+                              maximumLength="25" autoSubmit="true"
+                              id="place1-horizontal" partialTriggers="place1-latitude place1-longitude" 
+                              binding="#{backingBeanScope.horBinding}"
+                              valueChangeListener="#{pageFlowScope.PlaceEditBean.onChangeVnH}"
+                              validator="#{pageFlowScope.PlaceEditBean.validate}">                              
+                </af:inputText>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="place1-lmd" rendered="false" visible="#{pageFlowScope.PlaceEditBean.lastModifiedDate != null}">
+                    <af:outputText value="#{pageFlowScope.PlaceEditBean.lastModifiedDate}" id="ot9">
+                        <af:convertDateTime pattern="#{pageFlowScope.PlaceEditBean.dateTimeFormat}"/>
+                    </af:outputText>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="place1-lmu" rendered="false" visible="#{pageFlowScope.PlaceEditBean.entityObject.lastModifiedUser != null}">
+                    <af:outputText value="#{pageFlowScope.PlaceEditBean.entityObject.lastModifiedUser}" id="ot10"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_DATE}" id="place1-crd" rendered="false" visible="#{pageFlowScope.PlaceEditBean.createdDate != null}">
+                    <af:outputText value="#{pageFlowScope.PlaceEditBean.createdDate}" id="ot11">
+                        <af:convertDateTime pattern="#{pageFlowScope.PlaceEditBean.dateTimeFormat}"/>
+                    </af:outputText>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_USER}" id="place1-cru" rendered="false" visible="#{pageFlowScope.PlaceEditBean.entityObject.createdUser != null}">
+                    <af:outputText value="#{pageFlowScope.PlaceEditBean.entityObject.createdUser}" id="ot12"/>
+                </af:panelLabelAndMessage>
+              </af:panelFormLayout>
+            </af:panelGroupLayout>
+          </af:group>
+        </af:showDetailHeader>
+        </af:panelGroupLayout>
+      </af:panelHeader>
+      
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

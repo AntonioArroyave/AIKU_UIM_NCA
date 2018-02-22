@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:inventory="http://xmlns.oracle.com/communications/studio/model/inventory" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="inventory:ServiceConfigurationSpecification" id="sc=CO_RFS_EQ" type="sc" typeName="Service Configuration Specification" name="CO_RFS_EQ" resource="\BA_RFS\model\CO_RFS_EQ.configuration">
+    <note lang="default"/>
+    <project>
+      <relation ref="ivprj=BA_RFS" type="Inventory Project" name="Dependency">
+        <target name="BA_RFS" typeName="Inventory Project"/>
+      </relation>
+    </project>
+    <dataElements>
+      <element id="sc=CO_RFS_EQ+dataElement=A6OWmaGAQRu+9LDgaf7C0Q" type="dataElement" typeName="Data Element" kind="Element" name="Configuracion_Equipo_Premisa" path="/CO_RFS_EQ/Configuracion_Equipo_Premisa">
+        <displayName lang="default">Configuracion Equipo Premisa</displayName>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <base>
+          <relation ref="ds=BA_RFS+dataElement=Configuracion_Equipo_Premisa" type="Schema Element" name="Type" kind="Element">
+            <target name="Configuracion_Equipo_Premisa" typeName="Schema Element"/>
+            <inEntity name="BA_RFS" typeName="Data Schema"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <specificationOptions>
+          <specificationOptionList>
+            <element>
+              <specification>
+                <relation ref="pds=CDI" type="Physical Device Specification" name="Spec Option" kind="Entity">
+                  <target name="CDI" typeName="Physical Device Specification"/>
+                </relation>
+              </specification>
+              <sequence>1</sequence>
+            </element>
+          </specificationOptionList>
+          <itemOptionType>Reference</itemOptionType>
+        </specificationOptions>
+        <primitiveType>structure</primitiveType>
+      </element>
+    </dataElements>
+    <relatedSpecificationList/>
+  </entity>
+</model:Model>

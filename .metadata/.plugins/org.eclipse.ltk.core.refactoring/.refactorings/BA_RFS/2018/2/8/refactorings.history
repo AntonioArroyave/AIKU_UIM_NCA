@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;ACCRFS_HFC.service&apos;" description="Rename resource &apos;ACCRFS_HFC.service&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="model/ACCRFS_HFC.service" name="ACC_RFS_HFC.service" stamp="1519061184975" updateReferences="true"/>
+</session>

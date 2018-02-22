@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:tns="http://xmlns.oracle.com/communications/sce/dictionary/BA_RFS/BA_RFS" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/communications/sce/dictionary/BA_RFS/BA_RFS">
+    <xs:complexType name="Configuracion_Equipo_Premisa">
+    <xs:sequence/>
+  </xs:complexType>
+    <xs:complexType name="Uiltima_Milla">
+    <xs:sequence/>
+  </xs:complexType>
+    <xs:complexType name="Elemento_de_Acceso">
+    <xs:sequence/>
+  </xs:complexType>
+    <xs:complexType name="Propiedades_de_servicio">
+    <xs:sequence/>
+  </xs:complexType>
+    <xs:simpleType name="bandwidth">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="40"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="estadoDelServicio">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="40"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="buzonDeCorreo">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="40"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

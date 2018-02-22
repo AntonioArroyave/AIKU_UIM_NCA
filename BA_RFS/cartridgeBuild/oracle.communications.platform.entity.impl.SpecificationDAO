@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<extent>
+  <object class="oracle.communications.platform.entity.impl.InventoryConfigurationSpecDAO" guid="http://xmlns.oracle.com/cgbu/inventory/nowhere/BA_RFS/model/CO_RFS_ACC_HFC.configuration#1.0.0.0.0_b0" oid="oracle.communications.platform.entity.impl.SpecificationDAO-0" version="0">
+    <field name="name">"CO_RFS_ACC_HFC"</field>
+    <field name="instanceType">"instanceType.oracle.communications.platform.entity.impl.ServiceConfigurationVersionDAO"</field>
+    <field name="description">null</field>
+    <field name="startDate">1519275601000</field>
+    <field name="relatedSpecs">
+      <element>oracle.communications.platform.ies.xfile.OID:oracle.communications.platform.entity.impl.SpecificationRelDAO-0</element>
+      <element>oracle.communications.platform.ies.xfile.OID:oracle.communications.platform.entity.impl.SpecificationRelDAO-1</element>
+    </field>
+    <field mode="skip" name="fromSpecs"/>
+    <field name="type">null</field>
+    <field name="characteristicSpecUsages"/>
+    <field name="extensionPointRuleSets"/>
+    <field name="transitions"/>
+    <field name="media"/>
+    <field name="path">"CO_RFS_ACC_HFC"</field>
+    <field format="enum_name" name="configType">CONFIG</field>
+    <field name="activationParameter">false</field>
+    <field name="sharedBySpecs">false</field>
+    <field name="options"/>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.InventoryConfigurationSpecDAO" guid="http://xmlns.oracle.com/cgbu/inventory/nowhere/BA_RFS/model/CO_RFS_ACC_HFC.configuration.Uiltima_Milla.configItem-3972609505#1.0.0.0.0_b0" oid="oracle.communications.platform.entity.impl.SpecificationDAO-1" version="0">
+    <field name="name">"Uiltima_Milla"</field>
+    <field name="instanceType">"instanceType.oracle.communications.platform.entity.impl.ServiceConfigurationItemDAO"</field>
+    <field name="description">""</field>
+    <field name="startDate">1519275601000</field>
+    <field mode="skip" name="fromSpecs"/>
+    <field name="type">null</field>
+    <field name="path">"CO_RFS_ACC_HFC,Uiltima_Milla,"</field>
+    <field format="enum_name" name="configType">ITEM</field>
+    <field name="activationParameter">false</field>
+    <field name="sharedBySpecs">false</field>
+    <field name="options">
+      <element>oracle.communications.platform.ies.xfile.OID:oracle.communications.platform.entity.impl.InventoryConfigSpecOptionDAO-0</element>
+    </field>
+    <field format="enum_name" name="itemOptionType">REFERENCE</field>
+    <field name="characteristicSpecUsages"/>
+    <field name="relatedSpecs"/>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.InventoryConfigurationSpecDAO" guid="http://xmlns.oracle.com/cgbu/inventory/nowhere/BA_RFS/model/CO_RFS_ACC_HFC.configuration.Elemento_de_Acceso.configItem-782776759#1.0.0.0.0_b0" oid="oracle.communications.platform.entity.impl.SpecificationDAO-2" version="0">
+    <field name="name">"Elemento_de_Acceso"</field>
+    <field name="instanceType">"instanceType.oracle.communications.platform.entity.impl.ServiceConfigurationItemDAO"</field>
+    <field name="description">""</field>
+    <field name="startDate">1519275601000</field>
+    <field mode="skip" name="fromSpecs"/>
+    <field name="type">null</field>
+    <field name="path">"CO_RFS_ACC_HFC,Elemento_de_Acceso,"</field>
+    <field format="enum_name" name="configType">ITEM</field>
+    <field name="activationParameter">false</field>
+    <field name="sharedBySpecs">false</field>
+    <field name="options">
+      <element>oracle.communications.platform.ies.xfile.OID:oracle.communications.platform.entity.impl.InventoryConfigSpecOptionDAO-1</element>
+    </field>
+    <field format="enum_name" name="itemOptionType">REFERENCE</field>
+    <field name="characteristicSpecUsages"/>
+    <field name="relatedSpecs"/>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.ServiceSpecificationDAO" guid="http://xmlns.oracle.com/cgbu/inventory/nowhere/BA_RFS/model/ACC_RFS_HFC.service#1.0.0.0.0_b0" oid="oracle.communications.platform.entity.impl.SpecificationDAO-3" version="0">
+    <field name="name">"ACC_RFS_HFC"</field>
+    <field name="instanceType">"instanceType.oracle.communications.platform.entity.impl.ServiceDAO"</field>
+    <field name="description">null</field>
+    <field name="consumableMayBeShared">false</field>
+    <field name="consumerAllowSharedConsumption">false</field>
+    <field name="startDate">1519275601000</field>
+    <field name="relatedSpecs">
+      <element>oracle.communications.platform.ies.xfile.OID:oracle.communications.platform.entity.impl.SpecificationRelDAO-2</element>
+    </field>
+    <field mode="skip" name="fromSpecs"/>
+    <field name="enterIdManually">false</field>
+    <field name="type">null</field>
+    <field name="characteristicSpecUsages"/>
+    <field name="extensionPointRuleSets"/>
+    <field name="transitions"/>
+    <field name="media"/>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.InventoryConfigurationSpecDAO" guid="http://xmlns.oracle.com/cgbu/inventory/nowhere/BA_RFS/model/CO_BA_RFS_HFC.configuration#1.0.0.0.0_b0" oid="oracle.communications.platform.entity.impl.SpecificationDAO-4" version="0">
+    <field name="name">"CO_BA_RFS_HFC"</field>
+    <field name="instanceType">"instanceType.oracle.communications.platform.entity.impl.ServiceConfigurationVersionDAO"</field>
+    <field name="description">null</field>
+    <field name="startDate">1519275601000</field>
+    <field name="relatedSpecs">
+      <element>oracle.communications.platform.ies.xfile.OID:oracle.communications.platform.entity.impl.SpecificationRelDAO-3</element>
+      <element>oracle.communications.platform.ies.xfile.OID:oracle.communications.platform.entity.impl.SpecificationRelDAO-4</element>
+    </field>
+    <field mode="skip" name="fromSpecs"/>
+    <field name="type">null</field>
+    <field name="characteristicSpecUsages"/>
+    <field name="extensionPointRuleSets"/>
+    <field name="transitions"/>
+    <field name="media"/>
+    <field name="path">"CO_BA_RFS_HFC"</field>
+    <field format="enum_name" name="configType">CONFIG</field>
+    <field name="activationParameter">false</field>
+    <field name="sharedBySpecs">false</field>
+    <field name="options"/>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.InventoryConfigurationSpecDAO" guid="http://xmlns.oracle.com/cgbu/inventory/nowhere/BA_RFS/model/CO_BA_RFS_HFC.configuration.Propiedades_de_servicio.configItem-1202142665#1.0.0.0.0_b0" oid="oracle.communications.platform.entity.impl.SpecificationDAO-5" version="0">
+    <field name="name">"Propiedades_de_servicio"</field>
+    <field name="instanceType">"instanceType.oracle.communications.platform.entity.impl.ServiceConfigurationItemDAO"</field>
+    <field name="description">""</field>
+    <field name="startDate">1519275601000</field>
+    <field mode="skip" name="fromSpecs"/>
+    <field name="type">null</field>
+    <field name="path">"CO_BA_RFS_HFC,Propiedades_de_servicio,"</field>
+    <field format="enum_name" name="configType">ITEM</field>
+    <field name="activationParameter">false</field>
+    <field name="sharedBySpecs">false</field>
+    <field name="options"/>
+    <field format="enum_name" name="itemOptionType">null</field>
+    <field name="characteristicSpecUsages">
+      <element>oracle.communications.platform.ies.xfile.OID:oracle.communications.platform.entity.impl.CharacteristicSpecUsageDAO-0</element>
+      <element>oracle.communications.platform.ies.xfile.OID:oracle.communications.platform.entity.impl.CharacteristicSpecUsageDAO-1</element>
+      <element>oracle.communications.platform.ies.xfile.OID:oracle.communications.platform.entity.impl.CharacteristicSpecUsageDAO-2</element>
+    </field>
+    <field name="relatedSpecs"/>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.InventoryConfigurationSpecDAO" guid="http://xmlns.oracle.com/cgbu/inventory/nowhere/BA_RFS/model/CO_BA_RFS_HFC.configuration.Plan_de_velocidad.configItem-1401960589#1.0.0.0.0_b0" oid="oracle.communications.platform.entity.impl.SpecificationDAO-6" version="0">
+    <field name="name">"Plan_de_velocidad"</field>
+    <field name="instanceType">"instanceType.oracle.communications.platform.entity.impl.ServiceConfigurationItemDAO"</field>
+    <field name="description">""</field>
+    <field name="startDate">1519275601000</field>
+    <field mode="skip" name="fromSpecs"/>
+    <field name="type">null</field>
+    <field name="path">"CO_BA_RFS_HFC,Plan_de_velocidad,"</field>
+    <field format="enum_name" name="configType">ITEM</field>
+    <field name="activationParameter">false</field>
+    <field name="sharedBySpecs">false</field>
+    <field name="options">
+      <element>oracle.communications.platform.ies.xfile.OID:oracle.communications.platform.entity.impl.InventoryConfigSpecOptionDAO-2</element>
+    </field>
+    <field format="enum_name" name="itemOptionType">REFERENCE</field>
+    <field name="characteristicSpecUsages"/>
+    <field name="relatedSpecs"/>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.InventoryConfigurationSpecDAO" guid="http://xmlns.oracle.com/cgbu/inventory/nowhere/BA_RFS/model/CO_RFS_EQ.configuration#1.0.0.0.0_b0" oid="oracle.communications.platform.entity.impl.SpecificationDAO-7" version="0">
+    <field name="name">"CO_RFS_EQ"</field>
+    <field name="instanceType">"instanceType.oracle.communications.platform.entity.impl.ServiceConfigurationVersionDAO"</field>
+    <field name="description">null</field>
+    <field name="startDate">1519275601000</field>
+    <field name="relatedSpecs">
+      <element>oracle.communications.platform.ies.xfile.OID:oracle.communications.platform.entity.impl.SpecificationRelDAO-5</element>
+    </field>
+    <field mode="skip" name="fromSpecs"/>
+    <field name="type">null</field>
+    <field name="characteristicSpecUsages"/>
+    <field name="extensionPointRuleSets"/>
+    <field name="transitions"/>
+    <field name="media"/>
+    <field name="path">"CO_RFS_EQ"</field>
+    <field format="enum_name" name="configType">CONFIG</field>
+    <field name="activationParameter">false</field>
+    <field name="sharedBySpecs">false</field>
+    <field name="options"/>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.InventoryConfigurationSpecDAO" guid="http://xmlns.oracle.com/cgbu/inventory/nowhere/BA_RFS/model/CO_RFS_EQ.configuration.Configuracion_Equipo_Premisa.configItem-50544491#1.0.0.0.0_b0" oid="oracle.communications.platform.entity.impl.SpecificationDAO-8" version="0">
+    <field name="name">"Configuracion_Equipo_Premisa"</field>
+    <field name="instanceType">"instanceType.oracle.communications.platform.entity.impl.ServiceConfigurationItemDAO"</field>
+    <field name="description">""</field>
+    <field name="startDate">1519275601000</field>
+    <field mode="skip" name="fromSpecs"/>
+    <field name="type">null</field>
+    <field name="path">"CO_RFS_EQ,Configuracion_Equipo_Premisa,"</field>
+    <field format="enum_name" name="configType">ITEM</field>
+    <field name="activationParameter">false</field>
+    <field name="sharedBySpecs">false</field>
+    <field name="options">
+      <element>oracle.communications.platform.ies.xfile.OID:oracle.communications.platform.entity.impl.InventoryConfigSpecOptionDAO-3</element>
+    </field>
+    <field format="enum_name" name="itemOptionType">REFERENCE</field>
+    <field name="characteristicSpecUsages"/>
+    <field name="relatedSpecs"/>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.ServiceSpecificationDAO" guid="http://xmlns.oracle.com/cgbu/inventory/nowhere/BA_RFS/model/BA_RFS_HFC.service#1.0.0.0.0_b0" oid="oracle.communications.platform.entity.impl.SpecificationDAO-9" version="0">
+    <field name="name">"BA_RFS_HFC"</field>
+    <field name="instanceType">"instanceType.oracle.communications.platform.entity.impl.ServiceDAO"</field>
+    <field name="description">null</field>
+    <field name="consumableMayBeShared">false</field>
+    <field name="consumerAllowSharedConsumption">false</field>
+    <field name="startDate">1519275601000</field>
+    <field name="relatedSpecs">
+      <element>oracle.communications.platform.ies.xfile.OID:oracle.communications.platform.entity.impl.SpecificationRelDAO-6</element>
+    </field>
+    <field mode="skip" name="fromSpecs"/>
+    <field name="enterIdManually">false</field>
+    <field name="type">null</field>
+    <field name="characteristicSpecUsages"/>
+    <field name="extensionPointRuleSets"/>
+    <field name="transitions"/>
+    <field name="media"/>
+  </object>
+  <object class="oracle.communications.platform.entity.impl.ServiceSpecificationDAO" guid="http://xmlns.oracle.com/cgbu/inventory/nowhere/BA_RFS/model/EQ_RFS.service#1.0.0.0.0_b0" oid="oracle.communications.platform.entity.impl.SpecificationDAO-10" version="0">
+    <field name="name">"EQ_RFS"</field>
+    <field name="instanceType">"instanceType.oracle.communications.platform.entity.impl.ServiceDAO"</field>
+    <field name="description">null</field>
+    <field name="consumableMayBeShared">false</field>
+    <field name="consumerAllowSharedConsumption">false</field>
+    <field name="startDate">1519275601000</field>
+    <field name="relatedSpecs">
+      <element>oracle.communications.platform.ies.xfile.OID:oracle.communications.platform.entity.impl.SpecificationRelDAO-7</element>
+    </field>
+    <field mode="skip" name="fromSpecs"/>
+    <field name="enterIdManually">false</field>
+    <field name="type">null</field>
+    <field name="characteristicSpecUsages"/>
+    <field name="extensionPointRuleSets"/>
+    <field name="transitions"/>
+    <field name="media"/>
+  </object>
+</extent>

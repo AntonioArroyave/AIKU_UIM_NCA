@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:inventory="http://xmlns.oracle.com/communications/studio/model/inventory" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="inventory:CustomNetworkAddressSpecification" id="cnas=IPAddress" type="cnas" typeName="Custom Network Address Specification" name="IPAddress" resource="\Inventario\model\IPAddress.custna">
+    <note lang="default"/>
+    <extends>
+      <relation ref="ie=CustomNetworkAddress" type="Inventory Entity" name="Dependency" kind="Entity">
+        <target name="CustomNetworkAddress" typeName="Inventory Entity"/>
+      </relation>
+    </extends>
+    <project>
+      <relation ref="ivprj=Inventario" type="Inventory Project" name="Dependency">
+        <target name="Inventario" typeName="Inventory Project"/>
+      </relation>
+    </project>
+    <dataElements>
+      <element id="cnas=IPAddress+dataElement=1nBybLOhT-aio6bABDxXjg~description" type="dataElement" typeName="Data Element" kind="Element" name="description" path="/description" inherited="true">
+        <displayName lang="default">description</displayName>
+        <displayName lang="default">description</displayName>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">255</maxLength>
+        <base>
+          <relation ref="ie=CustomNetworkAddress+dataElement=description" type="Data Element" name="Type" kind="Element">
+            <target name="description" typeName="Data Element"/>
+            <inEntity name="CustomNetworkAddress" typeName="Inventory Entity"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="cnas=IPAddress+dataElement=1nBybLOhT-aio6bABDxXjg~id" type="dataElement" typeName="Data Element" kind="Element" name="id" path="/id" inherited="true">
+        <displayName lang="default">id</displayName>
+        <displayName lang="default">id</displayName>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">255</maxLength>
+        <base>
+          <relation ref="ie=CustomNetworkAddress+dataElement=id" type="Data Element" name="Type" kind="Element">
+            <target name="id" typeName="Data Element"/>
+            <inEntity name="CustomNetworkAddress" typeName="Inventory Entity"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+      <element id="cnas=IPAddress+dataElement=1nBybLOhT-aio6bABDxXjg~name" type="dataElement" typeName="Data Element" kind="Element" name="name" path="/name" inherited="true">
+        <displayName lang="default">name</displayName>
+        <displayName lang="default">name</displayName>
+        <minOccurs inherited="true">0</minOccurs>
+        <maxOccurs inherited="true">1</maxOccurs>
+        <defaultValue inherited="true"></defaultValue>
+        <key inherited="false"></key>
+        <abstract inherited="false">false</abstract>
+        <deprecated inherited="false">false</deprecated>
+        <internal inherited="false">false</internal>
+        <sensitive inherited="true">false</sensitive>
+        <minLength inherited="true">0</minLength>
+        <maxLength inherited="true">50</maxLength>
+        <base>
+          <relation ref="ie=CustomNetworkAddress+dataElement=name" type="Data Element" name="Type" kind="Element">
+            <target name="name" typeName="Data Element"/>
+            <inEntity name="CustomNetworkAddress" typeName="Inventory Entity"/>
+          </relation>
+        </base>
+        <dataElements/>
+        <primitiveType>string</primitiveType>
+      </element>
+    </dataElements>
+    <relatedSpecificationList/>
+  </entity>
+</model:Model>

@@ -1,0 +1,277 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"  
+          xmlns:f="http://java.sun.com/jsf/core" xmlns:cui="/CommsUI" 
+          xmlns:pf="/platform/functions"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+		  
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>          
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+      <af:panelStretchLayout id="pgl1" binding="#{backingBeanScope.CNA_Results_panelGroupLayout}" topHeight="#{pageFlowScope.InventoryResultsBean.topHeight}">
+        <f:facet name="top">
+            <af:panelGroupLayout id="pgl23" layout="scroll">
+                     <cui:WarningDialog id="wd" binding="#{backingBeanScope.navigationWarningDialog}"/>
+                <af:panelGroupLayout id="pgl42" layout="horizontal" halign="left">
+                    <af:outputText id="otbi" styleClass="invCommonText" noWrap="true" rendered="#{!(pageFlowScope.InventoryResultsBean.popupMode)}"
+                                   value="#{pageFlowScope.InventoryResultsBean.renderBILabel ? inventoryUIBundle.BUSINESS_INTERACTION_LABEL : null}"/>
+                    <af:menuBar id="menuBar1">
+                              <af:menu id="BIContextMenu" binding="#{backingBeanScope.InventoryMenuBean.biContextMenu}" styleClass="invSearchMenu"
+                                       rendered="#{!(pageFlowScope.InventoryResultsBean.popupMode)}"   />
+                    </af:menuBar>
+                    <af:popup id="BISearchPopup" binding="#{backingBeanScope.businessInteractionSearch1}" contentDelivery="lazyUncached">
+                        <af:dialog id="BISearchPopup_d1" type="none"
+                                   title="#{inventoryUIBundle.BUSINESS_INTERACTION_SEARCH}">
+                            <af:panelStretchLayout id="psl_1" styleClass="invCommonPanelStretchLayout">
+                                <f:facet name="center">
+                                   <af:region value="#{bindings.BusinessInteractionSearchResultsFlow1.regionModel}" id="BISP_r2"/>
+                                </f:facet>
+                            </af:panelStretchLayout>
+                        </af:dialog>
+                        <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                        <af:serverListener type="refreshEntity" method="#{pageFlowScope.InventoryResultsBean.afterBusinessInteractionSelectionChange}"/>
+                    </af:popup>
+                </af:panelGroupLayout>
+                
+                
+            </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+          
+          <af:panelHeader text="#{pageFlowScope.InventoryResultsBean.displayInfo}" helpTopicId="OHW_search" id="ph1">
+          <!-- Search Results Query Component -->
+          <af:panelGroupLayout id="pg232" layout="scroll">
+          <jsp:include page="/oracle/communications/inventory/ui/framework/page/InventoryQuery.jsff"/>
+          <af:spacer width="10" height="10" id="s1"/>
+          <af:showDetailHeader text="#{inventoryUIBundle.SEARCH_RESULTS}" disclosed="true" id="resultsComponent">
+            <f:facet name="context"/>
+            <f:facet name="menuBar"/>
+            <f:facet name="toolbar"/>
+            <f:facet name="legend"/>
+            <f:facet name="info"/>
+            <af:panelCollection id="pc1" styleClass="invSearchPanelCollection">
+              <f:facet name="menus">
+                <af:menu binding="#{pageFlowScope.InventoryResultsBean.searchResultsActionsMenu}"
+                         rendered="#{!(pageFlowScope.InventoryResultsBean.popupMode)}" partialTriggers="cnart"
+                         disabled="#{pageFlowScope.InventoryResultsBean.resultsTable.selectedRowKeys.size lt 1 or pageFlowScope.InventoryResultsBean.resultsTable.selectedRowKeys.size eq null}"/>
+               </f:facet>           
+              <f:facet name="toolbar">
+                <!-- Buttons for Create/Edit/Delete -->
+                <af:toolbar id="t1">
+                  <af:commandToolbarButton text="#{inventoryUIBundle.CREATE}"
+                                           id="cb1Create"
+                                           icon="#{InventoryHelperBean.createIcon}"
+                                           action="create"
+                                           actionListener="#{pageFlowScope.InventoryResultsBean.registerRecentItemForCreate}">
+                    <af:setActionListener from="true" to="#{addMode}"/>
+                  </af:commandToolbarButton>
+                  <af:spacer width="10" height="10" id="s12"/>
+                  <af:commandToolbarButton text="#{inventoryUIBundle.EDIT}"
+                                           id="cb2Edit"
+                                           icon="#{InventoryHelperBean.editIcon}" disabledIcon="#{InventoryHelperBean.disEditIcon}"
+                                           action="#{pageFlowScope.InventoryResultsBean.validatePreUpdate}"
+                                           disabled="#{pageFlowScope.InventoryResultsBean.resultsTable.selectedRowKeys.size !=1}"
+                                           rendered="#{!pageFlowScope.InventoryResultsBean.popupMode}"
+                                           partialTriggers="cnart" binding="#{backingBeanScope.editButton}"
+                                           actionListener="#{bindings.openSubTaskForEdit.execute}"
+                                           accessKey="#{inventoryUIBundle.EDIT_ACCESS_KEY}">
+                    <af:setActionListener from="#{bindings.searchResultsIterator.currentRow.dataProvider.oid}"
+                                          to="#{objectId}"/>
+                    <af:setActionListener from="false" to="#{addMode}"/>
+                  </af:commandToolbarButton>
+                  <af:spacer width="10" height="10" id="s2"/>
+                  <af:commandToolbarButton text="#{inventoryUIBundle.DELETE}"
+                                           id="cb3Delete"
+                                           partialTriggers="cnart"
+                                           icon="#{InventoryHelperBean.deleteIcon}" disabledIcon="#{InventoryHelperBean.disDeleteIcon}"
+                                           disabled="#{pageFlowScope.InventoryResultsBean.resultsTable.selectedRowKeys.size lt 1 or pageFlowScope.InventoryResultsBean.resultsTable.selectedRowKeys.size eq null}"
+                                           actionListener="#{InventoryHelperBean.deleteAction}"
+                                           rendered="#{!pageFlowScope.InventoryResultsBean.popupMode &amp;&amp; securityContext.userGrantedResource['resourceType=PAGE_ACTION;resourceName=CustomNetworkAddress.DELETE;action=view']}" binding="#{backingBeanScope.deleteButton}"/>
+                <af:spacer width="10" height="10" id="s8"/>
+                    <af:commandToolbarButton text="#{inventoryUIBundle.EXPORT}" immediate="true" shortDesc="#{inventoryUIBundle.EXPORT_ALL_ROWS}" icon="/images/exporttoexcel_ena.png" disabledIcon="/images/exporttoexcel_dis.png" partialTriggers="cnart"
+                                             id="ctb1" rendered="#{!(pageFlowScope.InventoryResultsBean.popupMode)}">
+                        <af:exportCollectionActionListener type="excelHTML" exportedId="cnart"
+                                    filename="#{pageFlowScope.InventoryResultsBean.displayInfo}.xls" title="Export" exportedRows="all"/>
+                    </af:commandToolbarButton>
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="statusbar">
+                <af:toolbar id="toolbar1">
+                  <af:outputText value="#{pageFlowScope.InventoryResultsBean.displayTotalResults}"
+                                  id="ol1" styleClass="invSearchOutputLabel" partialTriggers="cnart" binding="#{backingBeanScope.totalResultsLabel}"/>
+                </af:toolbar>
+              </f:facet>
+              <!-- Table to hold the results defined with partial triggers for create/edit/delete -->
+              <af:table id="cnart"
+                        value="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel}"
+                        var="row"
+                        emptyText="#{bindings.searchResults.viewable ? inventoryUIBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET : inventoryUIBundle.TABLE_EMPTY_TEXT_ACCESS_DENIED}"
+                        fetchSize="#{pageFlowScope.InventoryResultsBean.fetchSize}"
+                        filterModel="#{pageFlowScope.InventoryQueryBean.filterModel}"
+                        queryListener="#{InventoryHelperBean.processQuery}"
+                        filterVisible="false" varStatus="vs"
+                        selectedRowKeys="#{bindings.searchResultsIterator.dataControl.dataProvider.collectionModel.selectedRow}"
+                        selectionListener="#{pageFlowScope.InventoryResultsBean.selectAction}"
+                        sortListener="#{bindings.searchResultsIterator.dataControl.dataProvider.processSort}"
+                        rowSelection="#{pageFlowScope.InventoryResultsBean.rowSelection}"
+                        styleClass="invSearchTable"
+                        binding="#{pageFlowScope.InventoryResultsBean.resultsTable}"
+                        summary="#{inventoryUIBundle.CUSTOM_NETWORK_ADDRESS_SEARCH_TABLE}">
+                <!-- Search Results Fields -->
+                <af:column sortProperty="id" sortable="true" filterable="true" headerText="#{inventoryUIBundle.ID}" id="cnart-c2"
+                           rowHeader="unstyled">
+                  <af:switcher id="idSwitcher" defaultFacet="true" facetName="#{pageFlowScope.InventoryResultsBean.summaryPageAllowable}">
+                    <f:facet name="true">
+                      <af:commandImageLink action="summary" id="cl1" actionListener="#{bindings.openSubTaskForSummary.execute}"
+                                           text="#{row.id}"
+                                           shortDesc="#{inventoryUIBundle.CUSTOM_NETWORK_ADDRESS_SUMMARY_LINK}">
+                        <af:setActionListener from="#{row.oid}" to="#{objectId}"/>
+                        
+                      </af:commandImageLink>
+                    </f:facet>
+                    <f:facet name="false">
+                      <af:outputText value="#{row.id}" id="otid2"/>
+                    </f:facet>
+                  </af:switcher>
+                </af:column>
+                <af:column sortProperty="name" sortable="true" filterable="true" headerText="#{inventoryUIBundle.NAME}" id="cnart-c1" width="#{pageFlowScope.InventoryResultsBean.nameWidth}">
+                  <af:outputText value="#{row.name}" id="ot2"/>
+                </af:column>
+                <af:column sortProperty="description" sortable="true" filterable="true" headerText="#{inventoryUIBundle.DESCRIPTION}" id="cnart-c10" width="#{pageFlowScope.InventoryResultsBean.descriptionWidth}">
+                  <af:outputText value="#{row.description}" id="ot11"/>
+                </af:column>
+                <af:column sortProperty="specification.name" sortable="true" filterable="true" headerText="#{inventoryUIBundle.SPECIFICATION}" id="cnart-c3" width="#{pageFlowScope.InventoryResultsBean.specWidth}">
+                  <af:switcher id="specSwitcher" defaultFacet="false" facetName="#{pageFlowScope.InventoryResultsBean.popupMode}">
+                    <f:facet name="false">
+                      <af:commandImageLink action="SpecificationSummary" id="clsp1" actionListener="#{bindings.openSubTaskForSpec.execute}"
+                                           text="#{row.specification.name}"
+                                           shortDesc="#{inventoryUIBundle.LINK_FOR_SPECIFICATION_SUMMARY}">
+                        
+                        <af:setActionListener from="#{row.specification.oid}" to="#{specObjectId}"/>
+                      </af:commandImageLink>
+                    </f:facet>
+                    <f:facet name="true">
+                      <af:outputText value="#{row.specification.name}" id="otsp2"/>
+                    </f:facet>
+                  </af:switcher>
+                </af:column>
+                <af:column sortProperty="adminState" sortable="true" filterable="true" headerText="#{inventoryUIBundle.INVENTORY_STATUS}" id="cnart-c8">
+                  <af:outputText value="#{pageFlowScope.InventoryResultsBean.inventoryStatus}" id="ot8"/>
+		<!--RMI 618 Start--><af:outputText id="pendingBIDueDate1" value="#{pageFlowScope.InventoryResultsBean.inventoryStatusBIDueDate}"/>
+                      <af:switcher defaultFacet="false" facetName="#{pageFlowScope.InventoryResultsBean.popupMode}"
+                                   id="swis618">
+                        <f:facet name="false">
+                          <af:commandImageLink text="#{pageFlowScope.InventoryResultsBean.inventoryStatusBILabel}"
+                                               disabled="#{pageFlowScope.InventoryResultsBean.invStatusDisabled}"
+                                               id="isCI1"
+                                               shortDesc="#{pageFlowScope.InventoryResultsBean.invStatusShortDesc}"
+                                               action="#{pageFlowScope.InventoryResultsBean.getPendingBiSummaryAction}"
+                                               actionListener="#{pageFlowScope.InventoryResultsBean.registerPendingBiRecentItem}">
+                            <af:setActionListener from="#{pageFlowScope.InventoryResultsBean.inventoryStatusBIOid}"
+                                                  to="#{objectId}"/>
+                          </af:commandImageLink>
+                        </f:facet>
+                        <f:facet name="true">
+                          <af:outputText id="swftis618"
+                                         value="#{pageFlowScope.InventoryResultsBean.inventoryStatusBILabel}"/>
+                        </f:facet>
+                      </af:switcher>
+                      <!--RMI 618 End-->
+                </af:column>
+                <af:column headerText="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}" id="cnart-column3">
+                  <af:outputText value="#{pageFlowScope.InventoryResultsBean.resourceAssignmentStatus}" id="outputText3"/>
+		<!--RMI 618 Start--><af:outputText id="pendingBIDueDate2" value="#{pageFlowScope.InventoryResultsBean.assignmentBIDueDate}"/>
+		<af:switcher defaultFacet="false" facetName="#{pageFlowScope.InventoryResultsBean.popupMode}" id="swas618">
+		<f:facet name="false">
+                          <af:commandImageLink text="#{pageFlowScope.InventoryResultsBean.assignmentBILabel}"
+                                               disabled="#{pageFlowScope.InventoryResultsBean.asnStatusDisabled}"
+                                               id="asCI"
+                                               shortDesc="#{pageFlowScope.InventoryResultsBean.asnStatusShortDesc}"
+                                               action="#{pageFlowScope.InventoryResultsBean.getPendingBiSummaryAction}"
+                                               actionListener="#{pageFlowScope.InventoryResultsBean.registerPendingBiRecentItem}">
+                            <af:setActionListener from="#{pageFlowScope.InventoryResultsBean.asnStatusBIOid}"
+                                                  to="#{objectId}"/>
+                          </af:commandImageLink>
+                        </f:facet>
+		<f:facet name="true">
+		<af:outputText id="swftas618" value="#{pageFlowScope.InventoryResultsBean.assignmentBILabel}"/>
+		</f:facet>
+		</af:switcher>
+		<!--RMI 618 End-->
+                </af:column>
+                <af:column headerText="#{inventoryUIBundle.CONDITION_TYPE}" id="cnart-column1" >
+                  <af:outputText value="#{pageFlowScope.InventoryResultsBean.conditionType}" escape="false" id="outputText1"/>
+                </af:column>
+                <af:column headerText="#{inventoryUIBundle.RESERVATION_TYPE}" id="cnart-column2">
+                  <af:outputText value="#{pageFlowScope.InventoryResultsBean.reservationType}" id="outputText2" escape="false"/>
+                </af:column>
+                <af:column headerText="#{inventoryUIBundle.INVENTORY_GROUP}" id="cnart-coli2">
+                  <af:iterator value="#{pageFlowScope.InventoryResultsBean.groups}" var="group" id="it2">
+                      <af:outputText value="#{group.name}" id="onn312"/>
+                      <br></br>
+                  </af:iterator>
+		</af:column> 
+              </af:table>
+            </af:panelCollection>
+            <af:spacer width="10" height="10" id="s4"/>
+            <af:panelBox id="pbx1" text="#{inventoryUIBundle.RESERVATION_INFORMATION}" rendered="#{pageFlowScope.InventoryResultsBean.displayRedeem}">
+              <af:group id="g22">
+                <af:panelGroupLayout id="pgl11">
+                  <af:panelFormLayout id="pfl11" maxColumns="3" rows="1" rendered="#{pageFlowScope.InventoryResultsBean.popupMode}"
+                                      styleClass="invSearchPanelFormLayout">
+                    <af:selectOneChoice id="reservedForType"
+                                        label="#{inventoryUIBundle.RESERVED_FOR_TYPE}"
+                                        disabled="#{!pageFlowScope.InventoryResultsBean.checkRedeem}"
+                                        autoSubmit="true" showRequired="true"
+                                        value="#{pageFlowScope.InventoryResultsBean.reservedForType}"
+                                        partialTriggers="pc1:cnart"
+                                        binding="#{backingBeanScope.reservedForTypeBinding}">
+                      <f:selectItems binding="#{pageFlowScope.InventoryResultsBean.reservedForTypes}" id="si2"/>
+                    </af:selectOneChoice>
+                    <af:inputText label="#{inventoryUIBundle.RESERVED_FOR}"
+                                  id="it1" showRequired="true" maximumLength="35"
+                                  autoSubmit="true"
+                                  disabled="#{!pageFlowScope.InventoryResultsBean.checkRedeem}"
+                                  partialTriggers="pc1:cnart"
+                                  binding="#{backingBeanScope.reservedForBinding}"
+                                  value="#{pageFlowScope.InventoryResultsBean.reservedFor}"></af:inputText>
+                  </af:panelFormLayout>
+                </af:panelGroupLayout>
+              </af:group>
+            </af:panelBox>
+          </af:showDetailHeader>
+            <af:panelGroupLayout id="pgl2" halign="right" layout="scroll">
+            <af:panelGroupLayout id="pgl3" layout="horizontal">
+              <af:toolbar id="t4">
+                <af:commandToolbarButton text="#{inventoryUIBundle.INVOLVE}"
+                                           action="CustomInvolvementEdit"
+                                           actionListener="#{pageFlowScope.InventoryResultsBean.involve}"
+                                           disabled="#{pageFlowScope.InventoryResultsBean.resultsTable.selectedRowKeys.size lt 1}"
+                                           partialTriggers="pc1:cnart"
+                                           rendered="#{pageFlowScope.InventoryResultsBean.involvementMode}"/>
+                   <af:commandToolbarButton text="#{inventoryUIBundle.DONE}" 
+                                             id="ctb4"
+                                             actionListener="#{pageFlowScope.InventoryResultsBean.associate}" 
+                                             rendered="#{pageFlowScope.InventoryResultsBean.popupMode and !pageFlowScope.InventoryResultsBean.involvementMode}"
+                                             disabled="#{pageFlowScope.InventoryResultsBean.resultsTable.selectedRowKeys.size lt 1}"
+                                             partialTriggers="pc1:cnart"
+                                            accessKey="#{inventoryUIBundle.DONE_ACCESS_KEY}"/>
+                    <af:spacer width="10" height="10" id="s3"/>
+                    <af:commandToolbarButton text="#{inventoryUIBundle.CANCEL}"
+                                             id="ctb2" immediate="true"
+                                             actionListener="#{pageFlowScope.InventoryResultsBean.cancel}" 
+                                             rendered="#{pageFlowScope.InventoryResultsBean.popupMode}"
+                                             accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+              </af:toolbar>
+            </af:panelGroupLayout>
+          </af:panelGroupLayout>
+          </af:panelGroupLayout>
+        </af:panelHeader>
+        
+        </f:facet>
+      </af:panelStretchLayout>
+    </f:facet>
+    <f:facet name="contextualArea"/>
+  </af:pageTemplate>
+</jsp:root>

@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: Inventario
+Bundle-Name: Inventario
+Bundle-Version: 1.0.0.0.0
+Bundle-BuildTime: 2018-02-22 08:40:01
+Bundle-BuildNumber: 17
+Bundle-Category: Inventory
+Bundle-Vendor: InventoryCartridge
+Bundle-RequiredExecutionEnvironment: Oracle-Communications/Inventory-7.3.5,
+ JavaSE-1.8
+Bundle-RequiredTargetVersion: 7.3.5

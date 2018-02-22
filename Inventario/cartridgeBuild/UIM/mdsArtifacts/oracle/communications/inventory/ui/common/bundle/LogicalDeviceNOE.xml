@@ -1,0 +1,4 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.53.52" id="LogicalDeviceNOE" Package="oracle.communications.inventory.ui.common.bundle" BeanClass="oracle.communications.inventory.ui.common.bundle.LogicalDeviceNOE" isJavaBased="true">
+<ResourceBundle xmlns="http://xmlns.oracle.com/adfm/beanmodel"><XliffBundle xmlns="http://xmlns.oracle.com/adfm/resourcebundle" id="oracle.communications.inventory.ui.common.bundle.LogicalDeviceNOEMsgBundle"/></ResourceBundle>
+</JavaBean>

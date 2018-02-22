@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:f="http://java.sun.com/jsf/core" xmlns:pf="/platform/functions">
+		
+  <c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <c:set var="bundle"
+         value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+      <af:panelGroupLayout layout="scroll" id="pgl1" binding="#{backingBeanScope.edit_panelGroupLayout}">
+        <af:panelGroupLayout id="pgl42" layout="horizontal" halign="left" rendered ="#{!pageFlowScope.LogicalDeviceRangeEditBean.previewLayout}">
+            <af:outputText id="otbi" styleClass="invCommonText" noWrap="true"
+                           rendered="#{!(pageFlowScope.LogicalDeviceRangeEditBean.popupMode)}"
+                           value="#{pageFlowScope.LogicalDeviceRangeEditBean.renderBILabel ? inventoryUIBundle.BUSINESS_INTERACTION_LABEL : null}"/>
+                <af:menuBar id="menuBar1">
+                      <af:menu id="BIContextMenu" binding="#{backingBeanScope.InventoryMenuBean.biContextMenu}" styleClass="invEditMenu"
+                               rendered="#{!(pageFlowScope.LogicalDeviceRangeEditBean.popupMode)}"   />
+                </af:menuBar>
+                <af:popup id="BISearchPopup" binding="#{backingBeanScope.businessInteractionSearch3}" contentDelivery="lazyUncached">
+                    <af:dialog id="BISearchPopup_d1" type="none"
+                        title="#{inventoryUIBundle.BUSINESS_INTERACTION_SEARCH}">
+                        <af:panelStretchLayout id="psl_1" styleClass="invCommonPanelStretchLayout">
+                            <f:facet name="center">
+                               <af:region value="#{bindings.BusinessInteractionSearchResultsFlow1.regionModel}" id="BISP_r2"/>
+                            </f:facet>
+                        </af:panelStretchLayout>
+                    </af:dialog>
+                    <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                    <af:serverListener type="refreshEntity" method="#{pageFlowScope.LogicalDeviceRangeEditBean.afterBusinessInteractionSelectionChange}"/>
+                </af:popup>
+        </af:panelGroupLayout>
+        
+        <af:panelHeader text="#{inventoryUIBundle.LOGICAL_DEVICE_RANGE} - #{pageFlowScope.LogicalDeviceRangeEditBean.displayInfo}" helpTopicId="OHW_LdRangeNew"
+                        id="ph1">
+          <f:facet name="toolbar">
+            <af:panelGroupLayout id="pgl3" layout="horizontal" rendered ="#{!pageFlowScope.LogicalDeviceRangeEditBean.previewLayout}">
+              <af:commandButton text="#{inventoryUIBundle.SAVE_AND_CLOSE}"
+                                id="cb1"
+                                action="#{pageFlowScope.LogicalDeviceRangeEditBean.saveOutcome}"
+                                actionListener="#{pageFlowScope.LogicalDeviceRangeEditBean.saveAction}"
+                                accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}">
+                <af:setActionListener from="saveAndClose"
+                                      to="#{pageFlowScope.saveActionOutcome}"/>
+              </af:commandButton>
+              <af:spacer width="10" height="10" id="s11"/>
+              <af:commandButton text="#{inventoryUIBundle.CANCEL}" id="cb2"
+                                action="cancel" immediate="true" accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+            </af:panelGroupLayout>
+          </f:facet>
+        <af:panelGroupLayout layout="scroll" id="pgl23">
+          <af:showDetailHeader text="#{inventoryUIBundle.LOGICAL_DEVICE_INFORM}" disclosed="true" id="sdh1">
+            <af:group id="g11">
+            <af:spacer width="10" height="10" id="s51"/>
+            <af:panelGroupLayout id="pgl2"/>
+            <af:panelFormLayout id="logdev" maxColumns="2" rows="3" labelWidth="33%" fieldWidth="67%" binding="#{backingBeanScope.uiHintsPanel}">
+              <af:selectOneChoice id="logdev-specification"
+                                  label="#{inventoryUIBundle.SPECIFICATION}"
+                                  autoSubmit="true" required="true"
+                                  valueChangeListener="#{pageFlowScope.LogicalDeviceRangeEditBean.specChanged}"
+                                  value="#{pageFlowScope.LogicalDeviceRangeEditBean.selectedSpec}">
+                <f:selectItems binding="#{pageFlowScope.LogicalDeviceRangeEditBean.specifications}"
+                               id="si1"/>
+              </af:selectOneChoice>
+              <af:inputText label="#{inventoryUIBundle.STARTING_ID}"
+                            value="#{pageFlowScope.LogicalDeviceRangeEditBean.startingId}"
+                            id="logdev-startID" partialTriggers="logdev-specification"
+                            rendered="#{(pageFlowScope.LogicalDeviceRangeEditBean.specificationCount > 0) &amp;&amp; ((pageFlowScope.LogicalDeviceRangeEditBean.enterIdManually))}"
+                            showRequired="true"
+                            binding="#{backingBeanScope.idBinding}"/>
+                <af:inputText label="#{inventoryUIBundle.NETWORK_LOCATION}" id="logdev-nel"
+                              valueChangeListener="#{pageFlowScope.LogicalDeviceRangeEditBean.populateAddressText}"
+                              autoSubmit="true" maximumLength="15"
+                              value="#{pageFlowScope.LogicalDeviceRangeEditBean.networkEntityLocation}">
+                  <af:autoSuggestBehavior suggestItems="#{pageFlowScope.LogicalDeviceRangeEditBean.getSuggestItems}"/>
+                </af:inputText>
+                <af:panelLabelAndMessage label="" id="logdev-al1">
+                  <af:outputFormatted binding="#{backingBeanScope.addressLabel1}"
+                                    value="#{pageFlowScope.LogicalDeviceRangeEditBean.addressLabel1}" id="of1"/>
+                </af:panelLabelAndMessage>
+                <af:inputText label="#{inventoryUIBundle.QUANTITY}" maximumLength="7"
+                            value="#{pageFlowScope.LogicalDeviceRangeEditBean.quantity}"
+                            id="logdev-quantity" required="true">
+                    <af:validateRegExp pattern="[0-9]{1,10}" messageDetailNoMatch="#{inventoryUIBundle.INVALID_QUANTITY}"/>
+              </af:inputText>
+              <af:inputText value="#{pageFlowScope.LogicalDeviceRangeEditBean.name}" binding="#{backingBeanScope.name}" autoSubmit="true" label="#{inventoryUIBundle.NAME}"
+                                  maximumLength="50" columns="50" id="logdev-name">
+                    </af:inputText>
+            <af:inputText value="#{pageFlowScope.LogicalDeviceRangeEditBean.description}" binding="#{backingBeanScope.description}" autoSubmit="true" label="#{inventoryUIBundle.DESCRIPTION}"
+                                  maximumLength="255" rows="5" columns="50" id="logdev-description">
+                    </af:inputText>
+            </af:panelFormLayout>
+            </af:group>
+          </af:showDetailHeader>
+          </af:panelGroupLayout>
+          </af:panelHeader>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

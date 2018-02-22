@@ -1,0 +1,189 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core" 
+          xmlns:pf="/platform/functions"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+		   
+<c:set var="inventoryUIBundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIBundle']}"/>
+  <c:set var="bundle" value="#{adfBundle['oracle.communications.inventory.ui.common.bundle.InventoryUIOverrideBundle']}"/>
+  <af:pageTemplate viewId="/oracle/communications/platform/templates/fragments/CommsUIShellMainArea.jspx" id="pt1">
+    <f:facet name="localArea">
+      <af:panelGroupLayout id="pgl1" binding="#{backingBeanScope.edit_panelGroupLayout}"
+                           layout="scroll">
+        <af:panelGroupLayout id="pgl42" layout="horizontal" halign="left" rendered ="#{!pageFlowScope.EquipmentEditBean.previewLayout}">
+            <af:outputText id="otbi" styleClass="invCommonText" noWrap="true"
+                           rendered="#{!(pageFlowScope.EquipmentEditBean.popupMode)}"
+                           value="#{pageFlowScope.EquipmentEditBean.renderBILabel ? inventoryUIBundle.BUSINESS_INTERACTION_LABEL : null}"/>
+            <af:menuBar id="menuBar1">
+              <af:menu id="BIContextMenu" binding="#{backingBeanScope.InventoryMenuBean.biContextMenu}" styleClass="invEditMenu"
+                       rendered="#{!(pageFlowScope.EquipmentEditBean.popupMode)}"   />
+            </af:menuBar>
+            <af:popup id="BISearchPopup" binding="#{backingBeanScope.businessInteractionSearch3}" contentDelivery="lazyUncached">
+                <af:dialog id="BISearchPopup_d1" type="none"
+                           title="#{inventoryUIBundle.BUSINESS_INTERACTION_SEARCH}">
+                    <af:panelStretchLayout id="psl_1" styleClass="invCommonPanelStretchLayout">
+                        <f:facet name="center">
+                           <af:region value="#{bindings.BusinessInteractionSearchResultsFlow1.regionModel}" id="BISP_r2"/>
+                        </f:facet>
+                    </af:panelStretchLayout>
+                </af:dialog>
+                <af:clientListener method="goRefreshEntity" type="popupClosed"/>
+                <af:serverListener type="refreshEntity" method="#{pageFlowScope.EquipmentEditBean.afterBusinessInteractionSelectionChange}"/>
+            </af:popup>
+        </af:panelGroupLayout>
+      
+        
+          
+          <af:panelHeader text="#{pageFlowScope.EquipmentEditBean.message}" id="ph45" messageType="confirmation" rendered="#{pageFlowScope.EquipmentEditBean.addAnotherMode}"/>
+         
+          <af:panelHeader text="#{inventoryUIBundle.EQUIPMENT} - #{pageFlowScope.EquipmentEditBean.displayInfo}" helpTopicId="#{pageFlowScope.EquipmentEditBean.helpTopic}" id="ph1">
+          
+          <f:facet name="toolbar">
+            <af:panelGroupLayout id="pgl3" layout="horizontal" rendered ="#{!pageFlowScope.EquipmentEditBean.previewLayout}">
+              <!-- Display the below SAVE_AND_CONTINUE button in the page mode. -->
+              <af:commandToolbarButton text="#{inventoryUIBundle.SAVE_AND_CONTINUE}" id="cb1" actionListener="#{pageFlowScope.EquipmentEditBean.save}"
+                                       action="#{pageFlowScope.EquipmentEditBean.saveOutcome}"
+                                       rendered="#{pageFlowScope.EquipmentEditBean.addMode and !pageFlowScope.EquipmentEditBean.popupMode}"
+                                       accessKey="#{inventoryUIBundle.SAVE_AND_CONTINUE_ACCESS_KEY}">
+                <af:setActionListener from="summary" to="#{pageFlowScope.saveActionOutcome}"/>
+              </af:commandToolbarButton>
+              <af:spacer width="10" height="10" id="s2"/>
+              <!-- Display the below SAVE_AND_ADD_ANOTHER button in the popup mode. -->
+              <af:commandToolbarButton text="#{inventoryUIBundle.SAVE_AND_ADD_ANOTHER}" actionListener="#{pageFlowScope.EquipmentEditBean.save}"
+                                       id="cb3" action="#{pageFlowScope.EquipmentEditBean.saveOutcome}"
+                                       rendered="#{pageFlowScope.EquipmentEditBean.addMode and !pageFlowScope.EquipmentEditBean.popupMode}"
+                                       accessKey="#{inventoryUIBundle.SAVE_AND_ADD_ANOTHER_ACCESS_KEY}">
+                <af:setActionListener from="init" to="#{pageFlowScope.saveActionOutcome}"/>
+              </af:commandToolbarButton>
+              <af:commandToolbarButton text="#{inventoryUIBundle.SAVE_AND_CLOSE}" id="cb4"
+                                       actionListener="#{pageFlowScope.EquipmentEditBean.associate}"
+                                       action="#{pageFlowScope.EquipmentEditBean.saveOutcome}"
+                                       rendered="#{!pageFlowScope.EquipmentEditBean.addMode || pageFlowScope.EquipmentEditBean.popupMode}"
+                                       accessKey="#{inventoryUIBundle.SAVE_AND_CLOSE_ACCESS_KEY}">
+                <af:setActionListener from="saveAndClose" to="#{pageFlowScope.saveActionOutcome}"/>
+              </af:commandToolbarButton>
+              <af:spacer width="10" height="10" id="s12"/>
+              <!-- Display the below CANCEL button -->                                                          
+              <af:commandToolbarButton text="#{inventoryUIBundle.CANCEL}" id="cb2" action="cancel" immediate="true" actionListener="#{bindings.closeSubTask.execute}"                                                
+                                       rendered="#{pageFlowScope.searchMode eq 'true' or !pageFlowScope.EquipmentEditBean.popupMode}"
+                                       accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>                                                 
+              <!-- Display the below CANCEL button if it renders from the visual -->
+              <af:commandToolbarButton text="#{inventoryUIBundle.CANCEL}" id="cb6" immediate="true"                                                  
+                                       action="cancel" actionListener="#{pageFlowScope.EquipmentEditBean.cancel}"                                                        
+                                       rendered="#{pageFlowScope.searchMode eq null and pageFlowScope.EquipmentEditBean.popupMode }"
+                                       accessKey="#{inventoryUIBundle.CANCEL_ACCESS_KEY}"/>
+            </af:panelGroupLayout>
+          </f:facet>
+           <af:panelGroupLayout layout="scroll" id="pgl23">
+          <af:showDetailHeader text="#{inventoryUIBundle.EQUIPMENT_INFORMATION}" disclosed="true" id="sdh1">
+            <af:group id="g2">
+              <af:panelGroupLayout id="pgl2">
+                <af:panelFormLayout id="eqp" maxColumns="2" rows="6" labelWidth="33%" fieldWidth="67%" binding="#{backingBeanScope.uiHintsPanel}">
+                  <af:selectOneChoice id="eqp-specification" label="#{inventoryUIBundle.SPECIFICATION}" autoSubmit="true"
+                                      value="#{pageFlowScope.EquipmentEditBean.selectedSpec}"
+                                      valueChangeListener="#{pageFlowScope.EquipmentEditBean.specChanged}"
+                                      disabled="#{!(pageFlowScope.EquipmentEditBean.addMode)}" required="true">
+                    <f:selectItems binding="#{pageFlowScope.EquipmentEditBean.specifications}"/>
+                  </af:selectOneChoice>
+                  <af:inputText value="#{(pageFlowScope.EquipmentEditBean.addMode &amp;&amp; pageFlowScope.EquipmentEditBean.specificationCount > 0) ? 
+                                                (pageFlowScope.EquipmentEditBean.enterIdManually ? pageFlowScope.EquipmentEditBean.entityObject.id : inventoryUIBundle.AUTO_GENERATE) : (pageFlowScope.EquipmentEditBean.entityObject.id)}"
+                                label="#{inventoryUIBundle.ID}" showRequired="true"
+                                disabled="#{(pageFlowScope.EquipmentEditBean.specificationCount > 0) &amp;&amp; (!(pageFlowScope.EquipmentEditBean.addMode &amp;&amp; pageFlowScope.EquipmentEditBean.enterIdManually))}"
+                                maximumLength="50" columns="53" id="eqp-id1" binding="#{backingBeanScope.idBinding}"
+                                rendered="#{pageFlowScope.EquipmentEditBean.addMode}"/>
+                    <af:inputText value="#{pageFlowScope.EquipmentEditBean.entityObject.name}" label="#{inventoryUIBundle.NAME}" maximumLength="50"
+                                columns="53" id="eqp-name"></af:inputText>
+                    <af:inputText value="#{pageFlowScope.EquipmentEditBean.entityObject.description}" label="#{inventoryUIBundle.DESCRIPTION}"
+                                maximumLength="255" rows="5" columns="50" id="eqp-description"></af:inputText>
+                    <af:inputText value="#{pageFlowScope.EquipmentEditBean.networkLocation}"
+                                  label="#{inventoryUIBundle.NETWORK_LOCATION}"
+                                  maximumLength="#{pageFlowScope.EquipmentEditBean.locationCodeMaximumLength}" columns="15" id="eqp-nel"
+                                  autoSubmit="true"
+                                  valueChangeListener="#{pageFlowScope.EquipmentEditBean.populateAddressText}"
+                                  disabled="#{!(pageFlowScope.EquipmentEditBean.nlEditable)}">
+                      <af:autoSuggestBehavior suggestItems="#{pageFlowScope.EquipmentEditBean.getSuggestItems}"/>
+                    </af:inputText>
+                    <af:panelLabelAndMessage label="" id="eqp-al1">
+                      <af:outputFormatted binding="#{backingBeanScope.addressLabel1}"
+                                          value="#{pageFlowScope.EquipmentEditBean.addressLabel1}"
+                                          id="ot15"/>
+                    </af:panelLabelAndMessage>
+                    <af:panelLabelAndMessage label="#{inventoryUIBundle.VENDOR_NAME}" id="eqp-sn" rendered="false">
+                    <af:outputText value="#{pageFlowScope.EquipmentEditBean.entityObject.specification.vendorName}"
+                                   id="ot1"/>
+                </af:panelLabelAndMessage>  
+                 <af:panelLabelAndMessage label="#{inventoryUIBundle.MODEL_NUMBER}"
+                                         id="eqp-mn" rendered="false">
+                    <af:outputText value="#{pageFlowScope.EquipmentEditBean.entityObject.specification.modelNumber}"
+                                   id="ot3"/>
+                </af:panelLabelAndMessage>  
+                  <af:panelLabelAndMessage label="#{inventoryUIBundle.INVENTORY_STATUS}" id="eqp-inventoryStatus">
+                    <af:outputText value="#{pageFlowScope.EquipmentEditBean.inventoryStatus}" id="ot7"/>
+                  <!--RMI 618 Start--><af:switcher defaultFacet="false" facetName="#{pageFlowScope.EquipmentEditBean.popupMode}" id="swis618">
+<f:facet name="false">
+<af:commandImageLink action="#{pageFlowScope.EquipmentEditBean.getSummaryAction}" actionListener="#{pageFlowScope.EquipmentEditBean.registerRecentItem}" disabled="#{(pageFlowScope.EquipmentEditBean.installingBI_OID eq null) ? true : false}" id="bid3" shortDesc="#{(pageFlowScope.EquipmentEditBean.installingBI_OID eq null) ? '&amp;#160;' : inventoryUIBundle.BUSINESS_INTERACTION}" text="#{pageFlowScope.EquipmentEditBean.installingBILabel}">
+<af:setActionListener from="#{pageFlowScope.EquipmentEditBean.inventoryStatusBI.oid}" to="#{objectId}"/>
+</af:commandImageLink>
+</f:facet>
+<f:facet name="true">
+<af:outputText id="swftis618" value="#{pageFlowScope.EquipmentEditBean.installingBILabel}"/>
+</f:facet>
+</af:switcher>
+<af:outputText id="installingBIDueDate" value="#{pageFlowScope.EquipmentEditBean.installingBIEffectiveDate}"/>
+<!--RMI 618 End-->
+                  </af:panelLabelAndMessage>
+                  <af:panelLabelAndMessage label="#{inventoryUIBundle.RESOURCE_ASSIGNMENT_STATUS}" id="eqp-resourceAssignmentStatus">
+                      <af:outputText value="#{pageFlowScope.EquipmentEditBean.resourceAssignmentStatus}" id="ot8"/>
+                  <!--RMI 618 Start--><af:switcher defaultFacet="false" facetName="#{pageFlowScope.EquipmentEditBean.popupMode}" id="swas618">
+<f:facet name="false">
+<af:commandImageLink action="#{pageFlowScope.EquipmentEditBean.getSummaryAction}" actionListener="#{pageFlowScope.EquipmentEditBean.registerRecentItem}" disabled="#{(pageFlowScope.EquipmentEditBean.consumerBI_OID eq null) ? true : false}" id="bid4" shortDesc="#{(pageFlowScope.EquipmentEditBean.consumerBI_OID eq null) ? '&amp;#160;' : inventoryUIBundle.BUSINESS_INTERACTION}" text="#{pageFlowScope.EquipmentEditBean.consumerBILabel}">
+<af:setActionListener from="#{pageFlowScope.EquipmentEditBean.assignmentBI.oid}" to="#{objectId}"/>
+</af:commandImageLink>
+</f:facet>
+<f:facet name="true">
+<af:outputText id="swftas618" value="#{pageFlowScope.EquipmentEditBean.consumerBILabel}"/>
+</f:facet>
+</af:switcher>
+<af:outputText id="consumerBIDueDate" value="#{pageFlowScope.EquipmentEditBean.consumerBIEffectiveDate}"/>
+<!--RMI 618 End-->
+                  </af:panelLabelAndMessage>
+                  <af:inputText label="#{inventoryUIBundle.SERIAL_NUMBER}"
+                               value="#{pageFlowScope.EquipmentEditBean.entityObject.serialNumber}" id="eqp-serialNumber" maximumLength="32"/>                                                                
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_DATE}" id="eqp-lmd" rendered="false" visible="#{pageFlowScope.EquipmentEditBean.lastModifiedDate != null}">
+                    <af:outputText value="#{pageFlowScope.EquipmentEditBean.lastModifiedDate}" id="ot9">
+                        <af:convertDateTime pattern="#{pageFlowScope.EquipmentEditBean.dateTimeFormat}"/>
+                    </af:outputText>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.LAST_MODIFIED_USER}" id="eqp-lmu" rendered="false" visible="#{pageFlowScope.EquipmentEditBean.entityObject.lastModifiedUser != null}">
+                    <af:outputText value="#{pageFlowScope.EquipmentEditBean.entityObject.lastModifiedUser}" id="ot10"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_DATE}" id="eqp-crd" rendered="false" visible="#{pageFlowScope.EquipmentEditBean.createdDate != null}">
+                    <af:outputText value="#{pageFlowScope.EquipmentEditBean.createdDate}" id="ot11">
+                        <af:convertDateTime pattern="#{pageFlowScope.EquipmentEditBean.dateTimeFormat}"/>
+                    </af:outputText>
+                </af:panelLabelAndMessage>
+		<af:panelLabelAndMessage label="#{inventoryUIBundle.CREATED_USER}" id="eqp-cru" rendered="false" visible="#{pageFlowScope.EquipmentEditBean.entityObject.createdUser != null}">
+                    <af:outputText value="#{pageFlowScope.EquipmentEditBean.entityObject.createdUser}" id="ot12"/>
+                </af:panelLabelAndMessage>
+                
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.PART_NUMBER}" id="eqp-vpn" rendered="false">
+                    <af:outputText value="#{pageFlowScope.EquipmentEditBean.entityObject.specification.partNumber}"
+                                   id="ot2"/>
+                </af:panelLabelAndMessage>  
+               
+                <af:panelLabelAndMessage label="#{inventoryUIBundle.NUMBER_OF_HOLDERS_REQUIRED}"
+                                         id="eqp-nohr" rendered="false">
+                    <af:outputText value="#{pageFlowScope.EquipmentEditBean.entityObject.specification.numberOfHoldersRequired}"
+                                   id="ot4"/>
+                </af:panelLabelAndMessage>                  
+                </af:panelFormLayout>                
+              </af:panelGroupLayout>
+            </af:group>
+          </af:showDetailHeader>
+          </af:panelGroupLayout>
+        </af:panelHeader>
+      
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

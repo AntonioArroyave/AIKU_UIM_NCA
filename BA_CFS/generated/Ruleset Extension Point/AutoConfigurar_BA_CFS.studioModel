@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:inventory="http://xmlns.oracle.com/communications/studio/model/inventory" xmlns:model="http://xmlns.oracle.com/communications/studio/model">
+  <metadata version="1.0.0" release="7.3.0"/>
+  <entity xsi:type="inventory:RulesetExtensionPoint" id="rep=AutoConfigurar_BA_CFS" type="rep" typeName="Ruleset Extension Point" name="AutoConfigurar_BA_CFS" resource="\BA_CFS\model\AutoConfigurar_BA_CFS.rst">
+    <note lang="default"/>
+    <project>
+      <relation ref="ivprj=BA_CFS" type="Inventory Project" name="Dependency">
+        <target name="BA_CFS" typeName="Inventory Project"/>
+      </relation>
+    </project>
+    <point>
+      <relation ref="ep=BaseConfigurationManager_automateConfiguration" type="Extension Point" name="Point" kind="Entity">
+        <target name="BaseConfigurationManager_automateConfiguration" typeName="Extension Point"/>
+      </relation>
+    </point>
+    <ruleset>
+      <relation ref="rul=Autoconfigurar_BA_CFS" type="Ruleset" name="Rules" kind="Entity">
+        <target name="Autoconfigurar_BA_CFS" typeName="Ruleset"/>
+      </relation>
+    </ruleset>
+  </entity>
+</model:Model>
